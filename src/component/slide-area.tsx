@@ -4,13 +4,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
 import { NextArrowIcon, PrevArrowIcon } from "./Icon";
-import { imageItems } from "@/data";
+import { projectsItems } from "@/data";
 
 export const Slide = () => {
   // api 호출해서 목록으로 가져오기
-  const images = imageItems.map((item) => item.src);
+  const images = projectsItems.map(
+    (item) => item.img || "/image/default-image.png"
+  );
   // 무한 슬라이드를 위해 앞뒤에 더미 이미지 추가
-  const slideImages = [images[imageItems.length - 1], ...images, images[0]];
+  const slideImages = [images[projectsItems.length - 1], ...images, images[0]];
   const duration = 20000; // 20초
 
   const [current, setCurrent] = useState(1); // 실제 첫 이미지 인덱스는 1
@@ -207,7 +209,7 @@ export const Slide = () => {
           // 실제 이미지 인덱스 계산 (더미 제외)
           const realIdx = getRealIndex(idx);
           const isActive = current === idx;
-          const currentImage = imageItems[realIdx];
+          const currentImage = projectsItems[realIdx];
 
           return (
             <div
@@ -236,7 +238,6 @@ export const Slide = () => {
                       bottom: 200,
                       color: "#fff",
                       zIndex: 10,
-                      maxWidth: "400px",
                     }}
                   >
                     <p
@@ -248,7 +249,7 @@ export const Slide = () => {
                         opacity: 0.9,
                       }}
                     >
-                      {currentImage.description}
+                      {currentImage.desc}
                     </p>
                     <h2
                       style={{
