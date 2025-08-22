@@ -69,7 +69,7 @@ export const Toolbar = () => {
               </Button>
               {/* 상담 요청 버튼 누르면 상담 요청 페이지로 이동 */}
               <Link
-                href="/advice"
+                href="/consultation"
                 className="text-gray-900 px-2 py-2 text-m font-medium hover:border-b-3 hover:border-gray-900"
                 style={{ minWidth: "50px", cursor: "pointer" }}
               >
