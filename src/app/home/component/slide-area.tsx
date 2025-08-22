@@ -1,10 +1,11 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
-import { NextArrowIcon, PrevArrowIcon } from "./Icon";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { projectsItems } from "@/data";
+import { NextArrowIcon, PrevArrowIcon } from "@/component/Icon";
+import { Button } from "@/component/button";
 
 export const Slide = () => {
   // api 호출해서 목록으로 가져오기
@@ -14,6 +15,7 @@ export const Slide = () => {
   // 무한 슬라이드를 위해 앞뒤에 더미 이미지 추가
   const slideImages = [images[projectsItems.length - 1], ...images, images[0]];
   const duration = 20000; // 20초
+  const router = useRouter();
 
   const [current, setCurrent] = useState(1); // 실제 첫 이미지 인덱스는 1
   const [isTransition, setIsTransition] = useState(true);
@@ -261,12 +263,14 @@ export const Slide = () => {
                     >
                       {currentImage.title}
                     </h2>
-                    <Link
-                      href={`/project/:id`}
+                    <Button
+                      onClick={() => {
+                        router.push(`/project/${currentImage.id}`);
+                      }}
                       style={{ fontSize: "22px", fontWeight: 500 }}
                     >
                       자세히 보기
-                    </Link>
+                    </Button>
                   </div>
                   {/* 진행 바 (실제 이미지에서만 표시) */}
                   <div

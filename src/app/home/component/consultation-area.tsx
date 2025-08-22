@@ -1,7 +1,7 @@
 "use client";
 
+import { Button } from "@/component/button";
 import { useRouter } from "next/navigation";
-import { Button } from "./button";
 
 export const ConsultationArea = () => {
   const router = useRouter();
