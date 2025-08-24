@@ -3,18 +3,18 @@
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { projectsItems } from "@/data";
+import { projectsItems } from "@/api/data";
 import { NextArrowIcon, PrevArrowIcon } from "@/component/Icon";
 import { Button } from "@/component/button";
 
-export const Slide = () => {
+export const SlideArea = () => {
   // api 호출해서 목록으로 가져오기
   const images = projectsItems.map(
     (item) => item.img || "/image/default-image.png"
   );
   // 무한 슬라이드를 위해 앞뒤에 더미 이미지 추가
   const slideImages = [images[projectsItems.length - 1], ...images, images[0]];
-  const duration = 20000; // 20초
+  const duration = 10000; // 20초
   const router = useRouter();
 
   const [current, setCurrent] = useState(1); // 실제 첫 이미지 인덱스는 1
@@ -26,6 +26,7 @@ export const Slide = () => {
     const timer = setTimeout(() => {
       goToNext();
     }, duration);
+
     return () => clearTimeout(timer);
   }, [current]);
 
@@ -138,6 +139,7 @@ export const Slide = () => {
         height: "calc(100vh - 64px)",
         overflow: "hidden",
         display: "flex",
+        marginBottom: 22,
       }}
     >
       {/* 이전/다음 버튼 */}

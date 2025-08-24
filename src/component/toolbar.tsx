@@ -6,12 +6,12 @@ import { Button } from "./button";
 
 export const Toolbar = () => {
   return (
-    <div className="bg-white shadow">
+    <div className="bg-white shadow sticky top-0 z-50">
       <div className="max-w-12xl mx-auto px-2 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-20">
           <div className="flex flex-1 items-center justify-between">
             {/* 왼쪽: 로고 */}
-            <Link href="/" className="flex items-center">
+            <Link href="/home" className="flex items-center">
               <Image
                 className="inline-block mx-2 px-1"
                 src="/image/jj-design.png"
