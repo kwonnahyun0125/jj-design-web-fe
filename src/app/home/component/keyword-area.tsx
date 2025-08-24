@@ -3,47 +3,43 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { projectsItems } from "@/data";
+import { projectsItems } from "@/api/data";
 import { NextArrowIcon, PrevArrowIcon } from "@/component/Icon";
 import { Button } from "@/component/button";
 
 export const KeywordArea = () => {
+  const router = useRouter();
+  const totalSlides = projectsItems.length;
+  const itemsPerSlide = 4; // 한 번에 보여줄 카드 수
+  const maxIndex = Math.max(0, totalSlides - itemsPerSlide);
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState("30");
 
-  const router = useRouter();
-  const totalSlides = projectsItems.length;
-  const itemsPerSlide = 5; // 한 번에 보여줄 카드 수
-  const maxIndex = Math.max(0, totalSlides - itemsPerSlide);
-
   const nextSlide = () => {
     setCurrentIndex((prev) => {
-      const nextIndex = prev + itemsPerSlide;
+      const nextIndex = prev + 1;
       return nextIndex > maxIndex ? 0 : nextIndex;
     });
   };
 
   const prevSlide = () => {
     setCurrentIndex((prev) => {
-      const prevIndex = prev - itemsPerSlide;
+      const prevIndex = prev - 1;
       return prevIndex < 0 ? maxIndex : prevIndex;
     });
   };
 
   return (
-    <div className=" py-10 mx-auto">
-      <div className="container mx-auto px-4">
-        <KeywordHeader
-          selectedCategory={selectedCategory}
-          onCategoryChange={setSelectedCategory}
-        />
-      </div>
-
+    <div className="px-15 py-10 mx-auto mb-10">
+      <KeywordHeader
+        selectedCategory={selectedCategory}
+        onCategoryChange={setSelectedCategory}
+      />
       <KeywordSlider
         currentIndex={currentIndex}
         itemsPerSlide={itemsPerSlide}
       />
-
       <div className="container mx-auto px-4">
         <KeywordControls
           currentIndex={currentIndex}
@@ -83,7 +79,7 @@ const KeywordHeader = ({
   ];
 
   return (
-    <div className="flex justify-between items-center mb-8">
+    <div className="flex justify-between items-center mb-8 px-7">
       <div className="flex items-center gap-6">
         <h2 className="text-3xl font-bold">키워드로 보는 프로젝트</h2>
         <div className="flex gap-2">
@@ -116,7 +112,7 @@ const KeywordSlider = ({
   return (
     <div className="relative overflow-hidden">
       <div
-        className="flex transition-transform duration-500 ease-in-out rounded-lg shadow py-10"
+        className="flex transition-transform duration-500 ease-in-out rounded-lg shadow pt-5 pb-7"
         style={{
           transform: `translateX(-${
             (currentIndex / projectsItems.length) * 100
@@ -148,13 +144,13 @@ const KeywordCard = ({
   project: {
     title: string;
     year: number;
-    price: string;
+    price: number | null;
     img: string;
     desc: string;
   };
 }) => {
   return (
-    <div className="bg-white overflow-hidden shadow-lg ">
+    <div className="bg-white overflow-hidden shadow-lg rounded-lg">
       <Image
         src={project.img}
         alt={project.title}

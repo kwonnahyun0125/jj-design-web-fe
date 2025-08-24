@@ -1,10 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import React, { useState } from "react";
-import { menuItems } from "@/data";
+import { menuItems } from "@/api/data";
 import { MenuItem } from "@/type/common";
 
 export const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedMenu, setSelectedMenu] = useState<string>("home");
 
   return (
     <nav className="hidden sm:flex sm:items-center sm:space-x-4 group cursor-pointer">
@@ -17,6 +20,7 @@ export const NavBar = () => {
               }`}
               onClick={() => {
                 setIsOpen(!isOpen);
+                setSelectedMenu(item.key);
                 item.fncClick();
               }}
             >
@@ -28,7 +32,13 @@ export const NavBar = () => {
           <Link
             key={item.key}
             href={item.url}
-            className="text-gray-900 hover:border-b-3 hover:border-gray-900 px-3 py-2 text-m font-medium"
+            onClick={() => {
+              setSelectedMenu(item.key);
+              item.fncClick();
+            }}
+            className={`text-gray-900 hover:border-b-3 hover:border-gray-900 px-3 py-2 text-m font-medium ${
+              selectedMenu === item.key ? "border-b-3 border-gray-900" : ""
+            }`}
           >
             {item.title}
           </Link>
