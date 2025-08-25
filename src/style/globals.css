@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: default;
+}
+
+/* 전역적으로 텍스트 선택 및 커서 비활성화 */
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none;
+}
+
+/* 입력 필드나 편집 가능한 요소는 예외 처리 */
+input, textarea, [contenteditable="true"] {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* 클릭 가능한 요소들은 포인터 커서 유지 */
+button, a, [role="button"], .cursor-pointer {
+  cursor: pointer !important;
+}
+
+/* 텍스트 요소에서 텍스트 커서 방지 (클릭 가능한 요소 제외) */
+p:not(button):not(a):not([role="button"]):not(.cursor-pointer), 
+span:not(button):not(a):not([role="button"]):not(.cursor-pointer), 
+div:not(button):not(a):not([role="button"]):not(.cursor-pointer), 
+h1, h2, h3, h4, h5, h6 {
+  cursor: default;
+}
+
+html, body {
+  height: 100%;
+  overflow-x: hidden; /* 가로 스크롤 방지 */
+}
+/* 
+/* 스크롤바 완전히 숨기기 (필요시) */
+/* * {
+/*   scrollbar-width: none; /* Firefox */
+/*   -ms-overflow-style: none; /* Internet Explorer 10+ */
+/* }*/
+
+/* *::-webkit-scrollbar {*/
+/*   display: none; /* Chrome, Safari, Opera */
+/* }  */
