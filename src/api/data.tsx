@@ -203,3 +203,16 @@ export const projectsItems = [
     label: "주거공간",
   },
 ];
+
+export const pyFilter: { key: string; label: string }[] = [
+  { key: "py20", label: "20평형" },
+  { key: "py30", label: "30평형" },
+  { key: "py40", label: "40평형" },
+  { key: "py50", label: "50평형" },
+  { key: "py60", label: "60평형" },
+  { key: "pyOthers", label: "그 외 평형" },
+];
+export const typeFilter: { key: string; label: string }[] = [
+  { key: "apt", label: "아파트" },
+  { key: "house", label: "주택" },
+];
