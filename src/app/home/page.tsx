@@ -1,13 +1,19 @@
 import { ConsultationArea } from "@/app/home/component/consultation-area";
 import { KeywordArea } from "@/app/home/component/keyword-area";
-import { Slide } from "@/app/home/component/slide-area";
-import { ProjectList } from "../project/component/list";
+import { SlideArea } from "@/app/home/component/slide-area";
+import { ProjectArea } from "./component/project-area";
 
 const Home = () => {
   return (
-    <div>
-      <h1>메인 페이지</h1>
-      <p>메인 페이지 입니다.</p>
+    <div className="w-full h-[calc(100vh - 82px)] overflow-x-hidden overflow-y-auto">
+      {/* 슬라이드 영역 */}
+      <SlideArea />
+      {/* 시공사례 목록 영역 */}
+      <ProjectArea />
+      {/* 키워드 프로젝트 목록 영역 */}
+      <KeywordArea />
+      {/* 상담신청 영역 */}
+      <ConsultationArea />
     </div>
   );
 };
