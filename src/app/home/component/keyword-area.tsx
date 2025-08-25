@@ -186,10 +186,10 @@ const KeywordControls = ({
   onPrev: () => void;
   itemsPerSlide: number;
 }) => {
-  const totalPages = Math.ceil(projectsItems.length / itemsPerSlide);
-  const currentPage = Math.floor(currentIndex / itemsPerSlide);
-  const progressPercentage =
-    totalPages > 1 ? (currentPage / (totalPages - 1)) * 100 : 0;
+  // 기본 4에서 시작해서 인덱스마다 증가
+  const baseProgress = (itemsPerSlide / projectsItems.length) * 100; // 기본 4개 항목에 대한 진행률
+  const indexProgress = (currentIndex / projectsItems.length) * 100; // 현재 인덱스에 따른 추가 진행률
+  const progressPercentage = Math.min(baseProgress + indexProgress, 100);
 
   return (
     <div className="flex items-center justify-between mt-8 mb-4">
@@ -213,6 +213,7 @@ const KeywordControls = ({
               ? "bg-gray-100 text-gray-400 cursor-not-allowed"
               : "hover:bg-gray-100"
           }`}
+          disabled={currentIndex === 0}
         >
           <PrevArrowIcon />
         </Button>
@@ -225,6 +226,7 @@ const KeywordControls = ({
               ? "bg-gray-100 text-gray-400 cursor-not-allowed"
               : "hover:bg-gray-100"
           }`}
+          disabled={currentIndex >= maxIndex}
         >
           <NextArrowIcon />
         </Button>
