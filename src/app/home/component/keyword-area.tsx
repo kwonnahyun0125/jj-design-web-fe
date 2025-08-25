@@ -213,6 +213,7 @@ const KeywordControls = ({
               ? "bg-gray-100 text-gray-400 cursor-not-allowed"
               : "hover:bg-gray-100"
           }`}
+          disabled={currentIndex === 0}
         >
           <PrevArrowIcon />
         </Button>
@@ -225,6 +226,7 @@ const KeywordControls = ({
               ? "bg-gray-100 text-gray-400 cursor-not-allowed"
               : "hover:bg-gray-100"
           }`}
+          disabled={currentIndex >= maxIndex}
         >
           <NextArrowIcon />
         </Button>
