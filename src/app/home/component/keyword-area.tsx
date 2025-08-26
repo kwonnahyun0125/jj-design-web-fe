@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { projectsItems } from "@/api/data";
 import { NextArrowIcon, PrevArrowIcon } from "@/component/Icon";
 import { Button } from "@/component/button";
+import { project } from "@/type/project";
 
 export const KeywordArea = () => {
   const router = useRouter();
@@ -30,6 +31,10 @@ export const KeywordArea = () => {
     });
   };
 
+  const handleCardClick = (id: number) => {
+    router.push(`/project/${id}`);
+  };
+
   return (
     <div className="px-15 py-10 mx-auto mb-10">
       <KeywordHeader
@@ -39,6 +44,7 @@ export const KeywordArea = () => {
       <KeywordSlider
         currentIndex={currentIndex}
         itemsPerSlide={itemsPerSlide}
+        handleCardClick={handleCardClick}
       />
       <div className="container mx-auto px-4">
         <KeywordControls
@@ -103,9 +109,11 @@ const KeywordHeader = ({
 };
 
 const KeywordSlider = ({
+  handleCardClick,
   currentIndex,
   itemsPerSlide,
 }: {
+  handleCardClick?: (id: number) => void;
   currentIndex: number;
   itemsPerSlide: number;
 }) => {
@@ -123,11 +131,15 @@ const KeywordSlider = ({
         {projectsItems.map((project, idx) => (
           <div
             key={`project_${idx}`}
-            className="flex-shrink-0"
+            className="flex-shrink-0 cursor-pointer"
             style={{ width: `${100 / projectsItems.length}%` }}
           >
             <div className="px-5">
-              <KeywordCard project={project} idx={idx} />
+              <KeywordCard
+                project={project}
+                idx={idx}
+                handleCardClick={handleCardClick}
+              />
             </div>
           </div>
         ))}
@@ -139,18 +151,17 @@ const KeywordSlider = ({
 const KeywordCard = ({
   idx,
   project,
+  handleCardClick,
 }: {
   idx: number;
-  project: {
-    title: string;
-    year: number;
-    price: number | null;
-    img: string;
-    desc: string;
-  };
+  project: project;
+  handleCardClick?: (id: number) => void;
 }) => {
   return (
-    <div className="bg-white overflow-hidden shadow-lg rounded-lg">
+    <div
+      className="bg-white overflow-hidden shadow-lg rounded-lg  cursor-pointer hover:shadow-xl transition-shadow h-full"
+      onClick={() => handleCardClick?.(project.id)}
+    >
       <Image
         src={project.img}
         alt={project.title}
@@ -222,11 +233,11 @@ const KeywordControls = ({
         <Button
           onClick={onNext}
           className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
-            currentIndex >= maxIndex
+            currentIndex > maxIndex
               ? "bg-gray-100 text-gray-400 cursor-not-allowed"
               : "hover:bg-gray-100"
           }`}
-          disabled={currentIndex >= maxIndex}
+          disabled={currentIndex > maxIndex}
         >
           <NextArrowIcon />
         </Button>
