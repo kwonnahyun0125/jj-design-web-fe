@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Toolbar } from "@/component/toolbar";
 import { Footer } from "@/component/footer";
 import { Error } from "@/component/error";
-import "../style/globals.css";
+import "../style/global.css";
 
 export const metadata: Metadata = {
   title: "JJ-DESIGN",
