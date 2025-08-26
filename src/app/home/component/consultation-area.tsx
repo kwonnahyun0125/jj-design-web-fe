@@ -18,15 +18,15 @@ export const ConsultationArea = () => {
           {/* TODO : 문구 수정 */}
           <div className="text-center lg:text-left text-white flex-1 max-w-2xl mt-6">
             <p className="text-lg md:text-xl mb-2 font-light">
-              인테리어 그 이상의 가치를 만드는 브랜드
+              인테리어는 단순한 공간의 완성이 아니라, 삶의 가치를 담는
+              과정입니다.
             </p>
             <p className="text-lg md:text-xl mb-8 font-light">
-              공간은 사람을 담는 그릇입니다.
+              JJ-DESIGN의 체계적인 시스템과 함께라면, 그 여정은 더욱
+              확실해집니다.
             </p>
             <h2 className="text-2xl md:text-3xl font-bold mb-6 leading-relaxed">
-              JJ-DESIGN은 삶과 비즈니스의 가치를 높이는
-              <br />
-              맞춤형 인테리어·건축 솔루션을 제안합니다.
+              인테리어 그 이상의 가치를, 모든 순간 함께합니다.
             </h2>
           </div>
 

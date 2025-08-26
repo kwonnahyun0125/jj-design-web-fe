@@ -1,4 +1,8 @@
+import Image from "next/image";
+import Link from "next/link";
+
 export const ProjectCard = ({
+  id,
   title,
   year,
   py,
@@ -6,6 +10,7 @@ export const ProjectCard = ({
   img,
   label,
 }: {
+  id: number;
   title: string;
   year: number;
   py: number;
@@ -14,14 +19,23 @@ export const ProjectCard = ({
   label: string;
 }) => {
   return (
-    <div className="bg-white rounded-lg shadow overflow-hidden flex flex-col min-h-[350px]">
+    <Link
+      href={`/project/${id}`}
+      className="bg-white rounded-lg shadow overflow-hidden flex flex-col min-h-[350px]"
+    >
       <div className="relative">
         {label && (
           <span className="absolute top-2 left-2 bg-black text-white text-xs font-bold px-2 py-1 rounded z-10">
             {label}
           </span>
         )}
-        <img src={img} alt={title} className="w-full h-48 object-cover" />
+        <Image
+          width={400}
+          height={300}
+          src={img}
+          alt={title}
+          className="w-full h-48 object-cover"
+        />
       </div>
       <div className="p-4 flex flex-col gap-1 flex-1">
         <h4 className="font-semibold text-lg">
@@ -36,6 +50,6 @@ export const ProjectCard = ({
           <span className="text-base font-normal">원</span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
