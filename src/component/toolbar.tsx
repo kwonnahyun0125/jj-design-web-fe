@@ -39,11 +39,10 @@ export const Toolbar = () => {
                 className="text-gray-900 px-2 py-2 text-m font-medium hover:border-b-3 hover:border-gray-900 flex items-center justify-center"
                 style={{ minWidth: "50px", cursor: "pointer" }}
                 onClick={() =>
-                  // window.open(
-                  //   "https://blog.naver.com/jj-design_part2",
-                  //   "_blank"
-                  // )
-                  alert("인스타그램은 준비중입니다.")
+                  window.open(
+                    "https://www.instagram.com/jj_interior_part2",
+                    "_blank"
+                  )
                 }
               >
                 <Image
