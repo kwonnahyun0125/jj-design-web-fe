@@ -1,10 +1,15 @@
 "use client";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { NavBar } from "./navbar";
 import { Button } from "./button";
 
 export const Toolbar = () => {
+  const router = useRouter();
+  const [selectedMenu, setSelectedMenu] = useState<string>("home");
+
   return (
     <div className="bg-white shadow sticky top-0 z-50">
       <div className="max-w-12xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -23,7 +28,10 @@ export const Toolbar = () => {
               />
             </Link>
             {/* 가운데: 메뉴 */}
-            <NavBar />
+            <NavBar
+              selectedMenu={selectedMenu}
+              setSelectedMenu={setSelectedMenu}
+            />
             {/* 오른쪽: 버튼 */}
             <div className="hidden sm:flex sm:items-end sm:space-x-4 group">
               {/* 인스타그램 버튼 */}
@@ -68,13 +76,16 @@ export const Toolbar = () => {
                 />
               </Button>
               {/* 상담 요청 버튼 누르면 상담 요청 페이지로 이동 */}
-              <Link
-                href="/consultation"
+              <Button
+                onClick={() => {
+                  setSelectedMenu("");
+                  router.push("/consultation");
+                }}
                 className="text-gray-900 px-2 py-2 text-m font-medium hover:border-b-3 hover:border-gray-900"
                 style={{ minWidth: "50px", cursor: "pointer" }}
               >
                 상담요청
-              </Link>
+              </Button>
             </div>
           </div>
         </div>

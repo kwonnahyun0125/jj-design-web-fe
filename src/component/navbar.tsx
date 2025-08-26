@@ -5,9 +5,14 @@ import React, { useState } from "react";
 import { menuItems } from "@/api/data";
 import { MenuItem } from "@/type/common";
 
-export const NavBar = () => {
+export const NavBar = ({
+  selectedMenu,
+  setSelectedMenu,
+}: {
+  selectedMenu: string;
+  setSelectedMenu: (menu: string) => void;
+}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedMenu, setSelectedMenu] = useState<string>("home");
 
   return (
     <nav className="hidden sm:flex sm:items-center sm:space-x-4 group cursor-pointer">
@@ -16,7 +21,7 @@ export const NavBar = () => {
           <div className="relative" key={item.key}>
             <button
               className={`peer text-gray-900 hover:border-b-3 hover:border-gray-900 px-3 py-2 text-m font-medium focus:outline-none flex items-center gap-1 cursor-pointer ${
-                isOpen ? "border-b-3 border-gray-900" : ""
+                selectedMenu === item.key ? "border-b-3 border-gray-900" : ""
               }`}
               onClick={() => {
                 setIsOpen(!isOpen);
@@ -34,6 +39,7 @@ export const NavBar = () => {
             href={item.url}
             onClick={() => {
               setSelectedMenu(item.key);
+              setIsOpen(false);
               item.fncClick();
             }}
             className={`text-gray-900 hover:border-b-3 hover:border-gray-900 px-3 py-2 text-m font-medium ${
