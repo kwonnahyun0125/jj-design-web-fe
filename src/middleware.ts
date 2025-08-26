@@ -19,11 +19,11 @@ export function middleware(request: NextRequest) {
     "/project",
     "/showroom",
     "/error",
+    "/project/*",
   ];
 
   // 유효하지 않은 경로면 /error로 리다이렉트
   if (!validPaths.includes(pathname)) {
-    console.log("Invalid path accessed:", pathname);
     return NextResponse.redirect(new URL("/error", request.url));
   }
 
@@ -42,6 +42,6 @@ export const config = {
      * - image (your image folder)
      * - svg (your svg folder)
      */
-    '/((?!api|_next/static|_next/image|favicon.ico|image|svg).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|icon|image|svg|project).*)',
   ],
 };
