@@ -11,18 +11,29 @@ export const metadata: Metadata = {
   icons: "/icon/favicon.ico",
 };
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) => {
   return (
     <html lang="ko">
-      <body className="antialiased">
+      <head>
+        <style>{`
+          @font-face {
+            font-family: 'Pretendard';
+            src: url('/font/PretendardVariable.woff2') format('woff2');
+            font-weight: 100 900;
+            font-display: swap;
+          }
+        `}</style>
+      </head>
+      <body style={{ fontFamily: "Pretendard, sans-serif" }}>
         <Toolbar />
         {children ? children : <Error status="notfound" />}
         <Footer />
       </body>
     </html>
   );
-}
+};
+export default RootLayout;
