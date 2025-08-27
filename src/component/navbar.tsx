@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { menuItems } from "@/api/data";
 import { MenuItem } from "@/type/common";
+import { Button } from "./button";
 
 export const NavBar = ({
   selectedMenu,
@@ -15,12 +16,12 @@ export const NavBar = ({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="hidden sm:flex sm:items-center sm:space-x-4 group cursor-pointer">
+    <nav className="hidden lg:flex lg:items-center lg:space-x-4 group cursor-pointer">
       {menuItems.map((item) =>
         item.sub ? (
           <div className="relative" key={item.key}>
-            <button
-              className={`peer text-gray-900 hover:border-b-3 hover:border-gray-900 px-3 py-2 text-m font-medium focus:outline-none flex items-center gap-1 cursor-pointer ${
+            <Button
+              className={`peer text-gray-900 hover:border-b-3 hover:border-gray-900 px-3 py-2 text-lg font-large focus:outline-none flex items-center gap-1 cursor-pointer ${
                 selectedMenu === item.key ? "border-b-3 border-gray-900" : ""
               }`}
               onClick={() => {
@@ -30,7 +31,7 @@ export const NavBar = ({
               }}
             >
               {item.title}
-            </button>
+            </Button>
             {isOpen && <MenuLayer subItems={item.sub} setIsOpen={setIsOpen} />}
           </div>
         ) : (
@@ -42,7 +43,7 @@ export const NavBar = ({
               setIsOpen(false);
               item.fncClick();
             }}
-            className={`text-gray-900 hover:border-b-3 hover:border-gray-900 px-3 py-2 text-m font-medium ${
+            className={`text-gray-900 hover:border-b-3 hover:border-gray-900 px-3 py-2 text-lg font-large ${
               selectedMenu === item.key ? "border-b-3 border-gray-900" : ""
             }`}
           >

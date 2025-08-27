@@ -1,10 +1,11 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "./button";
 
 export const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white py-8">
+    <footer className="bg-[#111827] text-white py-8">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
           <div className="flex items-center justify-center w-[120px] h-[100px] rounded relative">
@@ -39,19 +40,19 @@ export const Footer = () => {
             <h3 className="font-semibold text-lg mb-1">Quick Links</h3>
             <ul className="text-base space-y-1">
               <li>
-                <a href="/company" className="hover:underline">
+                <Link href="/company" className="hover:underline">
                   회사소개
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/project" className="hover:underline">
+                <Link href="/project" className="hover:underline">
                   프로젝트
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/notice" className="hover:underline">
+                <Link href="/notice" className="hover:underline">
                   공지사항
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -61,19 +62,18 @@ export const Footer = () => {
             <div className="flex space-x-2">
               {/* 인스타그램 버튼 */}
               <Button
-                className="text-gray-900 py-2 text-m font-medium hover:border-b-3 hover:border-gray-900 flex items-center justify-center"
+                className="text-gray-900 py-2 text-m font-medium hover:border-b-3 hover:border-gray-900 flex items-start justify-start"
                 style={{ minWidth: "50px", cursor: "pointer" }}
                 onClick={() =>
-                  // window.open(
-                  //   "https://blog.naver.com/jj-design_part2",
-                  //   "_blank"
-                  // )
-                  alert("인스타그램은 준비중입니다.")
+                  window.open(
+                    "https://www.instagram.com/jj_interior_part2",
+                    "_blank"
+                  )
                 }
               >
                 <Image
                   className="inline-block"
-                  src="/svg/Instagram.svg"
+                  src="/svg/instagram-white.svg"
                   alt="Instagram"
                   width={25}
                   height={25}
@@ -82,7 +82,7 @@ export const Footer = () => {
               </Button>
               {/* 블로그 버튼 */}
               <Button
-                className="text-gray-900 py-2 text-m font-medium hover:border-b-3 hover:border-gray-900 flex items-center justify-center"
+                className="text-gray-900 py-2 text-m font-medium hover:border-b-3 hover:border-gray-900 flex items-start justify-start"
                 style={{ minWidth: "50px", cursor: "pointer" }}
                 onClick={() =>
                   window.open(
@@ -93,7 +93,7 @@ export const Footer = () => {
               >
                 <Image
                   className="inline-block"
-                  src="/svg/blog.svg"
+                  src="/svg/blog-white.svg"
                   alt="Naver Blog"
                   width={25}
                   height={25}
