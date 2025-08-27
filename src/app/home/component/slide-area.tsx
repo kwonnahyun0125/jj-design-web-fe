@@ -143,7 +143,7 @@ export const SlideArea = () => {
       }}
     >
       {/* 이전/다음 버튼 */}
-      <button
+      <Button
         onClick={goToPrev}
         style={{
           position: "absolute",
@@ -168,8 +168,8 @@ export const SlideArea = () => {
         aria-label="이전"
       >
         <PrevArrowIcon width={56} height={56} />
-      </button>
-      <button
+      </Button>
+      <Button
         onClick={goToNext}
         style={{
           position: "absolute",
@@ -194,7 +194,7 @@ export const SlideArea = () => {
         aria-label="다음"
       >
         <NextArrowIcon width={56} height={56} />
-      </button>
+      </Button>
 
       {/* 슬라이드 컨테이너 */}
       <div

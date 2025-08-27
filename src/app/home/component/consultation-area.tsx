@@ -7,10 +7,7 @@ export const ConsultationArea = () => {
   const router = useRouter();
 
   return (
-    <section className="relative min-h-[320px] bg-gray-900/30 backdrop-blur-sm">
-      {/* 배경 오버레이 */}
-      <div className="absolute inset-0 bg-gray-900/80"></div>
-
+    <section className="relative min-h-[320px] bg-[#6B7280] backdrop-blur-sm">
       {/* 콘텐츠 */}
       <div className="relative z-10 flex items-center justify-center min-h-[320px] px-4">
         <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 max-w-6xl w-full">
@@ -33,7 +30,7 @@ export const ConsultationArea = () => {
           {/* 버튼 */}
           <div className="flex-shrink-0">
             <Button
-              className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-8 py-4 rounded-lg text-lg transition-colors duration-200"
+              className="bg-[#E5E7EB] hover:bg-[#111827] hover:text-white text-black font-semibold px-8 py-4 rounded-lg text-lg transition-colors duration-200"
               onClick={() => {
                 router.push("/consultation");
               }}

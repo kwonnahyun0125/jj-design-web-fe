@@ -99,7 +99,7 @@ export const ProjectFilter = () => {
           <Button className="flex-1 px-4 py-2 text-base border border-gray-300 rounded-md hover:bg-gray-50">
             초기화
           </Button>
-          <Button className="flex-1 px-4 py-2 text-base bg-gray-800/60 text-white rounded-md hover:bg-gray-600">
+          <Button className="flex-1 px-4 py-2 text-base bg-[#E5E7EB] hover:bg-[#111827] hover:text-white rounded-md">
             확인
           </Button>
         </div>

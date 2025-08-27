@@ -39,7 +39,7 @@ export const ConsultationForm = () => {
               </label>
               <button
                 type="submit"
-                className="w-full py-4 px-8 rounded-lg bg-gray-800 text-white font-semibold text-lg shadow-lg hover:bg-gray-700 transition-colors duration-200"
+                className="w-full py-4 px-8 rounded-lg bg-[#E5E7EB] hover:bg-[#111827] hover:text-white font-semibold text-lg shadow-lg transition-colors duration-200"
               >
                 상담 신청하기
               </button>
