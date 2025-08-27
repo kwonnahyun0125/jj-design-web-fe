@@ -1,3 +1,5 @@
+import { Button } from "@/component/button";
+
 const ShowRoomPage = () => {
   return (
     <div className="min-h-[calc(100vh-325px)] flex flex-col items-center justify-center bg-gradient-to-b from-white via-gray-50 to-gray-200 px-4">
@@ -45,12 +47,12 @@ const ShowRoomPage = () => {
           멋진 공간에서 곧 만나요!
         </p>
 
-        <button
-          className="mt-4 px-8 py-3 rounded-full bg-gray-800 text-white font-medium shadow hover:bg-gray-900 transition disabled:opacity-50 cursor-not-allowed"
+        <Button
+          className="mt-4 px-8 py-3 rounded-full bg-[#E5E7EB] text-black font-medium shadow hover:bg-[#111827] hover:text-white transition disabled:opacity-50 cursor-not-allowed"
           disabled
         >
           Coming Soon
-        </button>
+        </Button>
       </div>
     </div>
   );

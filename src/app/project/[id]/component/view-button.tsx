@@ -11,16 +11,20 @@ export const ViewGroupButton = ({
       {/* view type 버튼 */}
       <div className="flex items-center gap-2">
         <Button
-          className={`flex items-center justify-center p-2 border border-gray-300 rounded-md hover:bg-gray-50 ${
-            selectedView === "card" ? "bg-gray-200" : ""
+          className={`flex items-center justify-center p-2 rounded-md ${
+            selectedView === "card"
+              ? "bg-[#111827] text-white"
+              : "bg-[#E5E7EB] text-black"
           }`}
           onClick={() => setSelectedView("card")}
         >
           <CardViewIcon />
         </Button>
         <Button
-          className={`flex items-center justify-center p-2 border border-gray-300 rounded-md hover:bg-gray-50 ${
-            selectedView === "list" ? "bg-gray-200" : ""
+          className={`flex items-center justify-center p-2 rounded-md ${
+            selectedView === "list"
+              ? "bg-[#111827] text-white"
+              : "bg-[#E5E7EB] text-black"
           }`}
           onClick={() => setSelectedView("list")}
         >

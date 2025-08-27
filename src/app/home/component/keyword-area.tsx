@@ -56,7 +56,7 @@ export const KeywordArea = () => {
         />
         <div className="flex justify-center mt-10">
           <Button
-            className="text-lg px-8 py-3 rounded bg-gray-800 text-white font-semibold hover:bg-gray-700 transition-colors"
+            className="text-lg px-8 py-3 rounded font-semibold bg-[#E5E7EB] hover:bg-[#111827] hover:text-white"
             onClick={() => {
               router.push("/project");
             }}
@@ -93,10 +93,10 @@ const KeywordHeader = ({
             <Button
               key={item.value}
               onClick={() => onCategoryChange(item.value)}
-              className={`px-4 py-2 rounded border ${
+              className={`px-4 py-2 rounded ${
                 selectedCategory === item.value
-                  ? "bg-black text-white border-black"
-                  : "bg-white text-gray-800 border-gray-300"
+                  ? "bg-[#111827] text-white "
+                  : "bg-[#E5E7EB] text-gray-800"
               } transition-colors cursor-pointer`}
             >
               {item.label}
@@ -221,8 +221,8 @@ const KeywordControls = ({
           onClick={onPrev}
           className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
             currentIndex === 0
-              ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-              : "hover:bg-gray-100"
+              ? "bg-[#E5E7EB]  text-black cursor-not-allowed"
+              : "hover:bg-[#111827] hover:text-white "
           }`}
           disabled={currentIndex === 0}
         >
@@ -234,8 +234,8 @@ const KeywordControls = ({
           onClick={onNext}
           className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
             currentIndex > maxIndex
-              ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-              : "hover:bg-gray-100"
+              ? "bg-[#E5E7EB]  text-black cursor-not-allowed"
+              : "hover:bg-[#111827] hover:text-white "
           }`}
           disabled={currentIndex > maxIndex}
         >
