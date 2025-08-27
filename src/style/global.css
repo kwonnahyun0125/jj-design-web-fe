@@ -44,29 +44,54 @@ input, textarea, [contenteditable="true"] {
 }
 
 /* 클릭 가능한 요소들은 포인터 커서 유지 */
-button, a, [role="button"], .cursor-pointer {
+button, 
+a, 
+[role="button"], 
+.cursor-pointer,
+/* Next.js Link 컴포넌트 및 링크 관련 요소들 */
+[data-nextjs-link],
+a[href],
+[href] {
+  cursor: pointer !important;
+}
+
+/* Next.js Link 컴포넌트와 모든 하위 요소에 포인터 커서 적용 */
+a[href] *,
+[href] *,
+.cursor-pointer *,
+/* Link 컴포넌트로 감싸진 카드들 */
+a > div,
+a > div *,
+/* 특정 클래스가 있는 링크들 */
+.bg-white.rounded-lg.shadow,
+.bg-white.rounded-lg.shadow * {
   cursor: pointer !important;
 }
 
 /* 텍스트 요소에서 텍스트 커서 방지 (클릭 가능한 요소 제외) */
-p:not(button):not(a):not([role="button"]):not(.cursor-pointer), 
-span:not(button):not(a):not([role="button"]):not(.cursor-pointer), 
-div:not(button):not(a):not([role="button"]):not(.cursor-pointer), 
+p:not(button):not(a):not([role="button"]):not(.cursor-pointer):not([href]), 
+span:not(button):not(a):not([role="button"]):not(.cursor-pointer):not([href]), 
+div:not(button):not(a):not([role="button"]):not(.cursor-pointer):not([href]), 
 h1, h2, h3, h4, h5, h6 {
   cursor: default;
+}
+
+/* 링크 내부의 텍스트 요소들은 포인터 커서 유지 */
+a p, a span, a div, a h1, a h2, a h3, a h4, a h5, a h6,
+[href] p, [href] span, [href] div, [href] h1, [href] h2, [href] h3, [href] h4, [href] h5, [href] h6 {
+  cursor: pointer !important;
+}
+
+/* 비활성화된 버튼 스타일 */
+button:disabled,
+button[disabled],
+.disabled {
+  cursor: not-allowed !important;
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 html, body {
   height: 100%;
   overflow-x: hidden; /* 가로 스크롤 방지 */
 }
-/* 
-/* 스크롤바 완전히 숨기기 (필요시) */
-/* * {
-/*   scrollbar-width: none; /* Firefox */
-/*   -ms-overflow-style: none; /* Internet Explorer 10+ */
-/* }*/
-
-/* *::-webkit-scrollbar {*/
-/*   display: none; /* Chrome, Safari, Opera */
-/* }  */
