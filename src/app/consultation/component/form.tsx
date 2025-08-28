@@ -6,7 +6,6 @@ import { Modal } from "@/component/modal";
 import { FormHeader } from "./form-header";
 import { FormDefaultInfo } from "./form-default";
 import { FormSiteInfo } from "./form-site";
-import { FormConstructInfo } from "./form-construct";
 import { FormReferenceInfo } from "./form-reference";
 import { FormPrivacyInfo } from "./form-privacy";
 
