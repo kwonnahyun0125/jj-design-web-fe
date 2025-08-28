@@ -1,10 +1,22 @@
+import { Modal } from "@/component/modal";
 import { ProjectGalleryProps } from "@/type/project";
 import Image from "next/image";
+import { useState } from "react";
 
 export const DetailGalery = ({
   selectedView = "card",
   imageList,
 }: ProjectGalleryProps) => {
+  //모달 열림 상태 관리
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
+  const handleClickImage = (index: number) => {
+    // 이미지 클릭 시 동작
+    setSelectedImageIndex(index);
+    setIsModalOpen(true);
+  };
+
   return (
     <>
       <div className="border-t border-gray-200 mb-8 mx-8" />
@@ -23,6 +35,7 @@ export const DetailGalery = ({
                     width={400}
                     height={300}
                     className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                    onClick={() => handleClickImage(idx)}
                   />
                 </div>
               </div>
@@ -43,6 +56,7 @@ export const DetailGalery = ({
                   width={400}
                   height={300}
                   className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                  onClick={() => handleClickImage(idx)}
                 />
               </div>
             </div>
@@ -50,6 +64,21 @@ export const DetailGalery = ({
         </div>
       )}
       <div className="border-t border-gray-200 mb-8 px-8" />
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        size="full"
+      >
+        <div className="flex items-center justify-center overflow-y-auto">
+          <Image
+            src={imageList[selectedImageIndex].img}
+            alt={imageList[selectedImageIndex].label}
+            width={2560}
+            height={1920}
+            className="object-contain max-w-[70vw] max-h-[80vh] rounded-lg "
+          />
+        </div>
+      </Modal>
     </>
   );
 };
