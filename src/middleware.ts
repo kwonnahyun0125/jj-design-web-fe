@@ -18,6 +18,7 @@ export function middleware(request: NextRequest) {
     "/notice",
     "/project",
     "/showroom",
+    "/privacy",
     "/error"
   ];
 

@@ -1,11 +1,18 @@
-import { SelectBox } from "@/component/selectbox";
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { Modal } from "@/component/modal";
 import { FormHeader } from "./form-header";
 import { FormDefaultInfo } from "./form-default";
 import { FormSiteInfo } from "./form-site";
 import { FormConstructInfo } from "./form-construct";
 import { FormReferenceInfo } from "./form-reference";
+import { FormPrivacyInfo } from "./form-privacy";
 
 export const ConsultationForm = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className="lg:col-span-3 lg:sticky lg:top-8">
       <form className="bg-white shadow-lg rounded-xl overflow-hidden">
@@ -32,9 +39,19 @@ export const ConsultationForm = () => {
                 />
                 <span className="leading-relaxed">
                   개인정보 수집 및 이용에 동의합니다.
-                  <a href="#" className="text-gray-800 underline ml-1">
+                  <Link
+                    href="#"
+                    className="text-gray-800 underline ml-1"
+                    onClick={() => setIsModalOpen(true)}
+                  >
                     개인정보처리방침 보기
-                  </a>
+                  </Link>
+                  <Modal
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                  >
+                    <FormPrivacyInfo />
+                  </Modal>
                 </span>
               </label>
               <button

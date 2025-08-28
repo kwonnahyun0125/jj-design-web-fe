@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./button";
@@ -93,7 +94,7 @@ export const Footer = () => {
               >
                 <Image
                   className="inline-block"
-                  src="/svg/blog-white.svg"
+                  src="/svg/naver-blog-white.svg"
                   alt="Naver Blog"
                   width={25}
                   height={25}
@@ -106,9 +107,9 @@ export const Footer = () => {
         </div>
         <div className="border-t border-gray-700 mt-6 pt-4 text-center text-base">
           &copy; 2023 JJ-DESIGN. All rights reserved. |{" "}
-          <a href="/privacy" className="hover:underline">
+          <Link href="/privacy" className="hover:underline">
             개인정보처리방침
-          </a>
+          </Link>
         </div>
       </div>
     </footer>
