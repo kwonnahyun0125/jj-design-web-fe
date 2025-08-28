@@ -1,14 +1,4 @@
-import { SelectBox } from "@/component/selectbox";
-
 export const FormDefaultInfo = () => {
-  //상담 희망 방법 options
-  const options = [
-    { key: "phone", value: "전화 상담" },
-    { key: "kakao", value: "카카오톡" },
-    { key: "email", value: "이메일" },
-    { key: "visit", value: "방문 상담" },
-  ];
-
   return (
     <div className="space-y-6">
       <div className="flex items-center space-x-3 mb-6">
@@ -52,7 +42,6 @@ export const FormDefaultInfo = () => {
             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-gray-800 focus:ring-0 transition-colors duration-200 bg-white"
           />
         </div>
-        <SelectBox label="상담 희망 방법" options={options} />
       </div>
     </div>
   );

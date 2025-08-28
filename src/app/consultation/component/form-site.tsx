@@ -3,11 +3,9 @@ import { SelectBox } from "@/component/selectbox";
 export const FormSiteInfo = () => {
   // 공간 유형 options
   const options = [
-    { key: "apartment", value: "아파트" },
-    { key: "villa", value: "빌라/주택" },
-    { key: "office", value: "사무실" },
-    { key: "commercial", value: "상업공간" },
-    { key: "cafe", value: "카페/레스토랑" },
+    { key: "residence", value: "주거 공간" },
+    { key: "mercantile", value: "상업 공간" },
+    { key: "architecture", value: "건축물" }, 
   ];
   return (
     <div className="space-y-6">
@@ -52,6 +50,30 @@ export const FormSiteInfo = () => {
             <input
               type="text"
               placeholder="예: 25평"
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-gray-800 focus:ring-0 transition-colors duration-200 bg-white"
+            />
+          </div>
+        </div>
+        {/* 예상 예산 및 희망 시작 시기 */}
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              예상 예산
+            </label>
+            <input
+              type="text"
+              placeholder="예: 2천만 원"
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-gray-800 focus:ring-0 transition-colors duration-200 bg-white"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              희망 시작 시기
+            </label>
+            <input
+              type="month"
+              defaultValue={new Date().toISOString().slice(0, 7)}
               className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-gray-800 focus:ring-0 transition-colors duration-200 bg-white"
             />
           </div>
