@@ -24,8 +24,6 @@ export const ConsultationForm = () => {
           <FormDefaultInfo />
           {/* 섹션: 현장 정보 */}
           <FormSiteInfo />
-          {/* 섹션: 시공 요구사항 */}
-          <FormConstructInfo />
           {/* 섹션: 참고 자료 */}
           <FormReferenceInfo />
 
