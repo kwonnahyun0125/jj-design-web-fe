@@ -8,7 +8,7 @@ const FurniturePage = () => {
       {/* 헤더 섹션 */}
       <FurnitureHeader />
 
-      {/* 쇼룸 목록 */}
+      {/* 직영가구 목록 */}
       <div className="max-w-full mx-auto px-8 py-12">
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 max-w-7xl mx-auto">
           {furnitures.map((furniture) => (
