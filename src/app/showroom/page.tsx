@@ -2,7 +2,7 @@ import { Button } from "@/component/button";
 
 const ShowRoomPage = () => {
   return (
-    <div className="min-h-[calc(100vh-325px)] flex flex-col items-center justify-center bg-gradient-to-b from-white via-gray-50 to-gray-200 px-4">
+    <div className="min-h-[calc(100vh-345px)] flex flex-col items-center justify-center bg-gradient-to-b from-white via-gray-50 to-gray-200 px-4">
       <div className="flex flex-col items-center space-y-6 max-w-xl text-center">
         <svg
           className="w-24 h-24 text-gray-300 drop-shadow-lg"

@@ -163,7 +163,7 @@ const KeywordCard = ({
       onClick={() => handleCardClick?.(project.id)}
     >
       <Image
-        src={project.img}
+        src={project.imageUrl || "/image/default-image.png"}
         alt={project.title}
         width={500}
         height={250}
@@ -173,11 +173,10 @@ const KeywordCard = ({
       <div className="p-4">
         <h3 className="font-bold text-lg mb-1">{project.title}</h3>
         <p className="text-gray-600 text-sm mb-2">
-          {project.year} 준공 | {project.desc}
+          {project.durationWeeks}주 소요
         </p>
-        <p className="font-bold text-xl">
-          {project.price}
-          <span className="font-normal text-base">원</span>
+        <p className="text-gray-600 text-sm mb-2 text-ellipsis overflow-hidden whitespace-nowrap h-5">
+          {project.description}
         </p>
       </div>
     </div>
