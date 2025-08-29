@@ -12,21 +12,21 @@ export const menuItems = [
     fncClick: Function,
     sub: [
       {
-        key: "resident",
+        key: "residence",
         title: "주거공간",
-        url: "/project?category=resident",
+        url: "/project?category=residence",
         fncClick: Function,
       },
       {
-        key: "commercial",
+        key: "mercantile",
         title: "상업공간",
-        url: "/project?category=commercial",
+        url: "/project?category=mercantile",
         fncClick: Function,
       },
       {
-        key: "echo",
+        key: "architecture",
         title: "친환경 건축",
-        url: "/project?category=echo",
+        url: "/project?category=architecture",
         fncClick: Function,
       },
     ],
@@ -251,5 +251,24 @@ export const notices = [
     date: "2025-08-22",
     summary:
       "새로운 서비스가 출시되었습니다. 많은 이용 부탁드립니다...새로운 서비스가 출시되었습니다. 많은 이용 부탁드립니다...새로운 서비스가 출시되었습니다. 많은 이용 부탁드립니다...새로운 서비스가 출시되었습니다. 많은 이용 부탁드립니다...새로운 서비스가 출시되었습니다. 많은 이용 부탁드립니다...",
+  },
+];
+
+export const furnitures = [
+  {
+    id: 1,
+    name: "JJ Mobilia",
+    location: "대구광역시 수성구 달구벌대로 2478 1층 2~3F",
+    hours: "평일 09:00~18:00 / 토 10:00~17:00 / 일 10:00~16:00",
+    info: "방문 전 상담예약을 하셔야 매니저와의 인테리어 상담이 가능합니다.",
+    image: "/image/mock/가구점 이미지.png",
+  },
+  {
+    id: 2,
+    name: "불성점",
+    location: "대구광역시 북구 칠곡군 609 2~3F",
+    hours: "평일 09:00~18:00 / 토 10:00~17:00 / 일 10:00~16:00",
+    info: "방문 전 상담예약을 하셔야 견적상담이 가능하며, 예약없이 방문하시면 견적 상담없이 매장 내 자재 무드보드 및 키오스크 등의 체험은 가능합니다.",
+    image: "/image/mock/회사 내부 이미지.png",
   },
 ];
