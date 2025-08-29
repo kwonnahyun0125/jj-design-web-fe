@@ -25,7 +25,8 @@ export function middleware(request: NextRequest) {
   // 정확한 경로 매칭 또는 동적 경로 확인
   const isValidPath = validPaths.includes(pathname) ||
     pathname.startsWith("/project/") ||
-    pathname.startsWith("/notice/");
+    pathname.startsWith("/notice/") ||
+    pathname.startsWith("/furniture/");
 
   // 유효하지 않은 경로면 /error로 리다이렉트
   if (!isValidPath) {
