@@ -1,8 +1,21 @@
+import { furnitures } from "@/api/data";
+import { FurnitureCard } from "./component/card";
+import { FurnitureHeader } from "./component/header";
+
 const FurniturePage = () => {
   return (
-    <div>
-      <h1>직영가구</h1>
-      <p>직영가구 관련 페이지입니다.</p>
+    <div className="min-h-screen bg-gray-50 ">
+      {/* 헤더 섹션 */}
+      <FurnitureHeader />
+
+      {/* 쇼룸 목록 */}
+      <div className="max-w-full mx-auto px-8 py-12">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 max-w-7xl mx-auto">
+          {furnitures.map((furniture) => (
+            <FurnitureCard key={furniture.id} furniture={furniture} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
