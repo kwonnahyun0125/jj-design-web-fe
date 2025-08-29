@@ -63,7 +63,7 @@ const NoticePage = () => {
                           )}
                         </div>
                         <p className="text-sm text-gray-500 line-clamp-1 ellipsis max-w-[calc(70%)]">
-                          {notice.summary}
+                          {notice.content}
                         </p>
                       </div>
                     </div>
@@ -71,7 +71,9 @@ const NoticePage = () => {
 
                   {/* 등록일 */}
                   <div className="col-span-2 text-center">
-                    <span className="text-sm text-gray-600">{notice.date}</span>
+                    <span className="text-sm text-gray-600">
+                      {notice.createdAt}
+                    </span>
                   </div>
 
                   {/* 상태 */}

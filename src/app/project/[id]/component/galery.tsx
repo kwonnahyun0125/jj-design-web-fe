@@ -30,8 +30,8 @@ export const DetailGalery = ({
               >
                 <div className="aspect-[4/3] overflow-hidden">
                   <Image
-                    src={image.img}
-                    alt={image.label}
+                    src={image.imageUrl || "/image/default-image.png"}
+                    alt={image.type}
                     width={400}
                     height={300}
                     className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
@@ -51,8 +51,8 @@ export const DetailGalery = ({
             >
               <div className="aspect-[4/3] overflow-hidden">
                 <Image
-                  src={image.img}
-                  alt={image.label}
+                  src={image.imageUrl || "/image/default-image.png"}
+                  alt={image.type}
                   width={400}
                   height={300}
                   className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
@@ -71,8 +71,11 @@ export const DetailGalery = ({
       >
         <div className="flex items-center justify-center overflow-y-auto">
           <Image
-            src={imageList[selectedImageIndex].img}
-            alt={imageList[selectedImageIndex].label}
+            src={
+              imageList[selectedImageIndex].imageUrl ||
+              "/image/default-image.png"
+            }
+            alt={imageList[selectedImageIndex].type}
             width={2560}
             height={1920}
             className="object-contain max-w-[70vw] max-h-[80vh] rounded-lg "

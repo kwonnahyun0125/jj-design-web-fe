@@ -11,6 +11,7 @@ import { DetailKeywordFilter } from "./component/keyword-filter";
 import { DetailGalery } from "./component/galery";
 import { ViewGroupButton } from "./component/view-button";
 import { ReviewSection } from "./component/review";
+import { project } from "@/type/project";
 
 const ProjectDetailPage = () => {
   const router = useRouter();
@@ -18,17 +19,19 @@ const ProjectDetailPage = () => {
   const id = pathname.split("/").pop();
 
   // TODO: API 연동 필요
-  const project = projectsItems.find((p) => p.id === Number(id)) || {
+  const project: project = projectsItems.find((p) => p.id === Number(id)) || {
     id: 0,
     title: "",
-    year: 0,
-    price: 0,
-    img: "",
-    desc: "",
-    py: 0,
-    label: "",
+    imageUrl: "",
+    description: "",
+    areaSize: 0,
+    type: "",
+    durationWeeks: null,
+    reviews: null,
   };
-  const imageList = projectsItems.filter((p) => p.id === Number(id)) || [];
+  const imageList = projectsItems.filter(
+    (p) => p.id === Number(id) || "/image/default-image.png"
+  );
   const keywordItems =
     // project?.keyword ?
     //   ["전체", ...project.keyword.split(",")]:

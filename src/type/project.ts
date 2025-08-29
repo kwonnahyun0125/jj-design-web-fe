@@ -1,12 +1,12 @@
 export type project = {
   id: number;
   title: string;
-  year: number;
-  price: number | null;
-  img: string;
-  desc: string;
-  py: number;
-  label: string;
+  imageUrl: string | null;
+  description: string | null;
+  areaSize: number;
+  type: string;
+  durationWeeks: number | null;
+  reviews: string | null;
 }
 
 export type KeywordFilterProps = {

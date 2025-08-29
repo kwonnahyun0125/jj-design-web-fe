@@ -10,7 +10,7 @@ import { Button } from "@/component/button";
 export const SlideArea = () => {
   // api 호출해서 목록으로 가져오기
   const images = projectsItems.map(
-    (item) => item.img || "/image/default-image.png"
+    (item) => item.imageUrl || "/image/default-image.png"
   );
   // 무한 슬라이드를 위해 앞뒤에 더미 이미지 추가
   const slideImages = [images[projectsItems.length - 1], ...images, images[0]];
@@ -253,7 +253,7 @@ export const SlideArea = () => {
                         opacity: 0.9,
                       }}
                     >
-                      {currentImage.desc}
+                      {currentImage.description}
                     </p>
                     <h2
                       style={{
