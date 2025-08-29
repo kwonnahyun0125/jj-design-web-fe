@@ -29,17 +29,14 @@ export const ReviewSection = ({ projectId }: ReviewSectionProps) => {
   // };
 
   return (
-    <div className="bg-white rounded-lg p-8 shadow-sm">
-      <h2 className="text-2xl font-bold mb-6">고객리뷰</h2>
+    <>
+      {review && (
+        <div className="bg-white rounded-lg p-8 shadow-sm">
+          <h2 className="text-2xl font-bold mb-6">고객리뷰</h2>
 
-      {!review ? (
-        <div className="text-center text-gray-500 py-12">
-          아직 등록된 리뷰가 없습니다.
-        </div>
-      ) : (
-        <div className="bg-gray-50 rounded-lg p-6">
-          {/* 고객 정보 */}
-          {/* <div className="flex items-center gap-3 mb-4">
+          <div className="bg-gray-50 rounded-lg p-6">
+            {/* 고객 정보 */}
+            {/* <div className="flex items-center gap-3 mb-4">
             <div className="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
               <span className="text-sm font-medium">{review.customerName}</span>
             </div>
@@ -49,12 +46,13 @@ export const ReviewSection = ({ projectId }: ReviewSectionProps) => {
             </div>
           </div> */}
 
-          {/* 리뷰 내용 */}
-          <p className="text-gray-800 leading-relaxed text-base">
-            {review.content}
-          </p>
+            {/* 리뷰 내용 */}
+            <p className="text-gray-800 leading-relaxed text-base">
+              {review.content}
+            </p>
+          </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
