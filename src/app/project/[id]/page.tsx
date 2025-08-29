@@ -10,6 +10,7 @@ import { DetailInfo } from "./component/info";
 import { DetailKeywordFilter } from "./component/keyword-filter";
 import { DetailGalery } from "./component/galery";
 import { ViewGroupButton } from "./component/view-button";
+import { ReviewSection } from "./component/review";
 
 const ProjectDetailPage = () => {
   const router = useRouter();
@@ -71,6 +72,9 @@ const ProjectDetailPage = () => {
             <RightArrowIcon />
           </Button>
         </div>
+
+        {/* 리뷰 섹션 */}
+        <ReviewSection projectId={project.id} />
       </div>
 
       {/* 상담 영역 - 브라우저 너비 전체 */}
