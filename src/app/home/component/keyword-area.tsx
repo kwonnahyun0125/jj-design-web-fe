@@ -14,8 +14,16 @@ export const KeywordArea = () => {
   const itemsPerSlide = 4; // 한 번에 보여줄 카드 수
   const maxIndex = Math.max(0, totalSlides - itemsPerSlide);
 
+  const filteredItems = [
+    { value: "apt", label: "아파트" },
+    { value: "house", label: "주택" },
+    { value: "mercantile", label: "상가" },
+    { value: "new", label: "신축" },
+  ];
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedCategory, setSelectedCategory] = useState("30");
+  const [selectedCategory, setSelectedCategory] = useState(
+    filteredItems[0].value
+  );
 
   const nextSlide = () => {
     setCurrentIndex((prev) => {
@@ -38,6 +46,7 @@ export const KeywordArea = () => {
   return (
     <div className="px-15 py-10 mx-auto mb-10">
       <KeywordHeader
+        filteredItems={filteredItems}
         selectedCategory={selectedCategory}
         onCategoryChange={setSelectedCategory}
       />
@@ -70,20 +79,14 @@ export const KeywordArea = () => {
 };
 
 const KeywordHeader = ({
+  filteredItems,
   selectedCategory,
   onCategoryChange,
 }: {
+  filteredItems: { value: string; label: string }[];
   selectedCategory: string;
   onCategoryChange: (value: string) => void;
 }) => {
-  const filteredItems = [
-    { value: "30", label: "30평형 아파트" },
-    { value: "50", label: "50평형 이상 아파트" },
-    { value: "old", label: "구축 아파트" },
-    { value: "new", label: "신축 아파트" },
-    { value: "2", label: "주택" },
-  ];
-
   return (
     <div className="flex justify-between items-center mb-8 px-7">
       <div className="flex items-center gap-6">

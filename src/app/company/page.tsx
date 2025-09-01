@@ -110,8 +110,11 @@ const CompanyPage = () => {
                 </div>
                 <div>
                   <p className="font-semibold text-gray-800">주소</p>
-                  <p className="text-gray-600 text-sm">
-                    서울특별시 강남구 테헤란로 123
+                  <p className="text-gray-600 text-sm whitespace-pre-line">
+                    {`본점 : 경북 구미시 산동읍 첨단기업7로 \n 122-53, B동`}
+                  </p>
+                  <p className="text-gray-600 text-sm whitespace-pre-line">
+                    {`분점 : 경북 구미시 임수동`}
                   </p>
                 </div>
               </div>
@@ -121,7 +124,7 @@ const CompanyPage = () => {
                 </div>
                 <div>
                   <p className="font-semibold text-gray-800">전화</p>
-                  <p className="text-gray-600 text-sm">02-1234-5678</p>
+                  <p className="text-gray-600 text-sm">070-4017-1252</p>
                 </div>
               </div>
               <div className="flex items-center p-6 bg-gray-50 rounded-xl min-h-[120px]">
@@ -130,7 +133,7 @@ const CompanyPage = () => {
                 </div>
                 <div>
                   <p className="font-semibold text-gray-800">이메일</p>
-                  <p className="text-gray-600 text-sm">info@jjdesign.co.kr</p>
+                  <p className="text-gray-600 text-sm">llbeforell@naver.com</p>
                 </div>
               </div>
             </div>

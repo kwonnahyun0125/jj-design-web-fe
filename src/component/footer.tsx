@@ -26,15 +26,18 @@ export const Footer = () => {
             <p className="text-base">
               Your trusted partner in interior design and architecture.
             </p>
-            <p className="text-base mt-2">사업자등록번호: 123-45-67890</p>
-            <p className="text-base">대표: 홍길동</p>
+            <p className="text-base mt-2">사업자등록번호: 698-86-02793</p>
+            <p className="text-base">대표: 최병준</p>
           </div>
           {/* 연락처 및 주소 */}
           <div>
             <h3 className="font-semibold text-lg mb-1">Contact</h3>
-            <p className="text-base">전화: 02-1234-5678</p>
-            <p className="text-base">이메일: info@jj-design.com</p>
-            <p className="text-base">주소: 서울특별시 강남구 테헤란로 123</p>
+            <p className="text-base">전화: 070-4017-1252</p>
+            <p className="text-base">이메일: llbeforell@naver.com</p>
+            <p className="text-base">
+              주소 : 경북 구미시 산동읍 첨단기업7로 122-53, B동(본점)
+            </p>
+            <p className="text-base">주소 : 경북 구미시 임수동(분점)</p>
           </div>
           {/* 빠른 링크 */}
           <div>
@@ -67,7 +70,7 @@ export const Footer = () => {
                 style={{ minWidth: "50px", cursor: "pointer" }}
                 onClick={() =>
                   window.open(
-                    "https://www.instagram.com/jj_interior_part2",
+                    " https://www.instagram.com/jj_design0301",
                     "_blank"
                   )
                 }
@@ -86,10 +89,7 @@ export const Footer = () => {
                 className="text-gray-900 py-2 text-m font-medium hover:border-b-3 hover:border-gray-900 flex items-start justify-start"
                 style={{ minWidth: "50px", cursor: "pointer" }}
                 onClick={() =>
-                  window.open(
-                    "https://blog.naver.com/jj-design_part2",
-                    "_blank"
-                  )
+                  window.open(" https://blog.naver.com/jj-design_", "_blank")
                 }
               >
                 <Image
