@@ -20,7 +20,6 @@ const NoticeDetailPage = () => {
       const fetchedNotice = result.data || null;
       const newFlag =
         fetchedNotice?.createdAt && calcDate(fetchedNotice.createdAt) < 7;
-      fetchedNotice.date = formatDate(fetchedNotice.createdAt);
       setIsNew(newFlag);
       setNotice(fetchedNotice);
     };
@@ -75,7 +74,9 @@ const NoticeDetailPage = () => {
                 </div>
               </div>
               <div className="col-span-2 text-center">
-                <span className="text-sm text-gray-600">{notice.date}</span>
+                <span className="text-sm text-gray-600">
+                  {formatDate(notice.createdAt)}
+                </span>
               </div>
               <div className="col-span-2 text-center">
                 <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
