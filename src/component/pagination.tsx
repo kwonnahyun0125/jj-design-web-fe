@@ -1,21 +1,28 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NextArrowIcon, PrevArrowIcon } from "./Icon";
 import { Button } from "./button";
 
 interface PaginationProps {
   initialPage?: number;
-  totalPages: number;
+  pageSize?: number;
+  totalItems: number;
   onPageChange?: (page: number) => void;
 }
 
 export const Pagination: React.FC<PaginationProps> = ({
   initialPage = 1,
-  totalPages,
+  pageSize = 10,
+  totalItems,
   onPageChange,
 }) => {
   const [currentPage, setCurrentPage] = useState(initialPage);
+  const [totalPages, setTotalPages] = useState<number>(1);
+
+  useEffect(() => {
+    setTotalPages(Math.ceil(totalItems / pageSize));
+  }, [totalItems, pageSize]);
 
   const handlePageChange = (page: number) => {
     if (page < 1 || page > totalPages) return;
