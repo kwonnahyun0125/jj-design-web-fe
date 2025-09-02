@@ -1,4 +1,14 @@
-export const FormReferenceInfo = () => {
+export const FormReferenceInfo = ({
+  note,
+  setNote,
+}: {
+  note: string;
+  setNote: React.Dispatch<React.SetStateAction<string>>;
+}) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setNote(e.target.value);
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center space-x-3 mb-6">
@@ -27,7 +37,9 @@ export const FormReferenceInfo = () => {
           </label>
           <textarea
             rows={4}
+            value={note}
             placeholder="추가 요청사항이나 특별히 고려해야 할 사항이 있다면 자세히 적어주세요."
+            onChange={handleInputChange}
             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-gray-800 focus:ring-0 transition-colors duration-200 bg-white resize-none"
           />
         </div>
