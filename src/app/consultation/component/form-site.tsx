@@ -1,12 +1,41 @@
 import { SelectBox } from "@/component/selectbox";
+import { SiteInfoProps } from "@/type/consultation";
 
-export const FormSiteInfo = () => {
+export const FormSiteInfo = ({
+  address,
+  setAddress,
+  type,
+  setType,
+  size,
+  setSize,
+  budget,
+  setBudget,
+  preferredDate,
+  setPreferredDate,
+}: SiteInfoProps) => {
   // 공간 유형 options
   const options = [
     { key: "residence", value: "주거 공간" },
     { key: "mercantile", value: "상업 공간" },
-    { key: "architecture", value: "건축물" }, 
+    { key: "architecture", value: "건축물" },
   ];
+  // 입력값 변경 핸들러
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    if (id === "address") {
+      setAddress(value);
+    }
+    if (id === "size") {
+      setSize(value);
+    }
+    if (id === "budget") {
+      setBudget(value);
+    }
+    if (id === "preferredDate") {
+      setPreferredDate(value);
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center space-x-3 mb-6">
@@ -31,24 +60,33 @@ export const FormSiteInfo = () => {
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            시공 주소 <span className="text-red-500">*</span>
+            시공 주소
           </label>
           <input
+            id="address"
             type="text"
+            value={address}
             placeholder="시/군/구 + 상세 주소"
+            onChange={onChangeInput}
             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-gray-800 focus:ring-0 transition-colors duration-200 bg-white"
           />
         </div>
 
         <div className="grid grid-cols-2 gap-4">
-          <SelectBox label="공간 유형" options={options} />
-
+          <SelectBox
+            label="공간 유형"
+            options={options}
+            onChange={(key) => setType(key)}
+          />
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
               면적
             </label>
             <input
+              id="size"
               type="text"
+              value={size}
+              onChange={onChangeInput}
               placeholder="예: 25평"
               className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-gray-800 focus:ring-0 transition-colors duration-200 bg-white"
             />
@@ -62,6 +100,9 @@ export const FormSiteInfo = () => {
             </label>
             <input
               type="text"
+              id="budget"
+              value={budget}
+              onChange={onChangeInput}
               placeholder="예: 2천만 원"
               className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-gray-800 focus:ring-0 transition-colors duration-200 bg-white"
             />
@@ -72,8 +113,10 @@ export const FormSiteInfo = () => {
               희망 시작 시기
             </label>
             <input
+              id="preferredDate"
               type="month"
-              defaultValue={new Date().toISOString().slice(0, 7)}
+              value={preferredDate}
+              onChange={onChangeInput}
               className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-gray-800 focus:ring-0 transition-colors duration-200 bg-white"
             />
           </div>

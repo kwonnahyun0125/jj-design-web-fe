@@ -1,4 +1,47 @@
-export const FormPrivacyInfo = () => {
+import { Button } from "@/component/button";
+import { Modal } from "@/component/modal";
+import { useState } from "react";
+
+export const FormPrivacyInfo = ({
+  isChecked,
+  setIsChecked,
+}: {
+  isChecked: boolean;
+  setIsChecked: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  return (
+    <label className="flex items-start space-x-3 px-1 text-sm text-gray-700">
+      <input
+        type="checkbox"
+        className="mt-0.5 h-5 w-5 text-gray-800 border-gray-300 rounded focus:ring-gray-800"
+        checked={isChecked}
+        onChange={(e) => setIsChecked(e.target.checked)}
+      />
+      <span className="leading-relaxed">
+        개인정보 수집 및 이용에 동의합니다.
+        <Button
+          className="text-gray-800 underline ml-1"
+          onClick={() => setIsModalOpen(true)}
+        >
+          개인정보처리방침 보기
+        </Button>
+        <Modal
+          title="개인정보 처리방침 (요약)"
+          isOpen={isModalOpen}
+          onClose={() => {
+            setIsModalOpen(false);
+          }}
+        >
+          <FormPrivacyModal />
+        </Modal>
+      </span>
+    </label>
+  );
+};
+
+const FormPrivacyModal = () => {
   return (
     <section className="bg-gray-50 p-6 rounded-lg border border-gray-200">
       <p className="text-gray-700 mb-6 leading-relaxed">

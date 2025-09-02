@@ -1,19 +1,29 @@
 export const SelectBox = ({
   label,
   options,
+  onChange,
+  required = false,
+  value,
 }: {
   label: string;
   options: { key: string; value: string }[];
+  onChange: (key: string) => void;
+  required?: boolean;
+  value?: string;
 }) => {
   return (
     <div>
       <label className="block text-sm font-semibold text-gray-700 mb-2">
-        {label}
+        {label} {required && <span className="text-red-500">*</span>}
       </label>
       <div className="relative">
-        <select className="w-full px-4 py-3 pr-10 rounded-lg border border-gray-300 focus:border-gray-800 focus:ring-0 transition-colors duration-200 bg-white appearance-none">
+        <select
+          className="w-full px-4 py-3 pr-10 rounded-lg border border-gray-300 focus:border-gray-800 focus:ring-0 transition-colors duration-200 bg-white appearance-none"
+          onChange={(e) => onChange(e.target.value.toUpperCase())}
+          value={value}
+        >
           {options.map((option) => (
-            <option key={option.key} value={option.value}>
+            <option key={option.key} value={option.key}>
               {option.value}
             </option>
           ))}
