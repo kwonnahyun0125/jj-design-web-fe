@@ -1,12 +1,8 @@
 export const FormPrivacyInfo = () => {
-  // TODO : 회사명, 개인정보 보호책임자, 연락처 등 실제 정보로 교체 필요
   return (
     <section className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-      <h2 className="text-xl font-semibold text-gray-900 mb-4 border-b border-gray-300 pb-2">
-        개인정보 처리방침 (요약)
-      </h2>
       <p className="text-gray-700 mb-6 leading-relaxed">
-        ㈜OOO디자인은 고객님의 개인정보를 안전하게 보호하며, 아래와 같은 목적과
+        ㈜JJ-Design은 고객님의 개인정보를 안전하게 보호하며, 아래와 같은 목적과
         범위 내에서 정보를 수집·이용합니다.
       </p>
 
