@@ -10,16 +10,21 @@ import { defaultNotice } from "@/api/notice/data";
 
 const NoticePage = () => {
   const [notices, setNotices] = useState<Notice[]>([defaultNotice]);
-  const [totalPages, setTotalPages] = useState<number>(1);
+  const [condition, setCondition] = useState<{
+    page: number;
+    pageSize: number;
+  }>({ page: 1, pageSize: 10 });
+
+  const [totalItems, setTotalItems] = useState<number>(1);
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await getNoticeList();
+      const result = await getNoticeList(condition);
       setNotices(result.data.list || []);
-      setTotalPages(result.data.totalPages || 1);
+      setTotalItems(result.data.totalCount || 1);
     };
     fetchData();
-  }, []);
+  }, [condition]);
 
   return (
     <div className="min-h-screen bg-white">
@@ -65,7 +70,9 @@ const NoticePage = () => {
                     {/* 번호 */}
                     <div className="col-span-1 text-center">
                       <span className="text-sm text-gray-600">
-                        {notices.length - index}
+                        {totalItems -
+                          (condition.page - 1) * condition.pageSize -
+                          index}
                       </span>
                     </div>
 
@@ -124,8 +131,8 @@ const NoticePage = () => {
         {/* 페이지네이션 */}
         <div className="my-4 flex justify-center">
           <Pagination
-            totalPages={totalPages}
-            onPageChange={(page) => console.log("Page changed to:", page)}
+            totalItems={totalItems}
+            onPageChange={(page) => setCondition({ ...condition, page })}
           />
         </div>
       </div>
