@@ -1,13 +1,20 @@
+"use client";
+
 import Image from "next/image";
+import { useCompany } from "@/context/company-context";
+import { ContentLoading } from "@/component/content-loading";
 
 const CompanyPage = () => {
+  const { companyData, loading } = useCompany();
+  const companyAddress = companyData.address.split("/");
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Hero Section */}
       <div className="relative bg-gradient-to-r from-[#111827] to-[#7fa5f0] text-white py-15">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h1 className="text-5xl font-bold mb-4 animate-fade-in-up">
-            JJ Design
+            {companyData.name}
           </h1>
           <p className="text-xl opacity-90">
             창의적인 디자인으로 미래를 만들어갑니다
@@ -110,11 +117,11 @@ const CompanyPage = () => {
                 </div>
                 <div>
                   <p className="font-semibold text-gray-800">주소</p>
-                  <p className="text-gray-600 text-sm whitespace-pre-line">
-                    {`본점 : 경북 구미시 산동읍 첨단기업7로 \n 122-53, B동`}
+                  <p className="text-gray-600 text-sm">
+                    {companyAddress[0]} (본점)
                   </p>
-                  <p className="text-gray-600 text-sm whitespace-pre-line">
-                    {`분점 : 경북 구미시 임수동`}
+                  <p className="text-gray-600 text-sm">
+                    {companyAddress[1]} (분점)
                   </p>
                 </div>
               </div>
@@ -124,7 +131,7 @@ const CompanyPage = () => {
                 </div>
                 <div>
                   <p className="font-semibold text-gray-800">전화</p>
-                  <p className="text-gray-600 text-sm">070-4017-1252</p>
+                  <p className="text-gray-600 text-sm">{companyData.phone}</p>
                 </div>
               </div>
               <div className="flex items-center p-6 bg-gray-50 rounded-xl min-h-[120px]">
@@ -133,7 +140,7 @@ const CompanyPage = () => {
                 </div>
                 <div>
                   <p className="font-semibold text-gray-800">이메일</p>
-                  <p className="text-gray-600 text-sm">llbeforell@naver.com</p>
+                  <p className="text-gray-600 text-sm">{companyData.email}</p>
                 </div>
               </div>
             </div>
