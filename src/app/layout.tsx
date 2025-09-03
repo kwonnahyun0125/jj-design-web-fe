@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Toolbar } from "@/component/toolbar";
 import { Footer } from "@/component/footer";
 import { Error } from "@/component/error";
+import { CompanyProvider } from "@/context/company-context";
 import "../style/global.css";
 
 export const metadata: Metadata = {
@@ -29,9 +30,11 @@ const RootLayout = ({
         `}</style>
       </head>
       <body style={{ fontFamily: "Pretendard, sans-serif" }}>
-        <Toolbar />
-        {children ? children : <Error status="notfound" />}
-        <Footer />
+        <CompanyProvider>
+          <Toolbar />
+          {children ? children : <Error status="notfound" />}
+          <Footer />
+        </CompanyProvider>
       </body>
     </html>
   );

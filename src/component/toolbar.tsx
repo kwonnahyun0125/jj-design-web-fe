@@ -3,9 +3,14 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { NavBar } from "./navbar";
+import { useCompany } from "@/context/company-context";
 
 export const Toolbar = () => {
   const [selectedMenu, setSelectedMenu] = useState<string>("home");
+  const { companyData } = useCompany();
+
+  const instagramUrl = companyData?.instagram;
+  const blogUrl = companyData?.naver;
 
   return (
     <div className="bg-white shadow sticky top-0 z-50">
@@ -37,7 +42,9 @@ export const Toolbar = () => {
                 <Link
                   className="text-gray-900 px-2 py-2 text-m font-medium hover:border-b-3 hover:border-gray-900 flex items-center justify-center"
                   style={{ minWidth: "50px", cursor: "pointer" }}
-                  href="https://www.instagram.com/jj_interior_part2"
+                  href={instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <Image
                     className="inline-block"
@@ -52,7 +59,9 @@ export const Toolbar = () => {
                 <Link
                   className="text-gray-900 px-2 py-2 text-m font-medium hover:border-b-3 hover:border-gray-900 flex items-center justify-center"
                   style={{ minWidth: "50px", cursor: "pointer" }}
-                  href="https://blog.naver.com/jj-design_part2"
+                  href={blogUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <Image
                     className="inline-block"
