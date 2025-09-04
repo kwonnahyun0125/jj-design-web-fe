@@ -5,9 +5,11 @@ import { ProjectList } from "@/app/project/component/list";
 import { RightArrowIcon } from "@/component/Icon";
 import { useRouter } from "next/navigation";
 import { Button } from "@/component/button";
+import { Project } from "@/type/project";
 
-export const ProjectArea = () => {
+export const ProjectArea = ({ projectList }: { projectList: Project[] }) => {
   const router = useRouter();
+
   return (
     <div className="py-10 px-20 mb-10 flex flex-col gap-8">
       <div className="flex justify-between items-center mb-4 px-4">
@@ -16,7 +18,7 @@ export const ProjectArea = () => {
           <RightArrowIcon />
         </Link>
       </div>
-      <ProjectList />
+      <ProjectList projectList={projectList} />
       <div className="flex justify-center mt-10">
         <Button
           onClick={() => router.push("/project")}

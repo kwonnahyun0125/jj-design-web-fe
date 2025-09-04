@@ -3,17 +3,17 @@
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { projectsItems } from "@/api/data";
+// import { projectsItems } from "@/api/data";
 import { NextArrowIcon, PrevArrowIcon } from "@/component/Icon";
 import { Button } from "@/component/button";
+import { Project } from "@/type/project";
 
-export const SlideArea = () => {
-  // api 호출해서 목록으로 가져오기
-  const images = projectsItems.map(
+export const SlideArea = ({ projectList }: { projectList: Project[] }) => {
+  const images = projectList.map(
     (item) => item.imageUrl || "/image/default-image.png"
   );
   // 무한 슬라이드를 위해 앞뒤에 더미 이미지 추가
-  const slideImages = [images[projectsItems.length - 1], ...images, images[0]];
+  const slideImages = [images[projectList.length - 1], ...images, images[0]];
   const duration = 10000; // 20초
   const router = useRouter();
 
@@ -213,7 +213,7 @@ export const SlideArea = () => {
           // 실제 이미지 인덱스 계산 (더미 제외)
           const realIdx = getRealIndex(idx);
           const isActive = current === idx;
-          const currentImage = projectsItems[realIdx];
+          const currentImage = projectList[realIdx];
 
           return (
             <div
