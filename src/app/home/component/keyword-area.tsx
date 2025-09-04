@@ -141,34 +141,45 @@ const KeywordSlider = ({
   currentIndex: number;
   handleCardClick?: (id: number) => void;
 }) => {
+  const hasProjects =
+    keywordProjectList.length > 0 && keywordProjectList[0].id > 0;
+
   return (
-    <div className="relative overflow-hidden">
-      <div
-        className="flex transition-transform duration-500 ease-in-out rounded-lg shadow pt-5 pb-7"
-        style={{
-          transform: `translateX(-${
-            (currentIndex / keywordProjectList.length) * 100
-          }%)`,
-          width: `${(keywordProjectList.length / itemsPerSlide) * 100}%`,
-        }}
-      >
-        {keywordProjectList.map((project, idx) => (
+    <>
+      {hasProjects ? (
+        <div className="relative overflow-hidden">
           <div
-            key={`project_${idx}`}
-            className="flex-shrink-0 cursor-pointer"
-            style={{ width: `${100 / keywordProjectList.length}%` }}
+            className="flex transition-transform duration-500 ease-in-out rounded-lg shadow pt-5 pb-7"
+            style={{
+              transform: `translateX(-${
+                (currentIndex / keywordProjectList.length) * 100
+              }%)`,
+              width: `${(keywordProjectList.length / itemsPerSlide) * 100}%`,
+            }}
           >
-            <div className="px-5">
-              <KeywordCard
-                project={project}
-                idx={idx}
-                handleCardClick={handleCardClick}
-              />
-            </div>
+            {keywordProjectList.map((project, idx) => (
+              <div
+                key={`project_${idx}`}
+                className="flex-shrink-0 cursor-pointer"
+                style={{ width: `${100 / keywordProjectList.length}%` }}
+              >
+                <div className="px-5">
+                  <KeywordCard
+                    project={project}
+                    idx={idx}
+                    handleCardClick={handleCardClick}
+                  />
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
+        </div>
+      ) : (
+        <div className="flex items-center justify-center min-h-[300px] text-center py-8">
+          <p className="text-lg text-gray-500">등록된 시공사례가 없습니다.</p>
+        </div>
+      )}
+    </>
   );
 };
 
@@ -247,7 +258,9 @@ const KeywordControls = ({
               ? "bg-[#E5E7EB]  text-black cursor-not-allowed"
               : "hover:bg-[#111827] hover:text-white "
           }`}
-          disabled={currentIndex === 0}
+          disabled={
+            currentIndex === 0 || keywordProjectList.length <= itemsPerSlide
+          }
         >
           <PrevArrowIcon />
         </Button>
@@ -260,7 +273,10 @@ const KeywordControls = ({
               ? "bg-[#E5E7EB]  text-black cursor-not-allowed"
               : "hover:bg-[#111827] hover:text-white "
           }`}
-          disabled={currentIndex > maxIndex}
+          disabled={
+            currentIndex > maxIndex ||
+            keywordProjectList.length <= itemsPerSlide
+          }
         >
           <NextArrowIcon />
         </Button>
