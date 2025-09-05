@@ -1,6 +1,7 @@
 import Image from "next/image";
+import { Furniture } from "@/type/furniture";
 
-export const FurnitureSpace = () => {
+export const FurnitureSpace = ({ furniture }: { furniture: Furniture }) => {
   return (
     <div className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4">
@@ -20,7 +21,10 @@ export const FurnitureSpace = () => {
             <div className="relative overflow-hidden rounded-2xl shadow-xl">
               <div className="relative h-80">
                 <Image
-                  src="/image/mock/책상세트.png"
+                  src={
+                    (furniture?.images && furniture?.images[0]) ||
+                    "/image/no-image.png"
+                  }
                   alt="베스트 아이템 전시공간"
                   fill
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -37,9 +41,11 @@ export const FurnitureSpace = () => {
                 베스트 아이템 - 자재체험존
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                JJ-DESIGN 시그니처 가구와 직접 검증된 자재들을 한눈에
+                {`${
+                  furniture?.name || ""
+                } 시그니처 가구와 직접 검증된 자재들을 한눈에
                 확인하세요. 10,000여 점 이상의 엄선된 디자인 제품들로 고객과
-                시장의 트렌드를 분석하여 베스트 아이템만을 선별했습니다.
+                시장의 트렌드를 분석하여 베스트 아이템만을 선별했습니다.`}
               </p>
             </div>
           </div>
@@ -48,7 +54,10 @@ export const FurnitureSpace = () => {
             <div className="relative overflow-hidden rounded-2xl shadow-xl">
               <div className="relative h-80">
                 <Image
-                  src="/image/mock/가구점 내부.png"
+                  src={
+                    (furniture?.images && furniture?.images[1]) ||
+                    "/image/no-image.png"
+                  }
                   alt="공간별 구성 전시"
                   fill
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -73,66 +82,6 @@ export const FurnitureSpace = () => {
             </div>
           </div>
         </div>
-
-        {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div className="group cursor-pointer">
-              <div className="relative overflow-hidden rounded-2xl shadow-xl">
-                <div className="relative h-80">
-                  <Image
-                    src="/image/mock/사무실.png"
-                    alt="자연광 체험공간"
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                
-                  <div className="absolute bottom-4 left-4 bg-white bg-opacity-90 px-4 py-2 rounded-lg">
-                    <span className="text-gray-800 font-medium text-sm">
-                      자연광 체험공간
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="pt-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                  자연광 체험존
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  다양한 조명과 자연광 환경에서 자재의 실제 질감과 색상 변화를
-                  체험할 수 있는 특별한 공간입니다. 시간대별 조명 변화까지
-                  고려한 완벽한 선택을 도와드립니다.
-                </p>
-              </div>
-            </div>
-
-            <div className="group cursor-pointer">
-              <div className="relative overflow-hidden rounded-2xl shadow-xl">
-                <div className="relative h-80">
-                  <Image
-                    src="/image/mock/카페.png"
-                    alt="실제 생활공간"
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-
-                  <div className="absolute bottom-4 left-4 bg-white bg-opacity-90 px-4 py-2 rounded-lg">
-                    <span className="text-gray-800 font-medium text-sm">
-                      실제 생활공간
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="pt-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                  리얼 라이프 체험공간
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  실제 생활공간과 동일한 환경에서 가구와 자재의 조화를 직접
-                  체험해보세요. 일상의 동선과 사용성까지 고려한 완벽한 공간
-                  설계를 미리 경험하실 수 있습니다.
-                </p>
-              </div>
-            </div>
-          </div> */}
       </div>
     </div>
   );
