@@ -5,7 +5,7 @@ import { ProjectArea } from "./component/project-area";
 import { getProjectList } from "@/api/project/api";
 
 const Home = async () => {
-  const fetchData = await getProjectList({ page: 1, size: 10 });
+  const fetchData = await getProjectList({ page: 1, size: 12 });
   const projectData = fetchData.data;
   const projectList = projectData.list || [];
 
