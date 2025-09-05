@@ -1,18 +1,11 @@
+import { Furniture } from "@/type/furniture";
 import Image from "next/image";
 import Link from "next/link";
 
-export const FurnitureCard = ({
-  furniture,
-}: {
-  furniture: {
-    id: number;
-    name: string;
-    location: string;
-    hours: string;
-    info: string;
-    image: string;
-  };
-}) => {
+export const FurnitureCard = ({ furniture }: { furniture: Furniture }) => {
+  const hours =
+    furniture.hours || "평일 09:00~18:00 / 토 10:00~17:00 / 일 10:00~16:00";
+
   return (
     <Link
       key={furniture.id}
@@ -22,7 +15,7 @@ export const FurnitureCard = ({
       {/* 이미지 */}
       <div className="h-100 bg-gray-200 overflow-hidden relative">
         <Image
-          src={furniture.image}
+          src={furniture.coverImageUrl || "/image/no-image.png"}
           alt={furniture.name}
           fill
           className="object-cover"
@@ -30,25 +23,27 @@ export const FurnitureCard = ({
       </div>
 
       {/* 컨텐츠 */}
-      <div className="px-12 py-6">
+      <div className="px-12 py-8">
         <h3 className="text-2xl font-bold text-gray-900 mb-6">
           {furniture.name}
         </h3>
         <div className="space-y-4 mb-8">
           <div className="flex items-start gap-3">
             <p className="text-sm text-gray-500 min-w-[90px]">오시는 길</p>
-            <p className="text-gray-700 flex-1">{furniture.location}</p>
+            <p className="text-gray-700 flex-1">
+              {furniture.address || "정보 없음"}
+            </p>
           </div>
 
           <div className="flex items-start gap-3">
             <p className="text-sm text-gray-500 min-w-[90px]">운영시간</p>
-            <p className="text-gray-700 flex-1">{furniture.hours}</p>
+            <p className="text-gray-700 flex-1 line-clamp-2">{hours}</p>
           </div>
 
           <div className="flex items-start gap-3">
             <p className="text-sm text-gray-500 min-w-[90px]">이용안내</p>
             <p className="text-gray-700 flex-1 line-clamp-2">
-              {furniture.info}
+              {furniture.info || "정보 없음"}
             </p>
           </div>
         </div>
