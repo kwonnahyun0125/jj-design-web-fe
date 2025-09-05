@@ -7,7 +7,7 @@ export const FurnitureMatelrials = () => {
             제작 과정
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            JJ-Mobilia의 가구는 철저한 제작 과정을 거쳐 완성됩니다.
+            철저한 제작 과정을 거쳐 완성됩니다.
           </p>
         </div>
 

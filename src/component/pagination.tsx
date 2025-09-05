@@ -21,7 +21,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   const [totalPages, setTotalPages] = useState<number>(1);
 
   useEffect(() => {
-    setTotalPages(Math.ceil(totalItems / pageSize));
+    setTotalPages(Math.max(Math.ceil(totalItems / pageSize), 1));
   }, [totalItems, pageSize]);
 
   const handlePageChange = (page: number) => {
