@@ -1,8 +1,13 @@
+"use client";
+
 import { Button } from "@/component/button";
+import { Modal } from "@/component/modal";
 import { Furniture } from "@/type/furniture";
+import { useState } from "react";
 
 export const FurnitureLocation = ({ furniture }: { furniture: Furniture }) => {
   const hours = furniture.hours?.split(" / ");
+  const [isOpen, setIsOpen] = useState(false);
 
   const generateGoogleMapsEmbedUrl = () => {
     const query = furniture?.address || furniture?.name || "";
@@ -158,9 +163,45 @@ export const FurnitureLocation = ({ furniture }: { furniture: Furniture }) => {
                     <span>🗺️</span>
                     <span>카카오 길찾기</span>
                   </Button>
-                  <Button className="bg-gray-800 text-white px-4 py-2 rounded text-sm font-medium hover:bg-gray-900 transition-colors">
+                  <Button
+                    onClick={() => setIsOpen(!isOpen)}
+                    className="bg-gray-800 text-white px-4 py-2 rounded text-sm font-medium hover:bg-gray-900 transition-colors"
+                  >
                     오시는 길 및 주차안내
                   </Button>
+                  <Modal
+                    customClass="w-[800px]"
+                    title="오시는 길 및 주차안내"
+                    isOpen={isOpen}
+                    onClose={() => setIsOpen(false)}
+                  >
+                    <div className="py-8">
+                      <div className="text-gray-400 mb-4 text-center">
+                        <svg
+                          className="w-16 h-16 mx-auto mb-4"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                      <p className="text-gray-600 mb-6 text-center">
+                        상세한 오시는 길 및 주차 안내는
+                        <br />
+                        매장으로 직접 문의해 주세요
+                      </p>
+                      <div className="bg-gray-50 p-6 rounded-lg text-center">
+                        <p className="text-sm text-gray-500 mb-2">대표전화</p>
+                        <p className="text-lg font-semibold text-gray-900">
+                          {furniture?.phoneNumber || "매장 정보를 확인해주세요"}
+                        </p>
+                      </div>
+                    </div>
+                  </Modal>
                 </div>
               </div>
             </div>
