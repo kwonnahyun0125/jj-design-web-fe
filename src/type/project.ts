@@ -1,12 +1,21 @@
-export type project = {
+export type Project = {
   id: number;
   title: string;
-  imageUrl: string | null;
-  description: string | null;
-  areaSize: number;
-  type: string;
-  durationWeeks: number | null;
-  reviews: string | null;
+  imageUrl?: string | null;
+  description?: string | null;
+  size?: number;
+  type?: string;
+  duration?: number | null;
+  reviews?: string | null;
+}
+
+export type ProjectCondition = {
+  page: number;
+  size?: number;
+  search?: string;
+  category?: Category;
+  keyword?: Keyword;
+  lineup?: Lineup;
 }
 
 export type KeywordFilterProps = {
@@ -16,13 +25,13 @@ export type KeywordFilterProps = {
 }
 
 export type ProjectDetailPageProps = {
-  project: project;
+  project: Project;
   keywordFilterProps: KeywordFilterProps;
 }
 
 export type ProjectGalleryProps = {
   selectedView: "card" | "list";
-  imageList: project[];
+  imageList: Project[];
 }
 
 export type GalleryItem = {
@@ -35,4 +44,22 @@ export type GalleryItem = {
 export type ViewButtonProps = {
   selectedView: "card" | "list";
   setSelectedView: (view: "card" | "list") => void;
+}
+
+export enum Category {
+  RESIDENCE = 'RESIDENCE',
+  MERCANTILE = 'MERCANTILE',
+  ARCHITECTURE = 'ARCHITECTURE',
+}
+
+export enum Lineup {
+  FULL = 'FULL',
+  PARTIAL = 'PARTIAL',
+}
+
+export enum Keyword {
+  APART = 'APART',
+  HOUSE = 'HOUSE',
+  COMMERCIAL = 'COMMERCIAL',
+  NEW = 'NEW'
 }
