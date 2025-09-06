@@ -3,8 +3,8 @@ import { Button } from "@/component/button";
 
 export const ProjectFilter = () => {
   return (
-    <aside className="bg-white h-full border-r border-gray-300 py-8 px-6 overflow-y-auto">
-      <div className="space-y-6">
+    <aside className="bg-white h-full border-r border-gray-300 py-8 px-6 overflow-y-auto flex flex-col">
+      <div className="space-y-6 flex-1">
         {/* 검색 영역 */}
         <div className="relative">
           <input
@@ -93,16 +93,16 @@ export const ProjectFilter = () => {
             </label>
           </div>
         </section>
+      </div>
 
-        {/* 버튼 영역 */}
-        <div className="flex gap-2 pt-4 items-end">
-          <Button className="flex-1 px-4 py-2 text-base border border-gray-300 rounded-md hover:bg-gray-50">
-            초기화
-          </Button>
-          <Button className="flex-1 px-4 py-2 text-base bg-[#E5E7EB] hover:bg-[#111827] hover:text-white rounded-md">
-            확인
-          </Button>
-        </div>
+      {/* 버튼 영역 */}
+      <div className="flex gap-2 justify-end items-end mt-4">
+        <Button className="flex-1 px-4 py-2 text-base border border-gray-300 rounded-md hover:bg-gray-50">
+          초기화
+        </Button>
+        <Button className="flex-1 px-4 py-2 text-base bg-[#E5E7EB] hover:bg-[#111827] hover:text-white rounded-md">
+          확인
+        </Button>
       </div>
     </aside>
   );

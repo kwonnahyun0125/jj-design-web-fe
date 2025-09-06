@@ -13,7 +13,7 @@ const ProjectPage = () => {
     <div className="min-h-screen bg-gray-50">
       {/* 메인 컨텐츠 영역 */}
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex gap-8">
+        <div className="flex gap-8 min-h-screen">
           {/* 좌측 필터 영역 */}
           <div className="w-80 flex-shrink-0">
             <div className="sticky top-20 h-[calc(100vh-5rem)]">
@@ -21,13 +21,15 @@ const ProjectPage = () => {
             </div>
           </div>
           {/* 우측 프로젝트 리스트 영역 */}
-          <div className="flex-1 min-w-0 py-8 px-6 ">
+          <div className="flex-1 min-w-0 py-8 px-6 flex flex-col min-h-screen">
             {/* 프로젝트 헤더 */}
             <ProjectHeader />
             {/* 프로젝트 리스트 */}
-            <ProjectList />
+            <div className="flex-1">
+              <ProjectList projectList={[]} />
+            </div>
             {/* 페이지네이션 */}
-            <Pagination totalPages={totalPages} />
+            <Pagination totalItems={totalPages} />
           </div>
         </div>
       </div>
