@@ -1,13 +1,67 @@
+"use client";
+
+import { useEffect, useLayoutEffect, useState } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
+import { Pagination } from "@/component/pagination";
+import { Category, Lineup, Project, ProjectCondition } from "@/type/project";
 import { ProjectList } from "./component/list";
 import { ProjectFilter } from "./component/filter";
 import { ProjectHeader } from "./component/header";
-import { Pagination } from "@/component/pagination";
-import { projectsItems } from "@/api/data";
+import { getProjectList } from "@/api/project/api";
+import { typeItems } from "@/api/project/data";
 
 const ProjectPage = () => {
-  const itemsPerPage = 15;
-  const totalItems = projectsItems.length;
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const params = useSearchParams();
+
+  const [projectList, setProjectList] = useState<Project[]>([]);
+  const [totalItems, setTotalItems] = useState<number>(1);
+  const [typeFilter, setTypeFilter] = useState<
+    { key: string; label: string }[]
+  >([]);
+  const [condition, setCondition] = useState<ProjectCondition>({
+    page: 1,
+    size: 12,
+    category: Category.RESIDENCE,
+    areaSize: [],
+    lineup: Lineup.FULL,
+  });
+
+  // URL 파라미터가 변경될 때만 실행
+  useEffect(() => {
+    const category = params.get("category");
+
+    let newCategory = Category.RESIDENCE;
+    let newTypeFilter = typeItems[Category.RESIDENCE];
+
+    if (category === "mercantile") {
+      newCategory = Category.MERCANTILE;
+      newTypeFilter = typeItems[Category.MERCANTILE];
+    } else if (category === "architecture") {
+      newCategory = Category.ARCHITECTURE;
+      newTypeFilter = typeItems[Category.ARCHITECTURE];
+    }
+
+    setTypeFilter(newTypeFilter);
+    setCondition((prev) => ({
+      ...prev,
+      page: 1,
+      category: newCategory,
+      type: newTypeFilter[0]?.key || "", // 첫 번째 타입을 기본값으로 설정
+    }));
+  }, [params]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getProjectList(condition);
+      setProjectList(result.data.list || []);
+      setTotalItems(result.data.totalCount || 0);
+    };
+
+    // category가 설정된 후에만 API 호출
+    if (condition.category) {
+      fetchData();
+    }
+  }, [condition]);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -17,19 +71,29 @@ const ProjectPage = () => {
           {/* 좌측 필터 영역 */}
           <div className="w-80 flex-shrink-0">
             <div className="sticky top-20 h-[calc(100vh-5rem)]">
-              <ProjectFilter />
+              <ProjectFilter
+                typeFilter={typeFilter}
+                setCondition={setCondition}
+              />
             </div>
           </div>
           {/* 우측 프로젝트 리스트 영역 */}
           <div className="flex-1 min-w-0 py-8 px-6 flex flex-col min-h-screen">
             {/* 프로젝트 헤더 */}
-            <ProjectHeader />
+            <ProjectHeader totalItems={totalItems} />
             {/* 프로젝트 리스트 */}
             <div className="flex-1">
-              <ProjectList projectList={[]} />
+              <ProjectList projectList={projectList} />
             </div>
             {/* 페이지네이션 */}
-            <Pagination totalItems={totalPages} />
+            <div className="mt-8 flex justify-center">
+              <Pagination
+                totalItems={totalItems || 0}
+                onPageChange={(page) => {
+                  setCondition({ ...condition, page });
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>

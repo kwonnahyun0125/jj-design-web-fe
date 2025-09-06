@@ -2,7 +2,7 @@ import { ProjectCard } from "./card";
 import { Project } from "@/type/project";
 
 export const ProjectList = ({ projectList }: { projectList: Project[] }) => {
-  const hasProjects = projectList.length > 0 && projectList[0].id > 0;
+  const hasProjects = projectList?.length > 0 && projectList[0]?.id > 0;
 
   return (
     <div className="h-full flex flex-col">

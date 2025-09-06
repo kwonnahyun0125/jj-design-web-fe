@@ -1,3 +1,32 @@
+import { Dispatch, SetStateAction } from "react";
+
+export enum Category {
+  RESIDENCE = 'RESIDENCE',
+  MERCANTILE = 'MERCANTILE',
+  ARCHITECTURE = 'ARCHITECTURE',
+}
+
+export enum Lineup {
+  FULL = 'FULL',
+  PARTIAL = 'PARTIAL',
+}
+
+export enum Keyword {
+  APART = 'APART',
+  HOUSE = 'HOUSE',
+  COMMERCIAL = 'COMMERCIAL',
+  NEW = 'NEW'
+}
+
+export enum Type {
+  APART = 'APART',
+  HOUSE = 'HOUSE',
+  COMMERCIAL = 'COMMERCIAL',
+  NEW = 'NEW',
+  OFFICE = 'OFFICE',
+  REMODELING = 'REMODELING'
+}
+
 export type Project = {
   id: number;
   title: string;
@@ -13,6 +42,7 @@ export type ProjectCondition = {
   page: number;
   size?: number;
   search?: string;
+  areaSize?: string[];
   category?: Category;
   keyword?: Keyword;
   lineup?: Lineup;
@@ -46,20 +76,20 @@ export type ViewButtonProps = {
   setSelectedView: (view: "card" | "list") => void;
 }
 
-export enum Category {
-  RESIDENCE = 'RESIDENCE',
-  MERCANTILE = 'MERCANTILE',
-  ARCHITECTURE = 'ARCHITECTURE',
+export type ProjectFilterProps = {
+  typeFilter: { key: string; label: string }[];
+  setCondition: Dispatch<SetStateAction<ProjectCondition>>;
 }
 
-export enum Lineup {
-  FULL = 'FULL',
-  PARTIAL = 'PARTIAL',
+export type ProjectListProps = {
+  projectList: Project[];
+  totalItems: number;
+  condition: ProjectCondition;
+  setCondition: Dispatch<SetStateAction<ProjectCondition>>;
 }
 
-export enum Keyword {
-  APART = 'APART',
-  HOUSE = 'HOUSE',
-  COMMERCIAL = 'COMMERCIAL',
-  NEW = 'NEW'
+export type ProjectHeaderProps = {
+  totalItems: number;
+  selectedView: "card" | "list";
+  setSelectedView: (view: "card" | "list") => void;
 }
