@@ -1,18 +1,18 @@
 import { useEffect, useLayoutEffect, useState } from "react";
 import { Button } from "@/component/button";
-import { Lineup, ProjectFilterProps } from "@/type/project";
+import { Lineup, ProjectListFilterProps } from "@/type/project";
 import { lineupItems, pyItems } from "@/api/project/data";
 import { SearchIcon } from "@/component/Icon";
 
 export const ProjectFilter = ({
   typeFilter,
   setCondition,
-}: ProjectFilterProps) => {
+}: ProjectListFilterProps) => {
   const [search, setSearch] = useState<string>(""); // 검색어 상태
   const [checkedPyItems, setCheckedPyItems] = useState<string[]>([]);
   const [checkedTypeItem, setCheckedTypeItem] = useState<string>("");
   const [checkedLineupItem, setCheckedLineupItem] = useState<Lineup>(
-    Lineup.FULL
+    Lineup.ALL
   );
   useEffect(() => {
     if (typeFilter.length > 0) {
@@ -20,12 +20,7 @@ export const ProjectFilter = ({
     }
   }, [typeFilter]);
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-  };
-
   const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // 필터 변경 시 상태 업데이트 로직 구현
     const { name, value } = e.target;
 
     if (name === "areaSize") {
@@ -39,14 +34,6 @@ export const ProjectFilter = ({
     } else if (name === "lineup") {
       setCheckedLineupItem(value as Lineup);
     }
-  };
-
-  const handleSearchBtnClick = () => {
-    setCondition((prev) => ({ ...prev, search: search, page: 1 }));
-  };
-
-  const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") handleSearchBtnClick();
   };
 
   const handleFilterBtnClick = () => {
@@ -64,7 +51,6 @@ export const ProjectFilter = ({
     setCheckedPyItems([]);
     setCheckedTypeItem(typeFilter[0]?.key || "");
     setCheckedLineupItem(lineupItems[0].key as Lineup);
-    // 조건도 초기화
     setCondition((prev) => ({
       ...prev,
       page: 1,
@@ -76,26 +62,8 @@ export const ProjectFilter = ({
   };
 
   return (
-    <aside className="bg-white h-full border-r border-gray-300 py-8 px-6 overflow-y-auto flex flex-col">
+    <aside className="bg-white h-full border-r border-gray-300 py-10 px-6 overflow-y-auto flex flex-col">
       <div className="space-y-6 flex-1">
-        {/* 검색 영역 */}
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="검색어를 입력하세요"
-            className="w-full border border-gray-300 rounded-lg px-4 py-3 pr-12 focus:outline-none focus:border-gray-500 text-base"
-            value={search}
-            onChange={handleSearchChange}
-            onKeyDown={(e) => handleEnterPress(e)}
-          />
-          <Button
-            onClick={handleSearchBtnClick}
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-          >
-            <SearchIcon />
-          </Button>
-        </div>
-
         {/* 평형 필터 */}
         <section>
           <h3 className="font-semibold text-gray-900 mb-4 text-lg">평형</h3>

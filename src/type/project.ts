@@ -7,6 +7,7 @@ export enum Category {
 }
 
 export enum Lineup {
+  ALL = 'ALL',
   FULL = 'FULL',
   PARTIAL = 'PARTIAL',
 }
@@ -76,20 +77,11 @@ export type ViewButtonProps = {
   setSelectedView: (view: "card" | "list") => void;
 }
 
-export type ProjectFilterProps = {
+export type ProjectListFilterProps = {
   typeFilter: { key: string; label: string }[];
   setCondition: Dispatch<SetStateAction<ProjectCondition>>;
 }
-
-export type ProjectListProps = {
-  projectList: Project[];
+export type ProjectListHeaderProps = {
   totalItems: number;
-  condition: ProjectCondition;
   setCondition: Dispatch<SetStateAction<ProjectCondition>>;
-}
-
-export type ProjectHeaderProps = {
-  totalItems: number;
-  selectedView: "card" | "list";
-  setSelectedView: (view: "card" | "list") => void;
 }

@@ -26,7 +26,6 @@ const ProjectPage = () => {
     lineup: Lineup.FULL,
   });
 
-  // URL 파라미터가 변경될 때만 실행
   useEffect(() => {
     const category = params.get("category");
 
@@ -41,12 +40,12 @@ const ProjectPage = () => {
       newTypeFilter = typeItems[Category.ARCHITECTURE];
     }
 
-    setTypeFilter(newTypeFilter);
+    setTypeFilter([{ key: "ALL", label: "전체" }, ...newTypeFilter]);
     setCondition((prev) => ({
       ...prev,
       page: 1,
       category: newCategory,
-      type: newTypeFilter[0]?.key || "", // 첫 번째 타입을 기본값으로 설정
+      type: "ALL", // 첫 번째 타입을 기본값으로 설정
     }));
   }, [params]);
 
@@ -80,7 +79,10 @@ const ProjectPage = () => {
           {/* 우측 프로젝트 리스트 영역 */}
           <div className="flex-1 min-w-0 py-8 px-6 flex flex-col min-h-screen">
             {/* 프로젝트 헤더 */}
-            <ProjectHeader totalItems={totalItems} />
+            <ProjectHeader
+              totalItems={totalItems}
+              setCondition={setCondition}
+            />
             {/* 프로젝트 리스트 */}
             <div className="flex-1">
               <ProjectList projectList={projectList} />
