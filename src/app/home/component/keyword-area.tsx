@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { NextArrowIcon, PrevArrowIcon } from "@/component/Icon";
 import { Button } from "@/component/button";
 import { Keyword, Project } from "@/type/project";
-import { defaultProject, keywordFilters } from "@/api/project/data";
+import { defaultProject, keywordItems } from "@/api/project/data";
 import { getProjectList } from "@/api/project/api";
 
 export const KeywordArea = () => {
@@ -16,9 +16,7 @@ export const KeywordArea = () => {
   const maxIndexRef = useRef(0);
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedKeyword, setSelectedKeyword] = useState(
-    keywordFilters[0].value
-  );
+  const [selectedKeyword, setSelectedKeyword] = useState(keywordItems[0].value);
   const [keywordProjectList, setKeywordProjectList] = useState([
     defaultProject,
   ]);
@@ -63,7 +61,7 @@ export const KeywordArea = () => {
   return (
     <div className="px-15 py-10 mx-auto mb-10">
       <KeywordHeader
-        filteredItems={keywordFilters}
+        filteredItems={keywordItems}
         selectedKeyword={selectedKeyword}
         onKeywordChange={setSelectedKeyword}
       />

@@ -5,7 +5,12 @@ import instance from "../setup";
  * @descript 프로젝트 목록 조회
  */
 export const getProjectList = async (query: ProjectCondition) => {
-  const response = await instance.get("/projects", { params: query });
+  const response = await instance.get("/projects", {
+    params: query,
+    paramsSerializer: {
+      indexes: null
+    }
+  });
   return response.data;
 };
 
@@ -14,13 +19,5 @@ export const getProjectList = async (query: ProjectCondition) => {
  */
 export const getProjectById = async (id: number) => {
   const response = await instance.get(`/projects/${id}`);
-  return response.data;
-};
-
-/**
- * @descript 프로젝트 이미지 키워드 조회
- */
-export const getProjectImageKeywords = async (id: number) => {
-  const response = await instance.get(`/projects/${id}/image-keywords`);
   return response.data;
 };

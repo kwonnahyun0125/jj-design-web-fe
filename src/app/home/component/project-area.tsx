@@ -11,7 +11,7 @@ export const ProjectArea = ({ projectList }: { projectList: Project[] }) => {
   const router = useRouter();
 
   return (
-    <div className="py-10 px-20 mb-10 flex flex-col gap-8 ">
+    <div className="py-10 px-20 mb-10 grid grid-rows-[auto_1fr_auto] gap-8 min-h-[300px]">
       <div className="flex justify-between items-center mb-4 px-4">
         <h2 className="text-3xl font-bold">시공사례 프로젝트</h2>
         <Link href={"/project"}>

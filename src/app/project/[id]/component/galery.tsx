@@ -1,15 +1,15 @@
 import { Modal } from "@/component/modal";
 import { ProjectGalleryProps } from "@/type/project";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const DetailGalery = ({
   selectedView = "card",
-  imageList,
+  imageItems,
 }: ProjectGalleryProps) => {
   //모달 열림 상태 관리
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
 
   const handleClickImage = (index: number) => {
     // 이미지 클릭 시 동작
@@ -23,15 +23,15 @@ export const DetailGalery = ({
       {selectedView === "card" ? (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 px-8">
           <div className="lg:col-span-4 grid grid-cols-1 md:grid-cols-4 gap-4">
-            {imageList.map((image, idx) => (
+            {imageItems.map((item, idx) => (
               <div
-                key={`${image.id}_${idx}`}
+                key={`image_${idx}`}
                 className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden group cursor-pointer hover:shadow-md transition-shadow"
               >
                 <div className="aspect-[4/3] overflow-hidden">
                   <Image
-                    src={image.imageUrl || "/image/default-image.png"}
-                    alt={image.type}
+                    src={item.image.url || "/image/default-image.png"}
+                    alt={""}
                     width={400}
                     height={300}
                     className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
@@ -44,15 +44,15 @@ export const DetailGalery = ({
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-6 mb-8 mx-8">
-          {imageList.map((image, idx) => (
+          {imageItems.map((item, idx) => (
             <div
-              key={`${image.id}_${idx}`}
+              key={`image_${idx}`}
               className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden group cursor-pointer hover:shadow-md transition-shadow"
             >
               <div className="aspect-[4/3] overflow-hidden">
                 <Image
-                  src={image.imageUrl || "/image/default-image.png"}
-                  alt={image.type}
+                  src={item.image.url || "/image/default-image.png"}
+                  alt={""}
                   width={400}
                   height={300}
                   className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
@@ -72,10 +72,10 @@ export const DetailGalery = ({
         <div className="flex items-center justify-center overflow-y-auto">
           <Image
             src={
-              imageList[selectedImageIndex].imageUrl ||
+              imageItems[selectedImageIndex]?.image.url ||
               "/image/default-image.png"
             }
-            alt={imageList[selectedImageIndex].type}
+            alt={""}
             width={2560}
             height={1920}
             className="object-contain max-w-[70vw] max-h-[80vh] rounded-lg "

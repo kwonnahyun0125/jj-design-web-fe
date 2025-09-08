@@ -1,37 +1,89 @@
+import { Dispatch, SetStateAction } from "react";
+
+export enum Category {
+  RESIDENCE = "RESIDENCE",
+  MERCANTILE = "MERCANTILE",
+  ARCHITECTURE = "ARCHITECTURE",
+}
+
+export enum Lineup {
+  ALL = "ALL",
+  FULL = "FULL",
+  PARTIAL = "PARTIAL",
+}
+
+export enum Keyword {
+  APART = "APART",
+  HOUSE = "HOUSE",
+  COMMERCIAL = "COMMERCIAL",
+  NEW = "NEW"
+}
+
+export enum Type {
+  APART = "APART",
+  HOUSE = "HOUSE",
+  COMMERCIAL = "COMMERCIAL",
+  NEW = "NEW",
+  OFFICE = "OFFICE",
+  REMODELING = "REMODELING"
+}
+
 export type Project = {
+  id: number,
+  title: string,
+  size?: string,
+  category?: string,
+  description?: string,
+  duration?: string,
+  lineup?: string,
+  keywords?: string[],
+  review?: string,
+  imageUrl?: string,
+  images?: ProjectImage[]
+  createdAt?: Date,
+  updatedAt?: Date,
+  deletedAt?: Date,
+  isDeleted?: string,
+}
+
+export type ProjectImage = {
   id: number;
-  title: string;
-  imageUrl?: string | null;
-  description?: string | null;
-  size?: number;
-  type?: string;
-  duration?: number | null;
-  reviews?: string | null;
+  image: {
+    id: number;
+    url: string;
+  };
+  imageId: number;
+  projectId: number;
+  tagId: number;
 }
 
 export type ProjectCondition = {
   page: number;
   size?: number;
   search?: string;
+  pyung?: string[];
   category?: Category;
   keyword?: Keyword;
   lineup?: Lineup;
 }
 
-export type KeywordFilterProps = {
-  keywordItems: string[];
-  selectedKeyword: string;
-  setSelectedKeyword: (keyword: string) => void;
+export type TagFilterProps = {
+  tagItems: { key: number; label: string }[];
+  selectedTag: { key: number; label: string };
+  setSelectedTag: Dispatch<SetStateAction<{
+    key: number;
+    label: string;
+  }>>
 }
 
 export type ProjectDetailPageProps = {
   project: Project;
-  keywordFilterProps: KeywordFilterProps;
+  tagFilterProps: TagFilterProps;
 }
 
 export type ProjectGalleryProps = {
   selectedView: "card" | "list";
-  imageList: Project[];
+  imageItems: ProjectImage[];
 }
 
 export type GalleryItem = {
@@ -46,20 +98,13 @@ export type ViewButtonProps = {
   setSelectedView: (view: "card" | "list") => void;
 }
 
-export enum Category {
-  RESIDENCE = 'RESIDENCE',
-  MERCANTILE = 'MERCANTILE',
-  ARCHITECTURE = 'ARCHITECTURE',
+export type ProjectListFilterProps = {
+  typeFilter: { key: string; label: string }[];
+  setCondition: Dispatch<SetStateAction<ProjectCondition>>;
 }
 
-export enum Lineup {
-  FULL = 'FULL',
-  PARTIAL = 'PARTIAL',
-}
-
-export enum Keyword {
-  APART = 'APART',
-  HOUSE = 'HOUSE',
-  COMMERCIAL = 'COMMERCIAL',
-  NEW = 'NEW'
+export type ProjectListHeaderProps = {
+  totalItems: number;
+  condition: ProjectCondition;
+  setCondition: Dispatch<SetStateAction<ProjectCondition>>;
 }
