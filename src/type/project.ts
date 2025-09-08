@@ -61,7 +61,7 @@ export type ProjectCondition = {
   page: number;
   size?: number;
   search?: string;
-  areaSize?: string[];
+  pyung?: string[];
   category?: Category;
   keyword?: Keyword;
   lineup?: Lineup;
@@ -102,6 +102,7 @@ export type ProjectListFilterProps = {
   typeFilter: { key: string; label: string }[];
   setCondition: Dispatch<SetStateAction<ProjectCondition>>;
 }
+
 export type ProjectListHeaderProps = {
   totalItems: number;
   setCondition: Dispatch<SetStateAction<ProjectCondition>>;

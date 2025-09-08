@@ -1,29 +1,31 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { Key, useEffect, useLayoutEffect, useState } from "react";
 import { Button } from "@/component/button";
-import { Lineup, ProjectListFilterProps } from "@/type/project";
+import { Keyword, Lineup, ProjectListFilterProps } from "@/type/project";
 import { lineupItems, pyItems } from "@/api/project/data";
-import { SearchIcon } from "@/component/Icon";
 
 export const ProjectFilter = ({
   typeFilter,
   setCondition,
 }: ProjectListFilterProps) => {
-  const [search, setSearch] = useState<string>(""); // 검색어 상태
   const [checkedPyItems, setCheckedPyItems] = useState<string[]>([]);
   const [checkedTypeItem, setCheckedTypeItem] = useState<string>("");
   const [checkedLineupItem, setCheckedLineupItem] = useState<Lineup>(
     Lineup.ALL
   );
+  
   useEffect(() => {
     if (typeFilter.length > 0) {
       setCheckedTypeItem(typeFilter[0].key);
     }
+    setCheckedPyItems([]);
+    setCheckedTypeItem(typeFilter[0]?.key || "");
+    setCheckedLineupItem(lineupItems[0].key as Lineup);
   }, [typeFilter]);
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    if (name === "areaSize") {
+    if (name === "pyung") {
       if (checkedPyItems.includes(value)) {
         setCheckedPyItems(checkedPyItems.filter((item) => item !== value));
       } else {
@@ -40,14 +42,13 @@ export const ProjectFilter = ({
     setCondition((prev) => ({
       ...prev,
       page: 1,
-      areaSize: checkedPyItems,
-      type: checkedTypeItem,
+      pyung: checkedPyItems,
+      keyword: checkedTypeItem as Keyword,
       lineup: checkedLineupItem,
     }));
   };
 
   const handleClearBtnClick = () => {
-    setSearch("");
     setCheckedPyItems([]);
     setCheckedTypeItem(typeFilter[0]?.key || "");
     setCheckedLineupItem(lineupItems[0].key as Lineup);
@@ -55,8 +56,8 @@ export const ProjectFilter = ({
       ...prev,
       page: 1,
       search: "",
-      areaSize: [],
-      type: typeFilter[0]?.key || "",
+      pyung: [],
+      keyword: (typeFilter[0]?.key || "") as Keyword,
       lineup: Lineup.FULL,
     }));
   };
@@ -76,7 +77,7 @@ export const ProjectFilter = ({
                 <input
                   key={item.key}
                   id={item.key}
-                  name="areaSize"
+                  name="pyung"
                   type="checkbox"
                   value={item.key}
                   checked={checkedPyItems.includes(item.key)}

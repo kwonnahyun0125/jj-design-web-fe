@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/component/button";
 import { SearchIcon } from "@/component/Icon";
 import { ProjectListHeaderProps } from "@/type/project";
@@ -22,6 +22,10 @@ export const ProjectHeader = ({
   const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") handleSearchBtnClick();
   };
+
+  useEffect(() => {
+    setSearch("");
+  }, [totalItems]);
 
   return (
     <div className="mb-6 flex items-center justify-between gap-4">

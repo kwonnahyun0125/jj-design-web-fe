@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useState } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { Pagination } from "@/component/pagination";
 import { Category, Lineup, Project, ProjectCondition } from "@/type/project";
 import { ProjectList } from "./component/list";
@@ -22,8 +22,8 @@ const ProjectPage = () => {
     page: 1,
     size: 12,
     category: Category.RESIDENCE,
-    areaSize: [],
-    lineup: Lineup.FULL,
+    pyung: [],
+    lineup: Lineup.ALL,
   });
 
   useEffect(() => {
@@ -90,6 +90,7 @@ const ProjectPage = () => {
             {/* 페이지네이션 */}
             <div className="mt-8 flex justify-center">
               <Pagination
+                pageSize={condition.size}
                 totalItems={totalItems || 0}
                 onPageChange={(page) => {
                   setCondition({ ...condition, page });

@@ -5,7 +5,12 @@ import instance from "../setup";
  * @descript 프로젝트 목록 조회
  */
 export const getProjectList = async (query: ProjectCondition) => {
-  const response = await instance.get("/projects", { params: query });
+  const response = await instance.get("/projects", {
+    params: query,
+    paramsSerializer: {
+      indexes: null
+    }
+  });
   return response.data;
 };
 

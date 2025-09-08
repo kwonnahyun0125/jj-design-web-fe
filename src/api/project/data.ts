@@ -24,11 +24,11 @@ export const keywordItems = [
  - 건축 : 평수 / 타입-신축, 리모델링 / 라인업 - 전체, 부분
  */
 export const pyItems: { key: string; label: string }[] = [
-  { key: "20PY", label: "20평형" },
-  { key: "30PY", label: "30평형" },
-  { key: "40PY", label: "40평형" },
-  { key: "50PY", label: "50평형" },
-  { key: "60PY", label: "60평형" },
+  { key: "20", label: "20평형" },
+  { key: "30", label: "30평형" },
+  { key: "40", label: "40평형" },
+  { key: "50", label: "50평형" },
+  { key: "60", label: "60평형" },
   { key: "OTHER", label: "그 외 평형" },
 ];
 
