@@ -6,7 +6,7 @@ import { SearchIcon } from "@/component/Icon";
 import { ProjectListHeaderProps } from "@/type/project";
 
 export const ProjectHeader = ({
-  totalItems,
+  totalItems,condition,
   setCondition,
 }: ProjectListHeaderProps) => {
   const [search, setSearch] = useState<string>(""); // 검색어 상태
@@ -25,7 +25,7 @@ export const ProjectHeader = ({
 
   useEffect(() => {
     setSearch("");
-  }, [totalItems]);
+  }, [condition.category]);
 
   return (
     <div className="mb-6 flex items-center justify-between gap-4">

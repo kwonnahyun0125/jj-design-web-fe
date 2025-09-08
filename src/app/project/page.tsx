@@ -21,6 +21,7 @@ const ProjectPage = () => {
   const [condition, setCondition] = useState<ProjectCondition>({
     page: 1,
     size: 12,
+    search:"",
     category: Category.RESIDENCE,
     pyung: [],
     lineup: Lineup.ALL,
@@ -81,6 +82,7 @@ const ProjectPage = () => {
             {/* 프로젝트 헤더 */}
             <ProjectHeader
               totalItems={totalItems}
+              condition={condition}
               setCondition={setCondition}
             />
             {/* 프로젝트 리스트 */}

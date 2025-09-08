@@ -105,5 +105,6 @@ export type ProjectListFilterProps = {
 
 export type ProjectListHeaderProps = {
   totalItems: number;
+  condition: ProjectCondition;
   setCondition: Dispatch<SetStateAction<ProjectCondition>>;
 }
