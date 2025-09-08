@@ -16,11 +16,3 @@ export const getProjectById = async (id: number) => {
   const response = await instance.get(`/projects/${id}`);
   return response.data;
 };
-
-/**
- * @descript 프로젝트 이미지 키워드 조회
- */
-export const getProjectImageKeywords = async (id: number) => {
-  const response = await instance.get(`/projects/${id}/image-keywords`);
-  return response.data;
-};

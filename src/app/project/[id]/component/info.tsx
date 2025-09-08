@@ -1,6 +1,15 @@
-import { project } from "@/type/project";
+import { Project } from "@/type/project";
+import { lineupItems, typeItems } from "@/api/project/data";
 
-export const DetailInfo = ({ project }: { project: project }) => {
+export const DetailInfo = ({ project }: { project: Project }) => {
+  const convertType = (type: string[]) => {
+    // 카테고리 상관없이 타입 다 불러오기
+    const types = Object.values(typeItems).flat();
+    const labels = type.map((t) => types?.find((item) => item.key === t)?.label || "")
+    return labels.join(", ");
+  }
+  const lineup = lineupItems.find((item) => item.key === project.lineup);
+
   return (
     <div className="p-8 mb-6">
       <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-6">
@@ -24,23 +33,27 @@ export const DetailInfo = ({ project }: { project: project }) => {
           <div className="space-y-3">
             <div className="flex justify-between items-center">
               <span className="text-gray-600">타입</span>
-              <span className="font-medium text-gray-900">아파트</span>
+              <span className="font-medium text-gray-900">
+                {convertType(project.keywords || [])}
+              </span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-gray-600">평형</span>
-              <span className="font-medium text-blue-600">{project.py}</span>
+              <span className="font-medium text-blue-600">
+                {project.size}py
+              </span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-gray-600">라인업</span>
-              <span className="font-medium text-gray-900">전체</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-gray-600">완공년도</span>
-              <span className="font-medium text-gray-900">1999년</span>
+              <span className="font-medium text-gray-900">
+                {lineup?.label || ""}
+              </span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-gray-600">시공기간</span>
-              <span className="font-medium text-gray-900">7주</span>
+              <span className="font-medium text-gray-900">
+                {project.duration}주
+              </span>
             </div>
           </div>
         </div>
