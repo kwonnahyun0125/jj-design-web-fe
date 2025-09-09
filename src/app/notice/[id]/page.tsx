@@ -7,23 +7,30 @@ import { getNoticeById } from "@/api/notice/api";
 import { calcDate, formatDate } from "@/utils/date";
 import { defaultNotice } from "@/api/notice/data";
 import { Notice } from "@/type/notice";
+import { ContentLoading } from "@/component/content-loading";
+import { fi } from "date-fns/locale";
 
 const NoticeDetailPage = () => {
   const id = usePathname().split("/").pop();
   const [notice, setNotice] = useState<Notice | null>(defaultNotice);
   const [isNew, setIsNew] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (!id) return;
-    const fetchData = async () => {
-      const result = await getNoticeById(parseInt(id));
-      const fetchedNotice = result.data || null;
-      const newFlag =
-        fetchedNotice?.createdAt && calcDate(fetchedNotice.createdAt) < 7;
-      setIsNew(newFlag);
-      setNotice(fetchedNotice);
-    };
-    fetchData();
+    try {
+      if (!id) return;
+      const fetchData = async () => {
+        const result = await getNoticeById(parseInt(id));
+        const fetchedNotice = result.data || null;
+        const newFlag =
+          fetchedNotice?.createdAt && calcDate(fetchedNotice.createdAt) < 7;
+        setIsNew(newFlag);
+        setNotice(fetchedNotice);
+      };
+      fetchData();
+    } finally {
+      setIsLoading(false);
+    }
   }, [id]);
 
   return (
@@ -43,7 +50,12 @@ const NoticeDetailPage = () => {
       </div>
 
       {/* 메인 컨텐츠 */}
-      <div className="max-w-7xl mx-auto px-4 py-6">
+      <div
+        className={`relative max-w-7xl mx-auto px-4 py-6 ${
+          isLoading ? "opacity-50" : ""
+        }`}
+      >
+        {isLoading && <ContentLoading />}
         {notice && notice.id > 0 ? (
           <>
             {/* 게시글 정보 헤더 */}
@@ -120,7 +132,7 @@ const NoticeDetailPage = () => {
               </div>
             )}
             {/* 하단 액션 및 정보 영역 */}
-            <div className="bg-gray-50 border-b px-4 py-4">
+            <div className="bg-gray-50 border-b px-7 py-4">
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-4">
                   <div className="text-sm text-gray-500">작성자: 관리자</div>

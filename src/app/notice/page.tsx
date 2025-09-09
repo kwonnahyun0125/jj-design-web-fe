@@ -9,6 +9,7 @@ import { calcDate, formatDate } from "@/utils/date";
 import { defaultNotice } from "@/api/notice/data";
 import { ContentLoading } from "@/component/content-loading";
 import { EmptyState } from "@/component/empty-state";
+import { fi } from "date-fns/locale";
 
 const NoticePage = () => {
   const [notices, setNotices] = useState<Notice[]>([defaultNotice]);
@@ -21,13 +22,16 @@ const NoticePage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await getNoticeList(condition);
-      setNotices(result.data.list || []);
-      setTotalItems(result.data.totalCount || 1);
+    try {
+      const fetchData = async () => {
+        const result = await getNoticeList(condition);
+        setNotices(result.data.list || []);
+        setTotalItems(result.data.totalCount || 1);
+      };
+      fetchData();
+    } finally {
       setIsLoading(false);
-    };
-    fetchData();
+    }
   }, [condition]);
 
   return (
