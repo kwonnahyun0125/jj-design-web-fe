@@ -99,9 +99,9 @@ const FormPrivacyModal = () => {
         <div>
           <h3 className="text-lg font-medium text-gray-900 mb-2">6. 문의처</h3>
           <p className="text-gray-700 text-sm">
-            이메일: privacy@ooo-design.co.kr
+            이메일: llbeforell@naver.com
             <br />
-            전화: 02-1234-5678
+            전화: 070-4017-1252
           </p>
         </div>
       </div>

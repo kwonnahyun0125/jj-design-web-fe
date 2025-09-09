@@ -10,7 +10,6 @@ export const Footer = () => {
 
   const instagramUrl = companyData?.instagram;
   const blogUrl = companyData?.naver;
-  const companyAddress = companyData.address.split("/");
 
   return (
     <footer className="bg-[#111827] text-white py-8">
@@ -43,8 +42,7 @@ export const Footer = () => {
             <h3 className="font-semibold text-lg mb-1">Contact</h3>
             <p className="text-base">전화: {companyData.phone}</p>
             <p className="text-base">이메일: {companyData.email}</p>
-            <p className="text-base">본점: {companyAddress[0]}</p>
-            <p className="text-base">분점: {companyAddress[1]}</p>
+            <p className="text-base">주소: {companyData.address}</p>
           </div>
           {/* 빠른 링크 */}
           <div>

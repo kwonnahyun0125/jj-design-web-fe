@@ -2,11 +2,9 @@
 
 import Image from "next/image";
 import { useCompany } from "@/context/company-context";
-import { ContentLoading } from "@/component/content-loading";
 
 const CompanyPage = () => {
-  const { companyData, loading } = useCompany();
-  const companyAddress = companyData.address.split("/");
+  const { companyData } = useCompany();
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
@@ -50,11 +48,13 @@ const CompanyPage = () => {
                 <div className="space-y-3 pt-3">
                   <div className="flex items-center">
                     <span className="w-2 h-2 bg-[#E5E7EB] rounded-full mr-3"></span>
-                    <span className="text-gray-700">설립년도: 2020년</span>
+                    <span className="text-gray-700">
+                      설립일: 2022년 8월 31일
+                    </span>
                   </div>
                   <div className="flex items-center">
                     <span className="w-2 h-2 bg-[#E5E7EB] rounded-full mr-3"></span>
-                    <span className="text-gray-700">직원수: 50명</span>
+                    <span className="text-gray-700">직원수: 18명</span>
                   </div>
                   <div className="flex items-center">
                     <span className="w-2 h-2 bg-[#E5E7EB] rounded-full mr-3"></span>
@@ -112,17 +112,12 @@ const CompanyPage = () => {
             </div>
             <div className="grid md:grid-cols-3 gap-8">
               <div className="flex items-center p-6 bg-gray-50 rounded-xl min-h-[120px]">
-                <div className="w-10 h-10 bg-[#E5E7EB] rounded-full flex items-center justify-center mr-4">
+                <div className="w-10 h-10 bg-[#E5E7EB] rounded-full flex items-center justify-center mr-4 flex-shrink-0">
                   <span className="text-gray-600 text-lg">📍</span>
                 </div>
                 <div>
                   <p className="font-semibold text-gray-800">주소</p>
-                  <p className="text-gray-600 text-sm">
-                    {companyAddress[0]} (본점)
-                  </p>
-                  <p className="text-gray-600 text-sm">
-                    {companyAddress[1]} (분점)
-                  </p>
+                  <p className="text-gray-600 text-sm">{companyData.address}</p>
                 </div>
               </div>
               <div className="flex items-center p-6 bg-gray-50 rounded-xl min-h-[120px]">
