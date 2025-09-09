@@ -57,6 +57,7 @@ export interface ApiError {
   stack?: string;
   response?: {
     status?: number;
+    statusText?: string;
   };
 }
 

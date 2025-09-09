@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import { setupApiInterceptors } from '@/utils/api-error-handler';
 
-const apiClient = axios.create({
+const apiClient: AxiosInstance = axios.create({
   baseURL: process.env.BASE_URL || 'http://localhost:3001',
   timeout: 10000,
   headers: {
