@@ -1,3 +1,4 @@
+import { EmptyState } from "@/component/empty-state";
 import { ProjectCard } from "./card";
 import { Project } from "@/type/project";
 
@@ -13,9 +14,7 @@ export const ProjectList = ({ projectList }: { projectList: Project[] }) => {
           ))}
         </div>
       ) : (
-        <div className="flex items-center justify-center flex-1 min-h-[400px]">
-          <p className="text-gray-500 text-lg">등록된 시공사례가 없습니다.</p>
-        </div>
+        <EmptyState height={300} message="등록된 프로젝트가 없습니다." />
       )}
     </div>
   );
