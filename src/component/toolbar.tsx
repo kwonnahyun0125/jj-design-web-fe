@@ -6,7 +6,7 @@ import { NavBar } from "./navbar";
 import { useCompany } from "@/context/company-context";
 
 export const Toolbar = () => {
-  const [selectedMenu, setSelectedMenu] = useState<string>("home");
+  const [selectedMenu, setSelectedMenu] = useState<string>("");
   const { companyData } = useCompany();
 
   const instagramUrl = companyData?.instagram;
