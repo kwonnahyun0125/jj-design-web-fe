@@ -1,25 +1,52 @@
 "use client";
 
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { menuItems } from "@/api/data";
 import { MenuItem } from "@/type/common";
 import { Button } from "./button";
+import { usePathname } from "next/navigation";
 
 export const NavBar = ({
-  selectedMenu,
+  selectedMenu = "home",
   setSelectedMenu,
 }: {
   selectedMenu: string;
   setSelectedMenu: (menu: string) => void;
 }) => {
+  const path = usePathname();
+  const divRef = React.useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleBlur = (e: React.FocusEvent) => {
+    const target = divRef.current;
+    const relatedTarget = e.relatedTarget as Node;
+
+    // 포커스가 현재 메뉴 컨테이너 밖으로 이동했는지 확인
+    if (target && relatedTarget && !target.contains(relatedTarget)) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    const currentItem = menuItems.find((item) => path.startsWith(item.url));
+    if (currentItem) {
+      setSelectedMenu(currentItem.key);
+    } else {
+      setSelectedMenu("");
+    }
+  }, [path, setSelectedMenu]);
 
   return (
     <nav className="hidden lg:flex lg:items-center lg:space-x-4 group cursor-pointer">
       {menuItems.map((item) =>
         item.sub ? (
-          <div className="relative" key={item.key}>
+          <div
+            className="relative"
+            key={item.key}
+            ref={divRef}
+            onBlur={handleBlur}
+          >
             <Button
               className={`peer text-gray-900 hover:border-b-3 hover:border-gray-900 px-3 py-2 text-lg font-large focus:outline-none flex items-center gap-1 cursor-pointer ${
                 selectedMenu === item.key ? "border-b-3 border-gray-900" : ""
@@ -67,6 +94,7 @@ const MenuLayer = ({
       {subItems.map((subItem: MenuItem) => (
         <Link
           key={subItem.key}
+          tabIndex={0}
           href={subItem.url}
           className="block px-4 py-2 text-gray-900 hover:bg-gray-100"
           onClick={() => {

@@ -1,17 +1,27 @@
+import { typeItems } from "@/api/project/data";
 import { Project } from "@/type/project";
 import Image from "next/image";
 import Link from "next/link";
 
 export const ProjectCard = ({ projectList }: { projectList: Project }) => {
+  const convertType = (type: string[]) => {
+    // 카테고리 상관없이 타입 다 불러오기
+    const types = Object.values(typeItems).flat();
+    const labels = type.map(
+      (t) => types?.find((item) => item.key === t)?.label || ""
+    );
+    return labels.join(", ");
+  };
+
   return (
     <Link
       href={`/project/${projectList.id}`}
       className="bg-white rounded-lg shadow overflow-hidden flex flex-col min-h-[300px]"
     >
       <div className="relative">
-        {projectList.type && (
+        {projectList.keywords && (
           <span className="absolute top-2 left-2 bg-black text-white text-xs font-bold px-2 py-0.5 areaSize-1 rounded z-10">
-            {projectList.type}
+            {convertType(projectList.keywords)}
           </span>
         )}
         <Image

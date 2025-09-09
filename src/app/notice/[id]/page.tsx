@@ -8,7 +8,6 @@ import { calcDate, formatDate } from "@/utils/date";
 import { defaultNotice } from "@/api/notice/data";
 import { Notice } from "@/type/notice";
 import { ContentLoading } from "@/component/content-loading";
-import { fi } from "date-fns/locale";
 
 const NoticeDetailPage = () => {
   const id = usePathname().split("/").pop();

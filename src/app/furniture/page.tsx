@@ -54,6 +54,8 @@ const FurniturePage = () => {
         ) : (
           <EmptyState message="등록된 가구점이 없습니다." />
         )}
+      </div>
+      <div className="flex justify-center mb-8">
         <Pagination
           totalItems={totalCount}
           onPageChange={(page) => setCondition({ ...condition, page })}

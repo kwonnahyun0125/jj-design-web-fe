@@ -10,6 +10,7 @@ export const defaultProject = {
   reviews: "",
 }
 
+// 홈화면 키워드형
 export const keywordItems = [
   { value: "APART", label: "아파트" },
   { value: "HOUSE", label: "주택" },
@@ -17,12 +18,7 @@ export const keywordItems = [
   { value: "NEW", label: "신축" },
 ];
 
-/*
-  필터
- - 주거 : 평수 / 타입-아파트, 주택 / 라인업 - 전체, 부분
- - 상업 : 평수 / 타입-상가, 오피스 / 라인업 - 전체, 부분
- - 건축 : 평수 / 타입-신축, 리모델링 / 라인업 - 전체, 부분
- */
+// 평형 선택형
 export const pyItems: { key: string; label: string }[] = [
   { key: "20", label: "20평형" },
   { key: "30", label: "30평형" },
@@ -33,32 +29,31 @@ export const pyItems: { key: string; label: string }[] = [
 ];
 
 export const typeItems: { [key: string]: { key: string; label: string }[] } = {
+  // 주거 : 평수 / 타입-아파트, 주택 / 라인업 - 전체, 부분
   RESIDENCE: [
     { key: "APART", label: "아파트" },
     { key: "HOUSE", label: "주택" },
   ],
+  // 상업 : 평수 / 타입-상가, 오피스 / 라인업 - 전체, 부분
   MERCANTILE: [
     { key: "COMMERCIAL", label: "상가" },
     { key: "OFFICE", label: "오피스" },
   ],
+  // 건축 : 평수 / 타입-신축, 리모델링 / 라인업 - 전체, 부분
   ARCHITECTURE: [
     { key: "NEW", label: "신축" },
     { key: "REMODELING", label: "리모델링" },
   ]
 };
 
+// 라인업 선택형
 export const lineupItems: { key: string; label: string }[] = [
   { key: "ALL", label: "전체" },
   { key: "FULL", label: "전체 시공" },
   { key: "PARTIAL", label: "부분 시공" },
 ];
 
-/*
- - 주거 : 전체, 현관, 거실, 욕실, 주방, 방, 베란다
- - 상업 : 전체, 사무공간, 휴게공간, 주방, 홀, 가구
- - 친환경 건축 : 전체, 외부, 내부, 조감도
-*/
-
+// 프로젝트 상세 이미지 태그형
 export const imageTagItems: { [key: string]: { key: number; label: string }[] } = {
   // 주거 : 전체, 현관, 거실, 욕실, 주방, 방, 베란다
   RESIDENCE: [
