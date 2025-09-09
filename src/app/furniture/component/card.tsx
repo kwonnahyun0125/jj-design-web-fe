@@ -50,7 +50,7 @@ export const FurnitureCard = ({ furniture }: { furniture: Furniture }) => {
 
         {/* 버튼 그룹 */}
         <div className="grid grid-cols-1 gap-4">
-          <button className="bg-[#E5E7EB] text-black hover:bg-[#111827] hover:text-white py-3 px-6 rounded transition-colors">
+          <button className="bg-[#FCE7F3] border border-gray-300 text-black hover:bg-[#111827] hover:text-white py-3 px-6 rounded transition-colors">
             자세히 보기 &gt;
           </button>
         </div>

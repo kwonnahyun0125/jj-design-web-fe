@@ -84,7 +84,7 @@ const ProjectDetailPage = () => {
 
           <div className="flex justify-center py-8">
             <Button
-              className="flex items-center gap-2 px-6 py-3 border border-gray-300 rounded-md bg-[#E5E7EB]  text-black hover:bg-[#111827] hover:text-white"
+              className="flex items-center gap-2 px-6 py-3 border border-gray-300 rounded-md bg-[#FCE7F3] border border-gray-300  text-black hover:bg-[#111827] hover:text-white"
               onClick={() => {
                 router.push(`/project`);
               }}
@@ -122,7 +122,7 @@ const ProjectDetailPage = () => {
           </p>
           <div className="flex justify-center py-8">
             <Button
-              className="flex items-center gap-2 px-6 py-3 border border-gray-300 rounded-md bg-[#E5E7EB]  text-black hover:bg-[#111827] hover:text-white"
+              className="flex items-center gap-2 px-6 py-3 border border-gray-300 rounded-md bg-[#FCE7F3] border border-gray-300  text-black hover:bg-[#111827] hover:text-white"
               onClick={() => {
                 router.push(`/project`);
               }}

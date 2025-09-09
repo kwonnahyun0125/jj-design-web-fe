@@ -19,7 +19,7 @@ export const Error = ({ status }: { status: string }) => {
         <div className="mt-10 flex items-center justify-center gap-x-6">
           <Link
             href="/"
-            className="rounded-md bg-[#E5E7EB] hover:bg-[#111827] hover:text-white px-3.5 py-2.5 text-sm font-semibold text-black shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
+            className="rounded-md bg-[#FCE7F3] border border-gray-200 hover:bg-[#111827] hover:text-white px-3.5 py-2.5 text-sm font-semibold text-black shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
           >
             홈 화면으로 이동
           </Link>

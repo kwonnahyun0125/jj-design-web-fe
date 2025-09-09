@@ -168,7 +168,7 @@ const NoticeDetailPage = () => {
         <div className="mt-8 text-center">
           <Link
             href="/notice"
-            className="inline-flex items-center px-4 py-2 bg-[#E5E7EB]  text-black hover:bg-[#111827] hover:text-white rounded transition-colors"
+            className="inline-flex items-center px-4 py-2 bg-[#FCE7F3] border border-gray-300  text-black hover:bg-[#111827] hover:text-white rounded transition-colors"
           >
             목록으로 돌아가기
           </Link>
