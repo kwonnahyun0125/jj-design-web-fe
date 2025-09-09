@@ -3,6 +3,7 @@ import { Toolbar } from "@/component/toolbar";
 import { Footer } from "@/component/footer";
 import { Error } from "@/component/error";
 import { CompanyProvider } from "@/context/company-context";
+import ClientLayout from "@/component/client-layout";
 import "../style/global.css";
 
 export const metadata: Metadata = {
@@ -32,11 +33,14 @@ const RootLayout = ({
       <body style={{ fontFamily: "Pretendard, sans-serif" }}>
         <CompanyProvider>
           <Toolbar />
-          {children ? children : <Error status="notfound" />}
+          <ClientLayout>
+            {children ? children : <Error status="notfound" />}
+          </ClientLayout>
           <Footer />
         </CompanyProvider>
       </body>
     </html>
   );
 };
+
 export default RootLayout;
