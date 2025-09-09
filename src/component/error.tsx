@@ -23,12 +23,12 @@ export const Error = ({ status }: { status: string }) => {
           >
             홈 화면으로 이동
           </Link>
-          <Link
+          {/* <Link
             href="#"
             className="text-sm font-semibold text-gray-900 dark:text-white"
           >
             지원팀에 문의하기 <span aria-hidden="true">&rarr;</span>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </main>
