@@ -22,9 +22,9 @@ const ProjectDetailPage = () => {
 
   const [projectItems, setProjectItems] = useState<Project>(defaultProject);
   const [imageList, setImageList] = useState<ProjectImage[]>([]);
-  const [tagItems, setTagItems] = useState<
-    { key: number; label: string }[]
-  >([]);
+  const [tagItems, setTagItems] = useState<{ key: number; label: string }[]>(
+    []
+  );
   // 이미지 뷰 상태 / 이미지 필터 상태
   const [selectedView, setSelectedView] = useState<"card" | "list">("card");
   const [selectedTag, setSelectedTag] = useState<{
@@ -37,11 +37,9 @@ const ProjectDetailPage = () => {
     const FetchData = async () => {
       const result = await getProjectById(parseInt(id));
       setProjectItems(result.data);
-      const category = result.data.category;
-      setTagItems([
-        { key: 0, label: " 전체" },
-        ...imageTagItems[category]
-      ]);
+      if (!result.data) return;
+      const category = result.data?.category;
+      setTagItems([{ key: 0, label: " 전체" }, ...imageTagItems[category]]);
     };
     FetchData();
   }, [id]);
@@ -56,43 +54,77 @@ const ProjectDetailPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-9xl mx-auto px-25 py-8">
-        {/* 프로젝트 정보 */}
-        <DetailInfo project={projectItems} />
-        <div className="flex items-center justify-between mb-3 px-8">
-          {/* 태그 */}
-          <DetailTagFilter
-            tagItems={tagItems}
-            selectedTag={selectedTag}
-            setSelectedTag={setSelectedTag}
-          />
-          {/* view type 버튼 */}
-          <ViewGroupButton
-            selectedView={selectedView}
-            setSelectedView={setSelectedView}
-          />
-        </div>
-        {/* 이미지 갤러리 */}
-        <DetailGalery
-          selectedView={selectedView}
-          imageItems={imageList}
-        />
+      {projectItems && projectItems.id > 0 ? (
+        <div className="max-w-9xl mx-auto px-25 py-8">
+          {/* 프로젝트 정보 */}
+          <DetailInfo project={projectItems} />
+          <div className="flex items-center justify-between mb-3 px-8">
+            {/* 태그 */}
+            <DetailTagFilter
+              tagItems={tagItems}
+              selectedTag={selectedTag}
+              setSelectedTag={setSelectedTag}
+            />
+            {/* view type 버튼 */}
+            <ViewGroupButton
+              selectedView={selectedView}
+              setSelectedView={setSelectedView}
+            />
+          </div>
+          {/* 이미지 갤러리 */}
+          <DetailGalery selectedView={selectedView} imageItems={imageList} />
 
-        <div className="flex justify-center py-8">
-          <Button
-            className="flex items-center gap-2 px-6 py-3 border border-gray-300 rounded-md bg-[#E5E7EB]  text-black hover:bg-[#111827] hover:text-white"
-            onClick={() => {
-              router.push(`/project`);
-            }}
-          >
-            목록 더보기
-            <RightArrowIcon />
-          </Button>
-        </div>
+          <div className="flex justify-center py-8">
+            <Button
+              className="flex items-center gap-2 px-6 py-3 border border-gray-300 rounded-md bg-[#E5E7EB]  text-black hover:bg-[#111827] hover:text-white"
+              onClick={() => {
+                router.push(`/project`);
+              }}
+            >
+              목록 더보기
+              <RightArrowIcon />
+            </Button>
+          </div>
 
-        {/* 리뷰 섹션 */}
-        <ReviewSection review={projectItems?.review || ""} />
-      </div>
+          {/* 리뷰 섹션 */}
+          <ReviewSection review={projectItems?.review || ""} />
+        </div>
+      ) : (
+        <div className="flex flex-col items-center justify-center min-h-[700px] px-4 text-center">
+          <div className="mb-4">
+            <svg
+              className="w-16 h-16 text-gray-300 mx-auto"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"
+              />
+            </svg>
+          </div>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">
+            프로젝트를 찾을 수 없습니다.
+          </h3>
+          <p className="text-gray-500 mb-6">
+            요청하신 프로젝트가 존재하지 않거나 삭제되었을 수 있습니다.
+          </p>
+          <div className="flex justify-center py-8">
+            <Button
+              className="flex items-center gap-2 px-6 py-3 border border-gray-300 rounded-md bg-[#E5E7EB]  text-black hover:bg-[#111827] hover:text-white"
+              onClick={() => {
+                router.push(`/project`);
+              }}
+            >
+              목록 더보기
+              <RightArrowIcon />
+            </Button>
+          </div>
+        </div>
+      )}
 
       {/* 상담 영역 - 브라우저 너비 전체 */}
       <div className="bg-white w-full">
