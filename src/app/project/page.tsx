@@ -9,23 +9,25 @@ import { ProjectFilter } from "./component/filter";
 import { ProjectHeader } from "./component/header";
 import { getProjectList } from "@/api/project/api";
 import { typeItems } from "@/api/project/data";
+import { ContentLoading } from "@/component/content-loading";
 
 const ProjectPage = () => {
   const params = useSearchParams();
 
   const [projectList, setProjectList] = useState<Project[]>([]);
-  const [totalItems, setTotalItems] = useState<number>(1);
+  const [totalItems, setTotalItems] = useState<number>(0);
   const [typeFilter, setTypeFilter] = useState<
     { key: string; label: string }[]
   >([]);
   const [condition, setCondition] = useState<ProjectCondition>({
     page: 1,
     size: 12,
-    search:"",
+    search: "",
     category: Category.RESIDENCE,
     pyung: [],
     lineup: Lineup.ALL,
   });
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const category = params.get("category");
@@ -51,22 +53,31 @@ const ProjectPage = () => {
   }, [params]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await getProjectList(condition);
-      setProjectList(result.data.list || []);
-      setTotalItems(result.data.totalCount || 0);
-    };
+    try {
+      const fetchData = async () => {
+        const result = await getProjectList(condition);
+        setProjectList(result.data.list || []);
+        setTotalItems(result.data.totalCount || 0);
+      };
 
-    // category가 설정된 후에만 API 호출
-    if (condition.category) {
-      fetchData();
+      // category가 설정된 후에만 API 호출
+      if (condition.category) {
+        fetchData();
+      }
+    } finally {
+      setIsLoading(false);
     }
   }, [condition]);
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* 메인 컨텐츠 영역 */}
-      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        className={`relative max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 ${
+          isLoading ? "opacity-50" : ""
+        }`}
+      >
+        {isLoading && <ContentLoading />}
         <div className="flex gap-8 min-h-screen">
           {/* 좌측 필터 영역 */}
           <div className="w-80 flex-shrink-0">

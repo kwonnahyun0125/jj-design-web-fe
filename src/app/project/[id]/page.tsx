@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { Button } from "@/component/button";
@@ -14,6 +14,7 @@ import { Project, ProjectImage } from "@/type/project";
 import { getProjectById } from "@/api/project/api";
 import { defaultProject, imageTagItems } from "@/api/project/data";
 import { DetailTagFilter } from "./component/tag-filter";
+import { ContentLoading } from "@/component/content-loading";
 
 const ProjectDetailPage = () => {
   const router = useRouter();
@@ -25,6 +26,7 @@ const ProjectDetailPage = () => {
   const [tagItems, setTagItems] = useState<{ key: number; label: string }[]>(
     []
   );
+  const [isLoading, setIsLoading] = useState(true);
   // 이미지 뷰 상태 / 이미지 필터 상태
   const [selectedView, setSelectedView] = useState<"card" | "list">("card");
   const [selectedTag, setSelectedTag] = useState<{
@@ -34,14 +36,19 @@ const ProjectDetailPage = () => {
 
   useEffect(() => {
     if (!id) return;
-    const FetchData = async () => {
-      const result = await getProjectById(parseInt(id));
-      setProjectItems(result.data);
-      if (!result.data) return;
-      const category = result.data?.category;
-      setTagItems([{ key: 0, label: " 전체" }, ...imageTagItems[category]]);
-    };
-    FetchData();
+    try {
+      const FetchData = async () => {
+        const result = await getProjectById(parseInt(id));
+        setProjectItems(result.data);
+        setIsLoading(false);
+        if (!result.data) return;
+        const category = result.data?.category;
+        setTagItems([{ key: 0, label: " 전체" }, ...imageTagItems[category]]);
+      };
+      FetchData();
+    } finally {
+      setIsLoading(false);
+    }
   }, [id]);
 
   useEffect(() => {
@@ -53,7 +60,8 @@ const ProjectDetailPage = () => {
   }, [projectItems, selectedTag]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className={`min-h-screen bg-gray-50 ${isLoading ? "opacity-50" : ""}`}>
+      {isLoading && <ContentLoading />}
       {projectItems && projectItems.id > 0 ? (
         <div className="max-w-9xl mx-auto px-25 py-8">
           {/* 프로젝트 정보 */}
