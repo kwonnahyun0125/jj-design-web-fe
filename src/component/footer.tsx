@@ -32,14 +32,12 @@ export const Footer = () => {
             <p className="text-base">
               Your trusted partner in interior design and architecture.
             </p>
-            <p className="text-base mt-2">
-              사업자등록번호: {companyData.business}
-            </p>
+            <p className="text-base">사업자등록번호: {companyData.business}</p>
             <p className="text-base">대표: {companyData.owner}</p>
           </div>
           {/* 연락처 및 주소 */}
           <div>
-            <h3 className="font-semibold text-lg mb-1">Contact</h3>
+            <h3 className="font-semibold text-lg mb-2">Contact</h3>
             <p className="text-base">전화: {companyData.phone}</p>
             <p className="text-base">이메일: {companyData.email}</p>
             <p className="text-base">주소: {companyData.address}</p>
