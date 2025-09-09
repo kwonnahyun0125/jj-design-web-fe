@@ -12,7 +12,7 @@ export const ProjectFilter = ({
   const [checkedLineupItem, setCheckedLineupItem] = useState<Lineup>(
     Lineup.ALL
   );
-  
+
   useEffect(() => {
     if (typeFilter.length > 0) {
       setCheckedTypeItem(typeFilter[0].key);
@@ -156,7 +156,7 @@ export const ProjectFilter = ({
         </Button>
         <Button
           onClick={handleFilterBtnClick}
-          className="flex-1 px-4 py-2 text-base bg-[#E5E7EB] hover:bg-[#111827] hover:text-white rounded-md"
+          className="flex-1 px-4 py-2 text-base bg-[#FCE7F3] border border-gray-300 hover:bg-[#111827] hover:text-white rounded-md"
         >
           확인
         </Button>

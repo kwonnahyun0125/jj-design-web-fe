@@ -82,7 +82,7 @@ export const KeywordArea = () => {
         />
         <div className="flex justify-center mt-10">
           <Button
-            className="text-lg px-8 py-3 rounded font-semibold bg-[#E5E7EB] hover:bg-[#111827] hover:text-white"
+            className="text-lg px-8 py-3 rounded font-semibold bg-[#FCE7F3] border border-gray-300 hover:bg-[#111827] hover:text-white"
             onClick={() => {
               router.push("/project");
             }}
@@ -116,7 +116,7 @@ const KeywordHeader = ({
               className={`px-4 py-2 rounded ${
                 selectedKeyword === item.value
                   ? "bg-[#111827] text-white "
-                  : "bg-[#E5E7EB] text-gray-800"
+                  : "bg-[#FCE7F3] border border-gray-300 text-gray-800"
               } transition-colors cursor-pointer`}
             >
               {item.label}
@@ -253,8 +253,8 @@ const KeywordControls = ({
           onClick={onPrev}
           className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
             currentIndex === 0
-              ? "bg-[#E5E7EB]  text-black cursor-not-allowed"
-              : "hover:bg-[#111827] hover:text-white "
+              ? "text-black cursor-not-allowed"
+              : "hover:bg-gray-200 hover:text-black"
           }`}
           disabled={
             currentIndex === 0 || keywordProjectList.length <= itemsPerSlide
@@ -268,8 +268,8 @@ const KeywordControls = ({
           onClick={onNext}
           className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
             currentIndex > maxIndex
-              ? "bg-[#E5E7EB]  text-black cursor-not-allowed"
-              : "hover:bg-[#111827] hover:text-white "
+              ? "text-black cursor-not-allowed"
+              : "hover:bg-gray-200 hover:text-black"
           }`}
           disabled={
             currentIndex > maxIndex ||

@@ -30,7 +30,7 @@ export const ConsultationArea = () => {
           {/* 버튼 */}
           <div className="flex-shrink-0">
             <Button
-              className="bg-[#E5E7EB] hover:bg-[#111827] hover:text-white text-black font-semibold px-8 py-4 rounded-lg text-lg transition-colors duration-200"
+              className="bg-[#FCE7F3] border border-gray-300 hover:bg-[#111827] hover:text-white text-black font-semibold px-8 py-4 rounded-lg text-lg transition-colors duration-200"
               onClick={() => {
                 router.push("/consultation");
               }}

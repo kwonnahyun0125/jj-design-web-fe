@@ -14,7 +14,7 @@ export const ViewGroupButton = ({
           className={`flex items-center justify-center p-2 rounded-md ${
             selectedView === "card"
               ? "bg-[#111827] text-white"
-              : "bg-[#E5E7EB] text-black"
+              : "bg-[#FCE7F3] border border-gray-300 text-black"
           }`}
           onClick={() => setSelectedView("card")}
         >
@@ -24,7 +24,7 @@ export const ViewGroupButton = ({
           className={`flex items-center justify-center p-2 rounded-md ${
             selectedView === "list"
               ? "bg-[#111827] text-white"
-              : "bg-[#E5E7EB] text-black"
+              : "bg-[#FCE7F3] border border-gray-300 text-black"
           }`}
           onClick={() => setSelectedView("list")}
         >

@@ -25,7 +25,7 @@ const ShowRoomPage = () => {
             r="6"
             stroke="currentColor"
             strokeWidth="2"
-            fill="#e5e7eb"
+            fill="#FCE7F3"
           />
           <path
             d="M12 34c2 2 8 4 12 4s10-2 12-4"
@@ -48,7 +48,7 @@ const ShowRoomPage = () => {
         </p>
 
         <Button
-          className="mt-4 px-8 py-3 rounded-full bg-[#E5E7EB] text-black font-medium shadow hover:bg-[#111827] hover:text-white transition disabled:opacity-50 cursor-not-allowed"
+          className="mt-4 px-8 py-3 rounded-full bg-[#FCE7F3] border border-gray-200 text-black font-medium shadow transition cursor-not-allowed"
           disabled
         >
           Coming Soon

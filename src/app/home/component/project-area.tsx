@@ -22,7 +22,7 @@ export const ProjectArea = ({ projectList }: { projectList: Project[] }) => {
       <div className="flex justify-center mt-10">
         <Button
           onClick={() => router.push("/project")}
-          className="text-lg px-8 py-3 rounded bg-[#E5E7EB] hover:bg-[#111827] hover:text-white text-black font-semibold "
+          className="text-lg px-8 py-3 rounded bg-[#FCE7F3] border border-gray-300 hover:bg-[#111827] hover:text-white text-black font-semibold "
         >
           더 많은 시공사례 보기
         </Button>
