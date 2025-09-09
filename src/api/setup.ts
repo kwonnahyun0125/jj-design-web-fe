@@ -1,12 +1,15 @@
-import axios from "axios";
+import axios, { AxiosInstance } from 'axios';
+import { setupApiInterceptors } from '@/utils/api-error-handler';
 
-const BASE_URL = process.env.BASE_URL || "http://localhost:3001";
-const instance = axios.create({
-  baseURL: BASE_URL,
+const apiClient: AxiosInstance = axios.create({
+  baseURL: process.env.BASE_URL || 'http://localhost:3001',
+  timeout: 10000,
   headers: {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
+    'Content-Type': 'application/json',
   },
-})
+});
 
-export default instance;
+// API 에러 인터셉터 설정
+setupApiInterceptors(apiClient);
+
+export default apiClient;
