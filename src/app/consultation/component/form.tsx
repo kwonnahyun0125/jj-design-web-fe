@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Modal } from "@/component/modal";
+import { useState } from "react";
 import { FormHeader } from "./form-header";
 import { FormDefaultInfo } from "./form-default";
 import { FormSiteInfo } from "./form-site";
@@ -9,6 +8,7 @@ import { FormReferenceInfo } from "./form-reference";
 import { FormPrivacyInfo } from "./form-privacy";
 import { Button } from "@/component/button";
 import { createConsulting } from "@/api/consult/api";
+import { Modal } from "@/component/modal";
 
 export const ConsultationForm = () => {
   const [name, setName] = useState(""); // 고객명
@@ -20,50 +20,40 @@ export const ConsultationForm = () => {
   const [preferredDate, setPreferredDate] = useState(
     new Date().toISOString().slice(0, 7)
   ); // 시작일자
-  const [note, setNote] = useState("");
-  const [isChecked, setIsChecked] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [note, setNote] = useState(""); // 참고사항
+  const [isChecked, setIsChecked] = useState(false); // 개인정보 동의 여부
+  const [isOpen, setIsOpen] = useState(false); // 개인정보 동의 모달 열림 여부
 
   const handleClickSubmit = async (e: React.FormEvent) => {
     e.preventDefault(); // 기본 form submit 동작 방지
 
-    // 제출 시작
-    setIsSubmitting(true);
-    setSubmitError(null);
+    // 최신 formData 생성
+    const updatedFormData = {
+      name,
+      phone,
+      address,
+      type,
+      size,
+      budget,
+      preferredDate,
+      note,
+      isAgreeTerms: isChecked,
+    };
 
-    try {
-      // 최신 formData 생성
-      const updatedFormData = {
-        name,
-        phone,
-        address,
-        type,
-        size,
-        budget,
-        preferredDate,
-        note,
-        isAgreeTerms: isChecked,
-      };
-      // 상담 신청 API 호출
-      const response = await createConsulting(updatedFormData);
-      if (response.status === 201) {
-        // 성공 시 폼 리셋
-        setName("");
-        setPhone("");
-        setAddress("");
-        setType("");
-        setSize("");
-        setBudget("");
-        setPreferredDate(new Date().toISOString().slice(0, 7));
-        setNote("");
-        setIsChecked(false);
-      }
-    } catch (error) {
-      setSubmitError("제출 중 오류가 발생했습니다.");
-      console.error("제출 오류:", error);
-    } finally {
-      setIsSubmitting(false);
+    // 상담 신청 API 호출
+    const response = await createConsulting(updatedFormData);
+    if (response.status === 201) {
+      // 성공 시 폼 리셋
+      setName("");
+      setPhone("");
+      setAddress("");
+      setType("");
+      setSize("");
+      setBudget("");
+      setPreferredDate(new Date().toISOString().slice(0, 7));
+      setNote("");
+      setIsChecked(false);
+      setIsOpen(true);
     }
   };
 
@@ -75,7 +65,8 @@ export const ConsultationForm = () => {
       !type ||
       !size?.trim() ||
       !budget?.trim() ||
-      !preferredDate
+      !preferredDate ||
+      !isChecked
     ) {
       return false;
     }
@@ -132,6 +123,12 @@ export const ConsultationForm = () => {
           </div>
         </div>
       </form>
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="신청 알림">
+        <p className="text-gray-700 text-center  whitespace-pre-wrap w-[300px]">
+          상담 신청이 완료되었습니다. <br />
+          빠른 시일 내에 연락드리겠습니다.
+        </p>
+      </Modal>
     </div>
   );
 };
