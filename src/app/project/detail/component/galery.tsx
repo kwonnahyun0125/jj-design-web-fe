@@ -1,7 +1,7 @@
+import { useState } from "react";
+import Image from "next/image";
 import { Modal } from "@/component/modal";
 import { ProjectGalleryProps } from "@/type/project";
-import Image from "next/image";
-import { useEffect, useState } from "react";
 
 export const DetailGalery = ({
   selectedView = "card",

@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { getNoticeById } from "@/api/notice/api";
 import { calcDate, formatDate } from "@/utils/date";
 import { defaultNotice } from "@/api/notice/data";
@@ -10,26 +10,42 @@ import { Notice } from "@/type/notice";
 import { ContentLoading } from "@/component/content-loading";
 
 const NoticeDetailPage = () => {
-  const id = usePathname().split("/").pop();
+  const searchParams = useSearchParams();
+  console.log("searchParams:", searchParams);
+  const id = searchParams.get("id");
+  console.log("id:", id);
   const [notice, setNotice] = useState<Notice | null>(defaultNotice);
   const [isNew, setIsNew] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    try {
-      if (!id) return;
-      const fetchData = async () => {
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        if (!id) {
+          console.log("ID가 없습니다");
+          setNotice(null);
+          return;
+        }
+
+        console.log("데이터 fetching 시작, ID:", id);
         const result = await getNoticeById(parseInt(id));
+        console.log("API 결과:", result);
+
         const fetchedNotice = result.data || null;
         const newFlag =
           fetchedNotice?.createdAt && calcDate(fetchedNotice.createdAt) < 7;
         setIsNew(newFlag);
         setNotice(fetchedNotice);
-      };
-      fetchData();
-    } finally {
-      setIsLoading(false);
-    }
+      } catch (error) {
+        console.error("데이터 fetch 실패:", error);
+        setNotice(null);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
   }, [id]);
 
   return (

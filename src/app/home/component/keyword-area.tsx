@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
 import { NextArrowIcon, PrevArrowIcon } from "@/component/Icon";
 import { Button } from "@/component/button";
 import { Keyword, Project } from "@/type/project";
@@ -54,10 +55,6 @@ export const KeywordArea = () => {
     });
   };
 
-  const handleCardClick = (id: number) => {
-    router.push(`/project/${id}`);
-  };
-
   return (
     <div className="px-15 py-10 mx-auto mb-10">
       <KeywordHeader
@@ -69,7 +66,6 @@ export const KeywordArea = () => {
         keywordProjectList={keywordProjectList}
         currentIndex={currentIndex}
         itemsPerSlide={ITEMS_PER_SLIDE}
-        handleCardClick={handleCardClick}
       />
       <div className="container mx-auto px-4">
         <KeywordControls
@@ -132,12 +128,10 @@ const KeywordSlider = ({
   keywordProjectList,
   itemsPerSlide,
   currentIndex,
-  handleCardClick,
 }: {
   keywordProjectList: Project[];
   itemsPerSlide: number;
   currentIndex: number;
-  handleCardClick?: (id: number) => void;
 }) => {
   const hasProjects =
     keywordProjectList.length > 0 && keywordProjectList[0].id > 0;
@@ -162,11 +156,7 @@ const KeywordSlider = ({
                 style={{ width: `${100 / keywordProjectList.length}%` }}
               >
                 <div className="px-5">
-                  <KeywordCard
-                    project={project}
-                    idx={idx}
-                    handleCardClick={handleCardClick}
-                  />
+                  <KeywordCard project={project} idx={idx} />
                 </div>
               </div>
             ))}
@@ -181,19 +171,11 @@ const KeywordSlider = ({
   );
 };
 
-const KeywordCard = ({
-  idx,
-  project,
-  handleCardClick,
-}: {
-  idx: number;
-  project: Project;
-  handleCardClick?: (id: number) => void;
-}) => {
+const KeywordCard = ({ idx, project }: { idx: number; project: Project }) => {
   return (
-    <div
+    <Link
+      href={`/project/detail?id=${project.id}`}
       className="bg-white overflow-hidden shadow-lg rounded-lg  cursor-pointer hover:shadow-xl transition-shadow h-full"
-      onClick={() => handleCardClick?.(project.id)}
     >
       <Image
         src={project.imageUrl || "/image/default-image.png"}
@@ -210,7 +192,7 @@ const KeywordCard = ({
           {project.description}
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 // import { projectsItems } from "@/api/data";
@@ -22,6 +22,51 @@ export const SlideArea = ({ projectList }: { projectList: Project[] }) => {
   const [isTransition, setIsTransition] = useState(true);
   const [progress, setProgress] = useState(0);
 
+  // 다음/이전 버튼을 useCallback으로 메모화
+  const goToNext = useCallback(() => {
+    setProgress(0);
+    setCurrent((prev) => {
+      if (prev === slideImages.length - 2) {
+        // 마지막 진짜 이미지에서 더미로 이동(트랜지션 적용), 이후 handleTransitionEnd에서 점프
+        setIsTransition(true);
+        return prev + 1;
+      } else if (prev === slideImages.length - 1) {
+        // 이미 더미에 있으면 바로 점프
+        setIsTransition(false);
+        setTimeout(() => {
+          setCurrent(1);
+          setTimeout(() => setIsTransition(true), 50);
+        }, 50);
+        return prev;
+      } else {
+        setIsTransition(true);
+        return prev + 1;
+      }
+    });
+  }, [slideImages.length]);
+
+  const goToPrev = useCallback(() => {
+    setProgress(0);
+    setCurrent((prev) => {
+      if (prev === 1) {
+        // 첫 진짜 이미지에서 더미로 이동(트랜지션 적용), 이후 handleTransitionEnd에서 점프
+        setIsTransition(true);
+        return prev - 1;
+      } else if (prev === 0) {
+        // 이미 더미에 있으면 바로 점프
+        setIsTransition(false);
+        setTimeout(() => {
+          setCurrent(slideImages.length - 2);
+          setTimeout(() => setIsTransition(true), 50);
+        }, 50);
+        return prev;
+      } else {
+        setIsTransition(true);
+        return prev - 1;
+      }
+    });
+  }, [slideImages.length]);
+
   // 자동 슬라이드 타이머
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -29,7 +74,7 @@ export const SlideArea = ({ projectList }: { projectList: Project[] }) => {
     }, DURATION);
 
     return () => clearTimeout(timer);
-  }, [current]);
+  }, [goToNext]);
 
   // 진행 바 애니메이션
   const startRef = useRef<number | null>(null);
@@ -56,7 +101,7 @@ export const SlideArea = ({ projectList }: { projectList: Project[] }) => {
       if (frame) cancelAnimationFrame(frame);
       startRef.current = null;
     };
-  }, [current]);
+  }, [current, slideImages.length]);
 
   // 트랜지션 종료 후 무한 루프 처리
   const handleTransitionEnd = () => {
@@ -79,51 +124,6 @@ export const SlideArea = ({ projectList }: { projectList: Project[] }) => {
         setTimeout(() => setIsTransition(true), 50);
       }, 50);
     }
-  };
-
-  // 다음/이전 버튼
-  const goToNext = () => {
-    setProgress(0);
-    setCurrent((prev) => {
-      if (prev === slideImages.length - 2) {
-        // 마지막 진짜 이미지에서 더미로 이동(트랜지션 적용), 이후 handleTransitionEnd에서 점프
-        setIsTransition(true);
-        return prev + 1;
-      } else if (prev === slideImages.length - 1) {
-        // 이미 더미에 있으면 바로 점프
-        setIsTransition(false);
-        setTimeout(() => {
-          setCurrent(1);
-          setTimeout(() => setIsTransition(true), 50);
-        }, 50);
-        return prev;
-      } else {
-        setIsTransition(true);
-        return prev + 1;
-      }
-    });
-  };
-
-  const goToPrev = () => {
-    setProgress(0);
-    setCurrent((prev) => {
-      if (prev === 1) {
-        // 첫 진짜 이미지에서 더미로 이동(트랜지션 적용), 이후 handleTransitionEnd에서 점프
-        setIsTransition(true);
-        return prev - 1;
-      } else if (prev === 0) {
-        // 이미 더미에 있으면 바로 점프
-        setIsTransition(false);
-        setTimeout(() => {
-          setCurrent(slideImages.length - 2);
-          setTimeout(() => setIsTransition(true), 50);
-        }, 50);
-        return prev;
-      } else {
-        setIsTransition(true);
-        return prev - 1;
-      }
-    });
   };
 
   // 현재 실제 이미지 인덱스 계산 (진행 바 표시용)
@@ -273,7 +273,9 @@ export const SlideArea = ({ projectList }: { projectList: Project[] }) => {
                           </h2>
                           <Button
                             onClick={() => {
-                              router.push(`/project/${currentImage.id}`);
+                              router.push(
+                                `/project/detail?id=${currentImage.id}`
+                              );
                             }}
                             style={{ fontSize: "22px", fontWeight: 500 }}
                           >

@@ -15,7 +15,7 @@ export const ProjectCard = ({ projectList }: { projectList: Project }) => {
 
   return (
     <Link
-      href={`/project/${projectList.id}`}
+      href={`/project/detail?id=${projectList.id}`}
       className="bg-white rounded-lg shadow overflow-hidden flex flex-col min-h-[300px]"
     >
       <div className="relative">
@@ -34,7 +34,7 @@ export const ProjectCard = ({ projectList }: { projectList: Project }) => {
       </div>
       <div className="p-4 flex flex-col gap-1 flex-1">
         <h4 className="font-semibold text-lg">
-          {projectList.title}{" "}
+          {projectList.title}
           <span className="text-xs align-top">{projectList.size}py</span>
         </h4>
         <div className="text-sm text-gray-500">

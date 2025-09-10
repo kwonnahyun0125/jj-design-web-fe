@@ -9,7 +9,7 @@ export const FurnitureCard = ({ furniture }: { furniture: Furniture }) => {
   return (
     <Link
       key={furniture.id}
-      href={`/furniture/${furniture.id}`}
+      href={`/furniture/detail?id=${furniture.id}`}
       className="bg-white rounded-lg shadow-lg overflow-hidden"
     >
       {/* 이미지 */}

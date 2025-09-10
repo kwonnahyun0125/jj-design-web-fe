@@ -4,7 +4,6 @@ import { SiteInfoProps } from "@/type/consultation";
 export const FormSiteInfo = ({
   address,
   setAddress,
-  type,
   setType,
   size,
   setSize,
