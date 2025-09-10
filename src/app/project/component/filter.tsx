@@ -1,4 +1,4 @@
-import { Key, useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/component/button";
 import { Keyword, Lineup, ProjectListFilterProps } from "@/type/project";
 import { lineupItems, pyItems } from "@/api/project/data";

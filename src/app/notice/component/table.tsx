@@ -22,7 +22,7 @@ export const NoticeTable = ({
           {notices.map((notice, index) => (
             <div key={notice.id || index} className="border-b border-gray-200">
               <Link
-                href={`/notice/${notice.id}`}
+                href={`/notice/detail?id=${notice.id}`}
                 className="block hover:bg-gray-50 transition-colors duration-150"
               >
                 <div className="grid grid-cols-12 gap-4 px-4 py-4 items-center">

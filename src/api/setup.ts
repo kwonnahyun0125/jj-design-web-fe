@@ -1,8 +1,10 @@
 import axios, { AxiosInstance } from 'axios';
 import { setupApiInterceptors } from '@/utils/api-error-handler';
 
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001';
+
 const apiClient: AxiosInstance = axios.create({
-  baseURL: process.env.BASE_URL || 'http://localhost:3001',
+  baseURL,
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',

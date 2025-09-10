@@ -141,6 +141,8 @@ export const SearchIcon = ({
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
+      width={width}
+      height={height}
     >
       <path
         strokeLinecap="round"

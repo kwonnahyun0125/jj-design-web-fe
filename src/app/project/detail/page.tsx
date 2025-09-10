@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { Button } from "@/component/button";
 import { RightArrowIcon } from "@/component/Icon";
@@ -18,8 +18,8 @@ import { ContentLoading } from "@/component/content-loading";
 
 const ProjectDetailPage = () => {
   const router = useRouter();
-  const pathname = usePathname();
-  const id = pathname.split("/").pop();
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
 
   const [projectItems, setProjectItems] = useState<Project>(defaultProject);
   const [imageList, setImageList] = useState<ProjectImage[]>([]);
@@ -36,19 +36,19 @@ const ProjectDetailPage = () => {
 
   useEffect(() => {
     if (!id) return;
-    try {
-      const FetchData = async () => {
+    const FetchData = async () => {
+      try {
         const result = await getProjectById(parseInt(id));
         setProjectItems(result.data);
         setIsLoading(false);
         if (!result.data) return;
         const category = result.data?.category;
         setTagItems([{ key: 0, label: " 전체" }, ...imageTagItems[category]]);
-      };
-      FetchData();
-    } finally {
-      setIsLoading(false);
-    }
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    FetchData();
   }, [id]);
 
   useEffect(() => {

@@ -55,9 +55,12 @@ class GlobalErrorHandler {
     this.handleError({
       type: 'react',
       message: error.message,
-      stack: error.stack
+      stack: error.stack,
+      componentStack: errorInfo.componentStack ?? undefined
     });
   };
 }
 
-export default new GlobalErrorHandler();
+const globalErrorHandler = new GlobalErrorHandler();
+
+export default globalErrorHandler;

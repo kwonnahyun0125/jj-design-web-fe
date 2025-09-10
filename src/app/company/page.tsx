@@ -31,8 +31,8 @@ const CompanyPage = () => {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
                 <Image
-                  src="/image/mock/company-building.png"
-                  alt="회사 건물"
+                  src="/image/default-image.png"
+                  alt="회사 로고"
                   width={500}
                   height={300}
                   className="rounded-xl shadow-lg w-full h-auto"
