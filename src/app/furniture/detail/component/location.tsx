@@ -85,39 +85,16 @@ export const FurnitureLocation = ({ furniture }: { furniture: Furniture }) => {
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-white text-xs">✉️</span>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">
-                      대표메일
-                    </h4>
-                    <p className="text-gray-600">
-                      {furniture?.email || "정보없음"}
-                    </p>
-                  </div>
-                </div>
-
                 <div className="border-t pt-6">
                   <h4 className="font-semibold text-gray-900 mb-3">운영시간</h4>
                   <div className="space-y-2 text-gray-600">
-                    {hours?.map((hour, idx) => {
-                      return (
-                        <div key={idx} className="flex justify-between">
-                          <span>
-                            {hour.split(" ")[0]}
-                            {idx > 0 && "요일"}
-                          </span>
-                          <span className="font-medium">
-                            {hour.split(" ")[1]}
-                          </span>
-                        </div>
-                      );
-                    })}
-                    <div className="flex justify-between text-md text-red-500">
-                      <span>점심시간</span>
-                      <span>12:00 - 13:00</span>
+                    <div className="flex justify-between">
+                      <span>평일</span>
+                      <span className="font-medium">09:00 - 18:00</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>토요일</span>
+                      <span className="font-medium">10:00 - 17:00</span>
                     </div>
                   </div>
                 </div>
@@ -128,7 +105,7 @@ export const FurnitureLocation = ({ furniture }: { furniture: Furniture }) => {
           <div className="lg:col-span-3 relative">
             <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
               {/* 지도 영역 */}
-              <div className="relative h-115 bg-gray-100">
+              <div className="relative h-80 bg-gray-100">
                 <iframe
                   src={generateGoogleMapsEmbedUrl()}
                   width="100%"

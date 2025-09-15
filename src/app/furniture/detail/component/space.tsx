@@ -25,27 +25,24 @@ export const FurnitureSpace = ({ furniture }: { furniture: Furniture }) => {
                     (furniture?.images && furniture?.images[0]) ||
                     "/image/no-image.png"
                   }
-                  alt="베스트 아이템 전시공간"
+                  alt="베스트 아이템"
                   fill
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
                 />
                 <div className="absolute bottom-4 left-4 bg-white bg-opacity-90 px-4 py-2 rounded-lg">
                   <span className="text-gray-800 font-medium text-sm">
-                    베스트 아이템 전시공간
+                    베스트 아이템
                   </span>
                 </div>
               </div>
             </div>
             <div className="pt-6">
               <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                베스트 아이템 - 자재체험존
+                맞춤 제작 가구 - 시그니처 라인
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                {`${
-                  furniture?.name || ""
-                } 시그니처 가구와 직접 검증된 자재들을 한눈에
-                확인하세요. 10,000여 점 이상의 엄선된 디자인 제품들로 고객과
-                시장의 트렌드를 분석하여 베스트 아이템만을 선별했습니다.`}
+                JJ-MOBILIA 시그니처 가구와 직접 검증된 자재들을 한눈에
+                확인하세요.
               </p>
             </div>
           </div>
@@ -58,26 +55,26 @@ export const FurnitureSpace = ({ furniture }: { furniture: Furniture }) => {
                     (furniture?.images && furniture?.images[1]) ||
                     "/image/no-image.png"
                   }
-                  alt="공간별 구성 전시"
+                  alt="작업 공간 & 제작 현장 소개"
                   fill
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
                 />
 
                 <div className="absolute bottom-4 left-4 bg-white bg-opacity-90 px-4 py-2 rounded-lg">
                   <span className="text-gray-800 font-medium text-sm">
-                    공간별 구성 전시
+                    작업 공간 & 제작 현장 소개
                   </span>
                 </div>
               </div>
             </div>
             <div className="pt-6">
               <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                공간별 맞춤 구성
+                작업 공간 & 제작 현장 소개
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                인테리어 시공 시 가장 중요한 욕실과 주방 공간을 포함하여, 각
-                공간의 특성에 맞는 최적의 솔루션을 직접 체험하고 실제 시공
-                품질을 미리 확인하실 수 있습니다.
+                넓고 깔끔한 작업 공간에서 자재를 직접 재단하고 조립하며
+                고객님만을 위한 품질 높은 맞춤 제작 가구가 하나하나 완성되고
+                있습니다.
               </p>
             </div>
           </div>
