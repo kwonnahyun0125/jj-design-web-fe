@@ -74,7 +74,7 @@ export const SlideArea = ({ projectList }: { projectList: Project[] }) => {
     }, DURATION);
 
     return () => clearTimeout(timer);
-  }, [goToNext]);
+  }, [current, goToNext]);
 
   // 진행 바 애니메이션
   const startRef = useRef<number | null>(null);
