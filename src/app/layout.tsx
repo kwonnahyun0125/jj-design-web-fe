@@ -7,6 +7,7 @@ import { CompanyProvider } from "@/context/company-context";
 import ClientLayout from "@/component/client-layout";
 import { ContentLoading } from "@/component/content-loading";
 import "../style/global.css";
+import "../style/mobile-fix.css";
 
 export const metadata: Metadata = {
   title: "JJ-DESIGN",
