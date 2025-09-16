@@ -23,7 +23,7 @@ export const FurnitureSpace = ({ furniture }: { furniture: Furniture }) => {
                 <Image
                   src={
                     (furniture?.images && furniture?.images[0]) ||
-                    "/image/no-image.png"
+                    "/image/bang.png"
                   }
                   alt="베스트 아이템"
                   fill
@@ -53,7 +53,7 @@ export const FurnitureSpace = ({ furniture }: { furniture: Furniture }) => {
                 <Image
                   src={
                     (furniture?.images && furniture?.images[1]) ||
-                    "/image/no-image.png"
+                    "/image/job.png"
                   }
                   alt="작업 공간 & 제작 현장 소개"
                   fill
