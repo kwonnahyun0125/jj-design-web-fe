@@ -11,7 +11,6 @@ import { defaultProject, keywordItems } from "@/api/project/data";
 import { getProjectList } from "@/api/project/api";
 
 export const KeywordArea = () => {
-  const ITEMS_PER_SLIDE = 1; // 모바일 대응: 한 번에 1개, 내부에서 반응형 처리
   const router = useRouter();
   const totalSlidesRef = useRef(0);
   const maxIndexRef = useRef(0);

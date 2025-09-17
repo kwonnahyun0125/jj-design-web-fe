@@ -6,7 +6,6 @@ import { Furniture } from "@/type/furniture";
 import { useState } from "react";
 
 export const FurnitureLocation = ({ furniture }: { furniture: Furniture }) => {
-  const hours = furniture.hours?.split(" / ");
   const [isOpen, setIsOpen] = useState(false);
 
   const generateGoogleMapsEmbedUrl = () => {

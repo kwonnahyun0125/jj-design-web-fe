@@ -11,7 +11,6 @@ import { getProjectList } from "@/api/project/api";
 import { typeItems } from "@/api/project/data";
 import { ContentLoading } from "@/component/content-loading";
 import { ProjectMobileFilter } from "./component/mobile-filter";
-import { ListFilter, X } from "lucide-react"; // 또는 원하는 닫기 아이콘
 
 const ProjectPage = () => {
   const params = useSearchParams();
