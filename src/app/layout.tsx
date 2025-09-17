@@ -32,7 +32,7 @@ const RootLayout = ({
           }
         `}</style>
       </head>
-      <body style={{ fontFamily: "Pretendard, sans-serif" }}>
+      <body style={{ fontFamily: "Pretendard, sans-serif", color: "#111827" }}>
         <CompanyProvider>
           <ClientLayout>
             <Suspense fallback={<ContentLoading />}>

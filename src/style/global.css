@@ -19,6 +19,14 @@
   }
 }
 
+/* 다크 모드 강제 대응 */
+@media (prefers-color-scheme: dark) {
+  html, body {
+    color: #222 !important;  /* 항상 진한 글씨로 */
+    background: #f9fafb !important;
+  }
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -27,7 +35,9 @@ html, body {
   box-sizing: border-box;
   scroll-behavior: smooth;
   background: #f9fafb; /* Tailwind의 bg-gray-50와 유사 */
+  color: #222;
 }
+
 
 body {
   font-family: 'Pretendard', sans-serif;
