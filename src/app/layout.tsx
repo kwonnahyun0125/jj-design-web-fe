@@ -34,13 +34,13 @@ const RootLayout = ({
       </head>
       <body style={{ fontFamily: "Pretendard, sans-serif" }}>
         <CompanyProvider>
-          <Toolbar />
           <ClientLayout>
             <Suspense fallback={<ContentLoading />}>
+              <Toolbar />
               {children ? children : <Error status="notfound" />}
+              <Footer />
             </Suspense>
           </ClientLayout>
-          <Footer />
         </CompanyProvider>
       </body>
     </html>

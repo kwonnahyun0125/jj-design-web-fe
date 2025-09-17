@@ -17,7 +17,7 @@ export const ProjectArea = ({ projectList }: { projectList: Project[] }) => {
           시공사례 프로젝트
         </h2>
         <Link
-          href={"/project"}
+          href={"/project?category=residence"}
           className="flex items-center gap-1 text-gray-700 hover:text-black"
         >
           <span className="hidden sm:inline">전체보기</span>
@@ -27,7 +27,7 @@ export const ProjectArea = ({ projectList }: { projectList: Project[] }) => {
       <ProjectList projectList={projectList} />
       <div className="flex justify-center mt-8">
         <Button
-          onClick={() => router.push("/project")}
+          onClick={() => router.push("/project?category=residence")}
           className="text-base sm:text-lg px-6 sm:px-8 py-2 sm:py-3 rounded bg-[#FCE7F3] border border-gray-300 hover:bg-[#111827] hover:text-white text-black font-semibold"
         >
           더 많은 시공사례 보기
