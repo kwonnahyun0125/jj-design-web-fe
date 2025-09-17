@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { getFurnitureById } from "@/api/furnuture/api";
 import { defaultFurniture } from "@/api/furnuture/data";
 import { ContentLoading } from "@/component/content-loading";
@@ -13,9 +13,14 @@ import { FurnitureMatelrials } from "./component/matelrials";
 
 const FurnitureDetailPage = () => {
   const searchParams = useSearchParams();
+  const pathname = usePathname();
   const id = searchParams.get("id");
   const [furniture, setFurniture] = useState<Furniture>(defaultFurniture);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   useEffect(() => {
     if (!id) return;
@@ -35,7 +40,7 @@ const FurnitureDetailPage = () => {
 
   return (
     <div
-      className={`relative min-h-screen bg-white ${
+      className={`w-full min-h-screen bg-gray-50 ${
         isLoading ? "opacity-50" : ""
       }`}
     >

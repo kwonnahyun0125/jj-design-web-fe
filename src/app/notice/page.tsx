@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { Pagination } from "@/component/pagination";
 import { getNoticeList } from "@/api/notice/api";
 import { Notice } from "@/type/notice";
@@ -9,6 +10,7 @@ import { NoticeHeader } from "./component/header";
 import { NoticeTable } from "./component/table";
 
 const NoticePage = () => {
+  const pathname = usePathname();
   const [notices, setNotices] = useState<Notice[]>([defaultNotice]);
   const [condition, setCondition] = useState<{
     page: number;
@@ -31,28 +33,29 @@ const NoticePage = () => {
     }
   }, [condition]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   return (
-    <>
-      <div className="min-h-screen bg-white">
-        {/* 헤더 영역 */}
-        <NoticeHeader />
-        {/* 메인 컨텐츠 */}
-        <NoticeTable
-          notices={notices}
+    <div className="w-full min-h-screen bg-gray-50">
+      {/* 헤더 영역 */}
+      <NoticeHeader />
+      {/* 메인 컨텐츠 */}
+      <NoticeTable
+        notices={notices}
+        totalItems={totalItems}
+        page={condition.page}
+        pageSize={condition.pageSize}
+        isLoading={isLoading}
+      />
+      {/* 페이지네이션 */}
+      <div className="flex justify-center mb-8">
+        <Pagination
           totalItems={totalItems}
-          page={condition.page}
-          pageSize={condition.pageSize}
-          isLoading={isLoading}
+          onPageChange={(page) => setCondition({ ...condition, page })}
         />
-        {/* 페이지네이션 */}
-        <div className="flex justify-center mb-8">
-          <Pagination
-            totalItems={totalItems}
-            onPageChange={(page) => setCondition({ ...condition, page })}
-          />
-        </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -19,11 +19,19 @@
   }
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  background: #f9fafb; /* Tailwind의 bg-gray-50와 유사 */
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-  cursor: default;
+  font-family: 'Pretendard', sans-serif;
+  color: #222;
 }
 
 /* 전역적으로 텍스트 선택 및 커서 비활성화 */
@@ -91,7 +99,6 @@ button[disabled],
   pointer-events: none;
 }
 
-html, body {
+#root, #__next {
   height: 100%;
-  overflow-x: hidden; /* 가로 스크롤 방지 */
 }
