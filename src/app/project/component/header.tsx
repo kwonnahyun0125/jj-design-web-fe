@@ -4,10 +4,13 @@ import { useEffect, useState } from "react";
 import { Button } from "@/component/button";
 import { SearchIcon } from "@/component/Icon";
 import { ProjectListHeaderProps } from "@/type/project";
+import { ListFilter } from "lucide-react";
 
 export const ProjectHeader = ({
-  totalItems,condition,
+  totalItems,
+  condition,
   setCondition,
+  setMobileFilterOpen,
 }: ProjectListHeaderProps) => {
   const [search, setSearch] = useState<string>(""); // 검색어 상태
 
@@ -47,6 +50,14 @@ export const ProjectHeader = ({
         >
           <SearchIcon />
         </Button>
+      </div>
+      <div className="block lg:hidden mb-4 ">
+        <button
+          className="py-3 rounded bg-gray-100 text-gray-900 font-semibold"
+          onClick={() => setMobileFilterOpen?.(true)}
+        >
+          <ListFilter />
+        </button>
       </div>
     </div>
   );

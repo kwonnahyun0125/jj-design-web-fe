@@ -3,7 +3,6 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-// import { projectsItems } from "@/api/data";
 import { NextArrowIcon, PrevArrowIcon } from "@/component/Icon";
 import { Button } from "@/component/button";
 import { Project } from "@/type/project";
@@ -13,25 +12,21 @@ export const SlideArea = ({ projectList }: { projectList: Project[] }) => {
   const images = projectList.map(
     (item) => item.imageUrl || "/image/default-image.png"
   );
-  const DURATION = 10000; // 20초
-  // 무한 슬라이드를 위해 앞뒤에 더미 이미지 추가
+  const DURATION = 10000; // 10초
   const slideImages = [images[projectList.length - 1], ...images, images[0]];
   const hasProjects = projectList.length > 0 && projectList[0].id > 0;
 
-  const [current, setCurrent] = useState(1); // 실제 첫 이미지 인덱스는 1
+  const [current, setCurrent] = useState(1);
   const [isTransition, setIsTransition] = useState(true);
   const [progress, setProgress] = useState(0);
 
-  // 다음/이전 버튼을 useCallback으로 메모화
   const goToNext = useCallback(() => {
     setProgress(0);
     setCurrent((prev) => {
       if (prev === slideImages.length - 2) {
-        // 마지막 진짜 이미지에서 더미로 이동(트랜지션 적용), 이후 handleTransitionEnd에서 점프
         setIsTransition(true);
         return prev + 1;
       } else if (prev === slideImages.length - 1) {
-        // 이미 더미에 있으면 바로 점프
         setIsTransition(false);
         setTimeout(() => {
           setCurrent(1);
@@ -49,11 +44,9 @@ export const SlideArea = ({ projectList }: { projectList: Project[] }) => {
     setProgress(0);
     setCurrent((prev) => {
       if (prev === 1) {
-        // 첫 진짜 이미지에서 더미로 이동(트랜지션 적용), 이후 handleTransitionEnd에서 점프
         setIsTransition(true);
         return prev - 1;
       } else if (prev === 0) {
-        // 이미 더미에 있으면 바로 점프
         setIsTransition(false);
         setTimeout(() => {
           setCurrent(slideImages.length - 2);
@@ -67,7 +60,6 @@ export const SlideArea = ({ projectList }: { projectList: Project[] }) => {
     });
   }, [slideImages.length]);
 
-  // 자동 슬라이드 타이머
   useEffect(() => {
     const timer = setTimeout(() => {
       goToNext();
@@ -76,7 +68,6 @@ export const SlideArea = ({ projectList }: { projectList: Project[] }) => {
     return () => clearTimeout(timer);
   }, [current, goToNext]);
 
-  // 진행 바 애니메이션
   const startRef = useRef<number | null>(null);
 
   useEffect(() => {
@@ -103,30 +94,24 @@ export const SlideArea = ({ projectList }: { projectList: Project[] }) => {
     };
   }, [current, slideImages.length]);
 
-  // 트랜지션 종료 후 무한 루프 처리
   const handleTransitionEnd = () => {
     if (current === slideImages.length - 1) {
-      // 마지막 더미 -> 진짜 첫 이미지로 점프 (트랜지션 없이)
       setIsTransition(false);
       setProgress(0);
       setTimeout(() => {
         setCurrent(1);
-        // 다음 프레임에서 트랜지션 복구
         setTimeout(() => setIsTransition(true), 50);
       }, 50);
     } else if (current === 0) {
-      // 첫 더미 -> 진짜 마지막 이미지로 점프 (트랜지션 없이)
       setIsTransition(false);
       setProgress(0);
       setTimeout(() => {
         setCurrent(slideImages.length - 2);
-        // 다음 프레임에서 트랜지션 복구
         setTimeout(() => setIsTransition(true), 50);
       }, 50);
     }
   };
 
-  // 현재 실제 이미지 인덱스 계산 (진행 바 표시용)
   const getRealIndex = (slideIndex: number) => {
     if (slideIndex === 0) return images.length - 1;
     if (slideIndex === slideImages.length - 1) return 0;
@@ -136,68 +121,21 @@ export const SlideArea = ({ projectList }: { projectList: Project[] }) => {
   return (
     <>
       {hasProjects ? (
-        <div
-          style={{
-            position: "relative",
-            width: "100vw",
-            height: "calc(100vh - 64px)",
-            overflow: "hidden",
-            display: "flex",
-            marginBottom: 22,
-          }}
-        >
+        <div className="relative w-full h-[60vw] max-h-[600px] min-h-[320px] sm:h-[400px] md:h-[500px] lg:h-screen lg:max-h-none overflow-hidden flex mb-6">
           {/* 이전/다음 버튼 */}
           <Button
             onClick={goToPrev}
-            style={{
-              position: "absolute",
-              left: 40,
-              top: "50%",
-              zIndex: 30,
-              transform: "translateY(-50%)",
-              background: "none",
-              color: "#fff",
-              border: "none",
-              borderRadius: 0,
-              width: 56,
-              height: 56,
-              fontSize: 96,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontWeight: 700,
-              cursor: "pointer",
-              transition: "color 0.2s",
-            }}
+            className="!absolute left-2 sm:left-6 top-1/2 z-30 -translate-y-1/2 bg-white/40 hover:bg-white/70 text-black border-none rounded-full w-10 h-10 sm:w-14 sm:h-14 flex items-center justify-center font-bold transition-colors"
             aria-label="이전"
           >
-            <PrevArrowIcon width={56} height={56} />
+            <PrevArrowIcon width={32} height={32} />
           </Button>
           <Button
             onClick={goToNext}
-            style={{
-              position: "absolute",
-              right: 40,
-              top: "50%",
-              zIndex: 30,
-              transform: "translateY(-50%)",
-              background: "none",
-              color: "#fff",
-              border: "none",
-              borderRadius: 0,
-              width: 56,
-              height: 56,
-              fontSize: 96,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontWeight: 700,
-              cursor: "pointer",
-              transition: "color 0.2s",
-            }}
+            className="!absolute right-2 sm:right-6 top-1/2 z-30 -translate-y-1/2 bg-white/40 hover:bg-white/70 text-black border-none rounded-full w-10 h-10 sm:w-14 sm:h-14 flex items-center justify-center font-bold transition-colors"
             aria-label="다음"
           >
-            <NextArrowIcon width={56} height={56} />
+            <NextArrowIcon width={32} height={32} />
           </Button>
 
           {/* 슬라이드 컨테이너 */}
@@ -205,7 +143,7 @@ export const SlideArea = ({ projectList }: { projectList: Project[] }) => {
             className="flex"
             style={{
               width: `${slideImages.length * 100}vw`,
-              height: "calc(100vh - 64px)",
+              height: "100%",
               transform: `translateX(-${current * 100}vw)`,
               transition: isTransition
                 ? "transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)"
@@ -214,7 +152,6 @@ export const SlideArea = ({ projectList }: { projectList: Project[] }) => {
             onTransitionEnd={handleTransitionEnd}
           >
             {slideImages.map((img, idx) => {
-              // 실제 이미지 인덱스 계산 (더미 제외)
               const realIdx = getRealIndex(idx);
               const isActive = current === idx;
               const currentImage = projectList[realIdx];
@@ -222,12 +159,7 @@ export const SlideArea = ({ projectList }: { projectList: Project[] }) => {
               return (
                 <div
                   key={idx}
-                  style={{
-                    width: "100vw",
-                    height: "calc(100vh - 64px)",
-                    position: "relative",
-                    flexShrink: 0,
-                  }}
+                  className="relative flex-shrink-0 w-screen lg:max-h-none h-[60vw] max-h-[600px] min-h-[320px] sm:h-[400px] md:h-[500px] lg:h-[calc(100vh-80px)]"
                 >
                   <Image
                     src={img}
@@ -240,35 +172,36 @@ export const SlideArea = ({ projectList }: { projectList: Project[] }) => {
                     current > 0 &&
                     current < slideImages.length - 1 && (
                       <>
-                        {/* 이미지 제목과 설명 */}
-                        <div
-                          style={{
-                            position: "absolute",
-                            left: 200,
-                            bottom: 200,
-                            color: "#fff",
-                            zIndex: 10,
-                          }}
-                        >
-                          <p
-                            style={{
-                              fontSize: "28px",
-                              fontWeight: 500,
-                              lineHeight: 1.5,
-                              textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
-                              opacity: 0.9,
-                            }}
-                          >
+                        {/* 모바일: 왼쪽 하단 오버레이 */}
+                        <div className="block sm:hidden absolute left-3 bottom-12 z-10 max-w-[85vw]">
+                          <div className="bg-blue-50/80 rounded-xl px-4 py-3 text-left shadow-md">
+                            <p className="text-xs font-medium mb-1 text-gray-800 truncate">
+                              {currentImage.description}
+                            </p>
+                            <div className="flex items-center gap-2">
+                              <h2 className="text-base font-bold text-gray-900 truncate">
+                                {currentImage.title}
+                              </h2>
+                              <button
+                                onClick={() => {
+                                  router.push(
+                                    `/project/detail?id=${currentImage.id}`
+                                  );
+                                }}
+                                className="inline-flex items-center justify-center h-7 px-3 rounded-full bg-[#FCE7F3] hover:bg-[#111827] hover:text-white text-black text-xs font-semibold transition-colors"
+                                aria-label="더보기"
+                              >
+                                더보기
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        {/* 데스크탑: 기존 스타일 유지 */}
+                        <div className="hidden sm:block absolute left-32 bottom-32 z-10 text-white">
+                          <p className="text-xl font-medium mb-2 text-shadow">
                             {currentImage.description}
                           </p>
-                          <h2
-                            style={{
-                              fontSize: "56px",
-                              fontWeight: 700,
-                              marginBottom: "8px",
-                              textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
-                            }}
-                          >
+                          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-shadow">
                             {currentImage.title}
                           </h2>
                           <Button
@@ -277,35 +210,17 @@ export const SlideArea = ({ projectList }: { projectList: Project[] }) => {
                                 `/project/detail?id=${currentImage.id}`
                               );
                             }}
-                            style={{ fontSize: "22px", fontWeight: 500 }}
+                            className="text-lg px-6 py-2 rounded bg-[#FCE7F3] border border-gray-300 hover:bg-[#111827] hover:text-white text-black font-semibold"
                           >
                             자세히 보기
                           </Button>
                         </div>
-                        {/* 진행 바 (실제 이미지에서만 표시) */}
-                        <div
-                          style={{
-                            position: "absolute",
-                            left: "50%",
-                            bottom: 70,
-                            transform: "translateX(-50%)",
-                            width: "85vw",
-                            maxWidth: "90%",
-                            height: 8,
-                            background: "rgba(255,255,255,0.25)",
-                            borderRadius: 4,
-                            zIndex: 10,
-                            overflow: "hidden",
-                          }}
-                        >
+                        {/* 진행 바는 기존 위치 유지 */}
+                        <div className="absolute left-1/2 bottom-8 sm:bottom-12 transform -translate-x-1/2 w-[80vw] max-w-[90%] h-2 bg-white/30 rounded z-10 overflow-hidden">
                           <div
+                            className="h-full bg-white transition-all duration-100"
                             style={{
-                              height: "100%",
                               width: `${Math.max(0, Math.min(progress, 100))}%`,
-                              background:
-                                progress > 0 ? "#F9F9F9" : "transparent",
-                              borderRadius: 4,
-                              transition: "width 0.1s linear",
                             }}
                           />
                         </div>
@@ -317,17 +232,9 @@ export const SlideArea = ({ projectList }: { projectList: Project[] }) => {
           </div>
         </div>
       ) : (
-        <div
-          style={{
-            position: "relative",
-            width: "100vw",
-            height: "calc(100vh - 64px)",
-            overflow: "hidden",
-            marginBottom: 22,
-          }}
-        >
+        <div className="relative w-full h-[60vw] max-h-[600px] min-h-[320px] sm:h-[400px] md:h-[500px] lg:h-screen lg:max-h-none overflow-hidden mb-6">
           <Image
-            src="/image/default-image.png" // 기본 대문 이미지 경로
+            src="/image/default-image.png"
             alt="대문 이미지"
             fill
             style={{ objectFit: "cover", objectPosition: "center" }}

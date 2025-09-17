@@ -3,9 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const FurnitureCard = ({ furniture }: { furniture: Furniture }) => {
-  const hours =
-    furniture.hours || "평일 09:00~18:00 / 토 10:00~17:00 / 일 10:00~16:00";
-
   return (
     <Link
       key={furniture.id}

@@ -14,38 +14,45 @@ export const Footer = () => {
   return (
     <footer className="bg-[#111827] text-white py-8">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
-          <div className="flex items-center justify-center w-[120px] h-[100px] rounded relative">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-start items-center gap-8">
+          {/* 로고 */}
+          <div className="flex items-center justify-center w-[100px] h-[80px] rounded relative mb-2 md:mb-0">
             <Image
               src="/image/jj-design.png"
               alt="JJ-DESIGN 로고"
-              width={120}
-              height={100}
+              width={100}
+              height={80}
               className="object-contain"
               style={{ objectFit: "contain" }}
               priority
             />
           </div>
           {/* 회사 정보 */}
-          <div>
-            <h2 className="font-bold text-xl mb-2">{companyData.name}</h2>
-            <p className="text-base">
+          <div className="text-center md:text-left min-w-[180px] mb-2 md:mb-0">
+            <h2 className="font-bold text-lg md:text-xl mb-1">
+              {companyData.name}
+            </h2>
+            <p className="text-sm md:text-base">
               Your trusted partner in interior design and architecture.
             </p>
-            <p className="text-base">사업자등록번호: {companyData.business}</p>
-            <p className="text-base">대표: {companyData.owner}</p>
+            <p className="text-sm md:text-base">
+              사업자등록번호: {companyData.business}
+            </p>
+            <p className="text-sm md:text-base">대표: {companyData.owner}</p>
           </div>
           {/* 연락처 및 주소 */}
-          <div>
-            <h3 className="font-semibold text-lg mb-2">Contact</h3>
-            <p className="text-base">전화: {companyData.phone}</p>
-            <p className="text-base">이메일: {companyData.email}</p>
-            <p className="text-base">주소: {companyData.address}</p>
+          <div className="text-center md:text-left min-w-[180px] mb-2 md:mb-0">
+            <h3 className="font-semibold text-base md:text-lg mb-1">Contact</h3>
+            <p className="text-sm md:text-base">전화: {companyData.phone}</p>
+            <p className="text-sm md:text-base">이메일: {companyData.email}</p>
+            <p className="text-sm md:text-base">주소: {companyData.address}</p>
           </div>
           {/* 빠른 링크 */}
-          <div>
-            <h3 className="font-semibold text-lg mb-1">Quick Links</h3>
-            <ul className="text-base space-y-1">
+          <div className="text-center md:text-left min-w-[120px] mb-2 md:mb-0">
+            <h3 className="font-semibold text-base md:text-lg mb-1">
+              Quick Links
+            </h3>
+            <ul className="text-sm md:text-base space-y-1">
               <li>
                 <Link href="/company" className="hover:underline">
                   회사소개
@@ -64,13 +71,14 @@ export const Footer = () => {
             </ul>
           </div>
           {/* 소셜 미디어 */}
-          <div>
-            <h3 className="font-semibold text-lg mb-1">Follow Us</h3>
-            <div className="flex space-x-2">
-              {/* 인스타그램 버튼 */}
+          <div className="text-center md:text-left min-w-[120px]">
+            <h3 className="font-semibold text-base md:text-lg mb-1">
+              Follow Us
+            </h3>
+            <div className="flex justify-center md:justify-start space-x-2">
               <Button
-                className="text-gray-900 py-2 text-m font-medium hover:border-b-3 hover:border-gray-900 flex items-start justify-start"
-                style={{ minWidth: "50px", cursor: "pointer" }}
+                className="bg-transparent p-0"
+                style={{ minWidth: "40px", cursor: "pointer" }}
                 onClick={() => window.open(instagramUrl, "_blank")}
               >
                 <Image
@@ -82,10 +90,9 @@ export const Footer = () => {
                   priority
                 />
               </Button>
-              {/* 블로그 버튼 */}
               <Button
-                className="text-gray-900 py-2 text-m font-medium hover:border-b-3 hover:border-gray-900 flex items-start justify-start"
-                style={{ minWidth: "50px", cursor: "pointer" }}
+                className="bg-transparent p-0"
+                style={{ minWidth: "40px", cursor: "pointer" }}
                 onClick={() => window.open(blogUrl, "_blank")}
               >
                 <Image
@@ -97,11 +104,10 @@ export const Footer = () => {
                   priority
                 />
               </Button>
-              {/* 필요시 다른 소셜 아이콘 추가 */}
             </div>
           </div>
         </div>
-        <div className="border-t border-gray-700 mt-6 pt-4 text-center text-base">
+        <div className="border-t border-gray-700 mt-6 pt-4 text-center text-xs md:text-base">
           &copy; 2023 {companyData.name}. All rights reserved. |{" "}
           <Link href="/privacy" className="hover:underline">
             개인정보처리방침

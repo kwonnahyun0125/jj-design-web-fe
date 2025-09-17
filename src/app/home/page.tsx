@@ -43,15 +43,23 @@ const HomePage = () => {
   }
 
   return (
-    <div className="w-full h-[calc(100vh - 82px)] overflow-x-hidden overflow-y-auto">
+    <div className="w-full min-h-screen overflow-x-hidden overflow-y-auto bg-gray-50">
       {/* 슬라이드 영역 */}
-      <SlideArea projectList={projectList} />
+      <div className="w-full">
+        <SlideArea projectList={projectList} />
+      </div>
       {/* 시공사례 목록 영역 */}
-      <ProjectArea projectList={projectList} />
+      <div className="w-full">
+        <ProjectArea projectList={projectList} />
+      </div>
       {/* 키워드 프로젝트 목록 영역 */}
-      <KeywordArea />
+      <div className="w-full">
+        <KeywordArea />
+      </div>
       {/* 상담신청 영역 */}
-      <ConsultationArea />
+      <div className="w-full">
+        <ConsultationArea />
+      </div>
     </div>
   );
 };
