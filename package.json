@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "rm -rf .next out && next build && cp out/home.html out/index.html",
+    "build": "rm -rf .next out && NODE_ENV=production next build && cp out/home.html out/index.html",
     "start": "npm run build && npx serve@latest out",
-    "deploy": "rsync -av --delete out/ ../jj-design-web/user-dist/",
+    "deploy": "rm -rf ../jj-design-web/user-dist && mkdir -p ../jj-design-web/user-dist && cp -rf out/* ../jj-design-web/user-dist/",
     "lint": "next lint"
   },
   "dependencies": {
