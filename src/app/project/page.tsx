@@ -10,6 +10,8 @@ import { ProjectHeader } from "./component/header";
 import { getProjectList } from "@/api/project/api";
 import { typeItems } from "@/api/project/data";
 import { ContentLoading } from "@/component/content-loading";
+import { ProjectMobileFilter } from "./component/mobile-filter";
+import { ListFilter, X } from "lucide-react"; // 또는 원하는 닫기 아이콘
 
 const ProjectPage = () => {
   const params = useSearchParams();
@@ -28,6 +30,7 @@ const ProjectPage = () => {
     lineup: Lineup.ALL,
   });
   const [isLoading, setIsLoading] = useState(true);
+  const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
   useEffect(() => {
     const category = params.get("category");
@@ -71,17 +74,17 @@ const ProjectPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* 메인 컨텐츠 영역 */}
       <div
         className={`relative max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 ${
           isLoading ? "opacity-50" : ""
         }`}
       >
         {isLoading && <ContentLoading />}
+
         <div className="flex gap-8 min-h-screen">
-          {/* 좌측 필터 영역 */}
-          <div className="w-80 flex-shrink-0">
-            <div className="sticky top-20 h-[calc(100vh-5rem)]">
+          {/* 좌측 필터 영역 (데스크탑) */}
+          <div className="w-80 flex-shrink-0 hidden lg:block pt-8">
+            <div className="sticky top-20 h-[calc(100vh-5rem)] ">
               <ProjectFilter
                 typeFilter={typeFilter}
                 setCondition={setCondition}
@@ -90,17 +93,23 @@ const ProjectPage = () => {
           </div>
           {/* 우측 프로젝트 리스트 영역 */}
           <div className="flex-1 min-w-0 py-8 px-6 flex flex-col min-h-screen">
-            {/* 프로젝트 헤더 */}
             <ProjectHeader
               totalItems={totalItems}
               condition={condition}
               setCondition={setCondition}
+              setMobileFilterOpen={setMobileFilterOpen}
             />
-            {/* 프로젝트 리스트 */}
+            {/* 모바일 필터 */}
+            <ProjectMobileFilter
+              typeFilter={typeFilter}
+              mobileFilterOpen={mobileFilterOpen}
+              setCondition={setCondition}
+              setMobileFilterOpen={setMobileFilterOpen}
+            />
+            {/* 프로젝트 리스트 및 페이지네이션 */}
             <div className="flex-1">
               <ProjectList projectList={projectList} />
             </div>
-            {/* 페이지네이션 */}
             <div className="mt-8 flex justify-center">
               <Pagination
                 pageSize={condition.size}

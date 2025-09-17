@@ -6,7 +6,7 @@ import { getNoticeList } from "@/api/notice/api";
 import { Notice } from "@/type/notice";
 import { defaultNotice } from "@/api/notice/data";
 import { NoticeHeader } from "./component/header";
-import { NoticeContent } from "./component/content";
+import { NoticeTable } from "./component/table";
 
 const NoticePage = () => {
   const [notices, setNotices] = useState<Notice[]>([defaultNotice]);
@@ -37,7 +37,7 @@ const NoticePage = () => {
         {/* 헤더 영역 */}
         <NoticeHeader />
         {/* 메인 컨텐츠 */}
-        <NoticeContent
+        <NoticeTable
           notices={notices}
           totalItems={totalItems}
           page={condition.page}

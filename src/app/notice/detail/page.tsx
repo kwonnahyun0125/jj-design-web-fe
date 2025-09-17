@@ -11,9 +11,8 @@ import { ContentLoading } from "@/component/content-loading";
 
 const NoticeDetailPage = () => {
   const searchParams = useSearchParams();
-  console.log("searchParams:", searchParams);
   const id = searchParams.get("id");
-  console.log("id:", id);
+
   const [notice, setNotice] = useState<Notice | null>(defaultNotice);
   const [isNew, setIsNew] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -23,14 +22,11 @@ const NoticeDetailPage = () => {
       try {
         setIsLoading(true);
         if (!id) {
-          console.log("ID가 없습니다");
           setNotice(null);
           return;
         }
 
-        console.log("데이터 fetching 시작, ID:", id);
         const result = await getNoticeById(parseInt(id));
-        console.log("API 결과:", result);
 
         const fetchedNotice = result.data || null;
         const newFlag =
@@ -76,9 +72,11 @@ const NoticeDetailPage = () => {
             {/* 게시글 정보 헤더 */}
             <div className="bg-gray-50 border-b border-t px-4 py-3">
               <div className="grid grid-cols-12 gap-4 text-sm font-medium text-gray-600">
-                <div className="col-span-1 text-center">번호</div>
-                <div className="col-span-7">제목</div>
-                <div className="col-span-2 text-center">등록일</div>
+                <div className="col-span-2 text-center">번호</div>
+                <div className="col-span-6">제목</div>
+                <div className="col-span-2 text-center hidden lg:block">
+                  등록일
+                </div>
                 <div className="col-span-2 text-center">상태</div>
               </div>
             </div>
@@ -86,10 +84,10 @@ const NoticeDetailPage = () => {
             {notice && (
               <div className="bg-white border-b border-gray-200">
                 <div className="grid grid-cols-12 gap-4 px-4 py-4 items-center">
-                  <div className="col-span-1 text-center">
+                  <div className="col-span-2 text-center">
                     <span className="text-sm text-gray-600">{notice.id}</span>
                   </div>
-                  <div className="col-span-7">
+                  <div className="col-span-6">
                     <div className="flex items-center gap-2">
                       <h2 className="text-base font-medium text-gray-900">
                         {notice.title}
@@ -101,7 +99,7 @@ const NoticeDetailPage = () => {
                       )}
                     </div>
                   </div>
-                  <div className="col-span-2 text-center">
+                  <div className="col-span-2 text-center hidden lg:block">
                     <span className="text-sm text-gray-600">
                       {formatDate(notice.createdAt)}
                     </span>
