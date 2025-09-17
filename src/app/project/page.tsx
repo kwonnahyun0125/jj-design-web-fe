@@ -82,7 +82,7 @@ const ProjectPage = () => {
 
         <div className="flex gap-8 min-h-screen">
           {/* 좌측 필터 영역 (데스크탑) */}
-          <div className="w-80 flex-shrink-0 hidden lg:block pt-8">
+          <div className="w-80 flex-shrink-0 hidden lg:block">
             <div className="sticky top-20 h-[calc(100vh-5rem)] ">
               <ProjectFilter
                 typeFilter={typeFilter}
