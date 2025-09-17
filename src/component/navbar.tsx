@@ -21,8 +21,6 @@ export const NavBar = ({
   const handleBlur = (e: React.FocusEvent) => {
     const target = divRef.current;
     const relatedTarget = e.relatedTarget as Node;
-
-    // 포커스가 현재 메뉴 컨테이너 밖으로 이동했는지 확인
     if (target && relatedTarget && !target.contains(relatedTarget)) {
       setIsOpen(false);
     }
@@ -38,7 +36,7 @@ export const NavBar = ({
   }, [path, setSelectedMenu]);
 
   return (
-    <nav className="hidden lg:flex lg:items-center lg:space-x-4 group cursor-pointer">
+    <nav className="hidden lg:flex items-center gap-2 xl:gap-4">
       {menuItems.map((item) =>
         item.sub ? (
           <div
@@ -48,8 +46,10 @@ export const NavBar = ({
             onBlur={handleBlur}
           >
             <Button
-              className={`peer text-gray-900 hover:border-b-3 hover:border-gray-900 px-3 py-2 text-lg font-large focus:outline-none flex items-center gap-1 cursor-pointer ${
-                selectedMenu === item.key ? "border-b-3 border-gray-900" : ""
+              className={`peer text-gray-900 font-medium px-4 py-2 transition-colors text-base xl:text-lg flex items-center gap-1 cursor-pointer ${
+                selectedMenu === item.key
+                  ? "border-b-2 border-gray-900 "
+                  : "hover:border-b-2 hover:border-gray-900 "
               }`}
               onClick={() => {
                 setIsOpen(!isOpen);
@@ -70,8 +70,10 @@ export const NavBar = ({
               setIsOpen(false);
               item.fncClick();
             }}
-            className={`text-gray-900 hover:border-b-3 hover:border-gray-900 px-3 py-2 text-lg font-large ${
-              selectedMenu === item.key ? "border-b-3 border-gray-900" : ""
+            className={`text-gray-900 font-medium px-4 py-2 transition-colors text-base xl:text-lg ${
+              selectedMenu === item.key
+                ? "border-b-2 border-gray-900 "
+                : "hover:border-b-2 hover:border-gray-900 "
             }`}
           >
             {item.title}
@@ -96,7 +98,7 @@ const MenuLayer = ({
           key={subItem.key}
           tabIndex={0}
           href={subItem.url}
-          className="block px-4 py-2 text-gray-900 hover:bg-gray-100"
+          className="block px-4 py-2 text-gray-900 hover:bg-gray-100 text-base"
           onClick={() => {
             setIsOpen(false);
             subItem?.fncClick?.();

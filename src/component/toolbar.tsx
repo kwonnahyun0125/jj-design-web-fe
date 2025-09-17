@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { NavBar } from "./navbar";
 import { useCompany } from "@/context/company-context";
+import { MobileNavBar } from "./mobile-navbar";
 
 export const Toolbar = () => {
   const [selectedMenu, setSelectedMenu] = useState<string>("");
@@ -33,6 +34,10 @@ export const Toolbar = () => {
             <div className="flex items-center space-x-8">
               {/* 메뉴 */}
               <NavBar
+                selectedMenu={selectedMenu}
+                setSelectedMenu={setSelectedMenu}
+              />
+              <MobileNavBar
                 selectedMenu={selectedMenu}
                 setSelectedMenu={setSelectedMenu}
               />
