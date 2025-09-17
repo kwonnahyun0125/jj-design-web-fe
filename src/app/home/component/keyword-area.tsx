@@ -11,7 +11,7 @@ import { defaultProject, keywordItems } from "@/api/project/data";
 import { getProjectList } from "@/api/project/api";
 
 export const KeywordArea = () => {
-  const ITEMS_PER_SLIDE = 4; // 한 번에 보여줄 카드 수
+  const ITEMS_PER_SLIDE = 1; // 모바일 대응: 한 번에 1개, 내부에서 반응형 처리
   const router = useRouter();
   const totalSlidesRef = useRef(0);
   const maxIndexRef = useRef(0);
@@ -34,12 +34,37 @@ export const KeywordArea = () => {
       totalSlidesRef.current = projectData.totalCount;
       maxIndexRef.current = Math.max(
         0,
-        totalSlidesRef.current - ITEMS_PER_SLIDE
+        projectList.length - getItemsPerSlide()
       );
       setKeywordProjectList(projectList);
+      setCurrentIndex(0);
     };
     FetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedKeyword]);
+
+  // 반응형: 슬라이드에 보여줄 카드 수 계산
+  function getItemsPerSlide() {
+    if (typeof window === "undefined") return 1;
+    if (window.innerWidth >= 1024) return 4;
+    if (window.innerWidth >= 640) return 2;
+    return 1;
+  }
+
+  // 반응형 슬라이드 개수 재계산
+  useEffect(() => {
+    const handleResize = () => {
+      maxIndexRef.current = Math.max(
+        0,
+        keywordProjectList.length - getItemsPerSlide()
+      );
+      setCurrentIndex((prev) => Math.min(prev, maxIndexRef.current));
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [keywordProjectList.length]);
 
   const prevSlide = () => {
     setCurrentIndex((prev) => {
@@ -56,7 +81,7 @@ export const KeywordArea = () => {
   };
 
   return (
-    <div className="px-15 py-10 mx-auto mb-10">
+    <div className="px-2 sm:px-4 md:px-8 lg:px-15 py-8 sm:py-10 mx-auto mb-10">
       <KeywordHeader
         filteredItems={keywordItems}
         selectedKeyword={selectedKeyword}
@@ -65,20 +90,20 @@ export const KeywordArea = () => {
       <KeywordSlider
         keywordProjectList={keywordProjectList}
         currentIndex={currentIndex}
-        itemsPerSlide={ITEMS_PER_SLIDE}
+        getItemsPerSlide={getItemsPerSlide}
       />
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-0 sm:px-4">
         <KeywordControls
           keywordProjectList={keywordProjectList}
           currentIndex={currentIndex}
           maxIndex={maxIndexRef.current}
           onNext={nextSlide}
           onPrev={prevSlide}
-          itemsPerSlide={ITEMS_PER_SLIDE}
+          getItemsPerSlide={getItemsPerSlide}
         />
-        <div className="flex justify-center mt-10">
+        <div className="flex justify-center mt-8">
           <Button
-            className="text-lg px-8 py-3 rounded font-semibold bg-[#FCE7F3] border border-gray-300 hover:bg-[#111827] hover:text-white"
+            className="text-base sm:text-lg px-6 sm:px-8 py-2 sm:py-3 rounded font-semibold bg-[#FCE7F3] border border-gray-300 hover:bg-[#111827] hover:text-white"
             onClick={() => {
               router.push("/project");
             }}
@@ -101,15 +126,17 @@ const KeywordHeader = ({
   onKeywordChange: (value: string) => void;
 }) => {
   return (
-    <div className="flex justify-between items-center mb-8 px-7">
-      <div className="flex items-center gap-6">
-        <h2 className="text-3xl font-bold">키워드로 보는 프로젝트</h2>
-        <div className="flex gap-2">
+    <div className="flex flex-col sm:flex-row justify-between items-center mb-6 sm:mb-8 px-2 sm:px-7">
+      <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+        <h2 className="text-xl sm:text-3xl font-bold">
+          키워드로 보는 프로젝트
+        </h2>
+        <div className="flex gap-2 flex-wrap">
           {filteredItems.map((item) => (
             <Button
               key={item.value}
               onClick={() => onKeywordChange(item.value)}
-              className={`px-4 py-2 rounded ${
+              className={`px-3 py-1 sm:px-4 sm:py-2 rounded text-sm sm:text-base ${
                 selectedKeyword === item.value
                   ? "bg-[#111827] text-white "
                   : "bg-[#FCE7F3] border border-gray-300 text-gray-800"
@@ -126,22 +153,23 @@ const KeywordHeader = ({
 
 const KeywordSlider = ({
   keywordProjectList,
-  itemsPerSlide,
+  getItemsPerSlide,
   currentIndex,
 }: {
   keywordProjectList: Project[];
-  itemsPerSlide: number;
+  getItemsPerSlide: () => number;
   currentIndex: number;
 }) => {
   const hasProjects =
     keywordProjectList.length > 0 && keywordProjectList[0].id > 0;
+  const itemsPerSlide = getItemsPerSlide();
 
   return (
     <>
       {hasProjects ? (
         <div className="relative overflow-hidden">
           <div
-            className="flex transition-transform duration-500 ease-in-out rounded-lg shadow pt-5 pb-7"
+            className="flex transition-transform duration-500 ease-in-out rounded-lg shadow pt-3 pb-5"
             style={{
               transform: `translateX(-${
                 (currentIndex / keywordProjectList.length) * 100
@@ -155,7 +183,7 @@ const KeywordSlider = ({
                 className="flex-shrink-0 cursor-pointer"
                 style={{ width: `${100 / keywordProjectList.length}%` }}
               >
-                <div className="px-5">
+                <div className="px-2 sm:px-5">
                   <KeywordCard project={project} idx={idx} />
                 </div>
               </div>
@@ -163,8 +191,10 @@ const KeywordSlider = ({
           </div>
         </div>
       ) : (
-        <div className="flex items-center justify-center min-h-[300px] text-center py-8">
-          <p className="text-lg text-gray-500">등록된 시공사례가 없습니다.</p>
+        <div className="flex items-center justify-center min-h-[200px] sm:min-h-[300px] text-center py-8">
+          <p className="text-base sm:text-lg text-gray-500">
+            등록된 시공사례가 없습니다.
+          </p>
         </div>
       )}
     </>
@@ -175,20 +205,22 @@ const KeywordCard = ({ idx, project }: { idx: number; project: Project }) => {
   return (
     <Link
       href={`/project/detail?id=${project.id}`}
-      className="bg-white overflow-hidden shadow-lg rounded-lg  cursor-pointer hover:shadow-xl transition-shadow h-full"
+      className="bg-white overflow-hidden shadow-lg rounded-lg cursor-pointer hover:shadow-xl transition-shadow h-full"
     >
       <Image
         src={project.imageUrl || "/image/default-image.png"}
         alt={project.title}
         width={500}
         height={250}
-        style={{ width: "100%", height: 250, objectFit: "cover" }}
+        style={{ width: "100%", height: 180, objectFit: "cover" }}
         priority={idx < 4}
       />
-      <div className="p-4">
-        <h3 className="font-bold text-lg mb-1">{project.title}</h3>
-        <p className="text-gray-600 text-sm mb-2">{project.duration}주 소요</p>
-        <p className="text-gray-600 text-sm mb-2 text-ellipsis overflow-hidden whitespace-nowrap h-5">
+      <div className="p-3 sm:p-4">
+        <h3 className="font-bold text-base sm:text-lg mb-1">{project.title}</h3>
+        <p className="text-gray-600 text-xs sm:text-sm mb-1">
+          {project.duration}주 소요
+        </p>
+        <p className="text-gray-600 text-xs sm:text-sm mb-2 text-ellipsis overflow-hidden whitespace-nowrap h-5">
           {project.description}
         </p>
       </div>
@@ -202,24 +234,24 @@ const KeywordControls = ({
   maxIndex,
   onNext,
   onPrev,
-  itemsPerSlide,
+  getItemsPerSlide,
 }: {
   keywordProjectList: Project[];
   currentIndex: number;
   maxIndex: number;
   onNext: () => void;
   onPrev: () => void;
-  itemsPerSlide: number;
+  getItemsPerSlide: () => number;
 }) => {
-  // 기본 4에서 시작해서 인덱스마다 증가
-  const baseProgress = (itemsPerSlide / keywordProjectList.length) * 100; // 기본 4개 항목에 대한 진행률
-  const indexProgress = (currentIndex / keywordProjectList.length) * 100; // 현재 인덱스에 따른 추가 진행률
+  const itemsPerSlide = getItemsPerSlide();
+  const baseProgress = (itemsPerSlide / keywordProjectList.length) * 100;
+  const indexProgress = (currentIndex / keywordProjectList.length) * 100;
   const progressPercentage = Math.min(baseProgress + indexProgress, 100);
 
   return (
-    <div className="flex items-center justify-between mt-8 mb-4">
+    <div className="flex items-center justify-between mt-6 mb-2 sm:mt-8 sm:mb-4">
       {/* 진행바 */}
-      <div className="flex-1 mr-8">
+      <div className="flex-1 mr-4 sm:mr-8">
         <div className="h-1 bg-gray-200 rounded-full overflow-hidden">
           <div
             className="h-full bg-black transition-all duration-300 ease-out"
@@ -227,13 +259,11 @@ const KeywordControls = ({
           />
         </div>
       </div>
-
       {/* 컨트롤 버튼들 */}
-      <div className="flex gap-3 ml-8">
-        {/* 이전 버튼 */}
+      <div className="flex gap-2 sm:gap-3 ml-4 sm:ml-8">
         <Button
           onClick={onPrev}
-          className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
+          className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-colors ${
             currentIndex === 0
               ? "text-black cursor-not-allowed"
               : "hover:bg-gray-200 hover:text-black"
@@ -244,11 +274,9 @@ const KeywordControls = ({
         >
           <PrevArrowIcon />
         </Button>
-
-        {/* 다음 버튼 */}
         <Button
           onClick={onNext}
-          className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
+          className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-colors ${
             currentIndex > maxIndex
               ? "text-black cursor-not-allowed"
               : "hover:bg-gray-200 hover:text-black"
