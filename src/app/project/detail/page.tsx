@@ -32,7 +32,10 @@ const ProjectDetailPage = () => {
   const [selectedTag, setSelectedTag] = useState<{
     key: number;
     label: string;
-  }>({ key: 0, label: " 전체" });
+  }>({
+    key: 0,
+    label: " 전체",
+  });
 
   useEffect(() => {
     if (!id) return;
@@ -40,7 +43,6 @@ const ProjectDetailPage = () => {
       try {
         const result = await getProjectById(parseInt(id));
         setProjectItems(result.data);
-        setIsLoading(false);
         if (!result.data) return;
         const category = result.data?.category;
         setTagItems([{ key: 0, label: " 전체" }, ...imageTagItems[category]]);
@@ -63,10 +65,10 @@ const ProjectDetailPage = () => {
     <div className={`min-h-screen bg-gray-50 ${isLoading ? "opacity-50" : ""}`}>
       {isLoading && <ContentLoading />}
       {projectItems && projectItems.id > 0 ? (
-        <div className="max-w-9xl mx-auto px-25 py-8">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-8 py-8">
           {/* 프로젝트 정보 */}
           <DetailInfo project={projectItems} />
-          <div className="flex items-center justify-between mb-3 px-8">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3 px-0 sm:px-4">
             {/* 태그 */}
             <DetailTagFilter
               tagItems={tagItems}
@@ -74,17 +76,19 @@ const ProjectDetailPage = () => {
               setSelectedTag={setSelectedTag}
             />
             {/* view type 버튼 */}
-            <ViewGroupButton
-              selectedView={selectedView}
-              setSelectedView={setSelectedView}
-            />
+            <div className="mt-2 md:mt-0 hidden sm:block">
+              <ViewGroupButton
+                selectedView={selectedView}
+                setSelectedView={setSelectedView}
+              />
+            </div>
           </div>
           {/* 이미지 갤러리 */}
           <DetailGalery selectedView={selectedView} imageItems={imageList} />
 
           <div className="flex justify-center py-8">
             <Button
-              className="flex items-center gap-2 px-6 py-3 border border-gray-300 rounded-md bg-[#FCE7F3] border border-gray-300  text-black hover:bg-[#111827] hover:text-white"
+              className="flex items-center gap-2 px-6 py-3 border border-gray-300 rounded-md bg-[#FCE7F3] text-black hover:bg-[#111827] hover:text-white"
               onClick={() => {
                 router.push(`/project`);
               }}
@@ -98,7 +102,7 @@ const ProjectDetailPage = () => {
           <ReviewSection review={projectItems?.review || ""} />
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center min-h-[700px] px-4 text-center">
+        <div className="flex flex-col items-center justify-center min-h-[500px] px-4 text-center">
           <div className="mb-4">
             <svg
               className="w-16 h-16 text-gray-300 mx-auto"
@@ -122,7 +126,7 @@ const ProjectDetailPage = () => {
           </p>
           <div className="flex justify-center py-8">
             <Button
-              className="flex items-center gap-2 px-6 py-3 border border-gray-300 rounded-md bg-[#FCE7F3] border border-gray-300  text-black hover:bg-[#111827] hover:text-white"
+              className="flex items-center gap-2 px-6 py-3 border border-gray-300 rounded-md bg-[#FCE7F3] text-black hover:bg-[#111827] hover:text-white"
               onClick={() => {
                 router.push(`/project`);
               }}
