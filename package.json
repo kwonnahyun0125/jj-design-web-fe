@@ -4,14 +4,16 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "npx serve@latest out",
+    "build": "rm -rf .next out && next build && cp out/home.html out/index.html",
+    "start": "npm run build && npx serve@latest out",
+    "deploy": "rsync -av --delete out/ ../jj-design-web/user-dist/",
     "lint": "next lint"
   },
   "dependencies": {
     "axios": "^1.12.2",
     "date-fns": "^4.1.0",
     "dotenv": "^17.2.1",
+    "lucide-react": "^0.544.0",
     "next": "15.4.6",
     "react": "19.1.0",
     "react-dom": "19.1.0"
