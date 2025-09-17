@@ -41,7 +41,7 @@ export const FurnitureSpace = ({ furniture }: { furniture: Furniture }) => {
                 맞춤 제작 가구 - 시그니처 라인
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                JJ-MOBILIA 시그니처 가구와 직접 검증된 자재들을 한눈에
+                {furniture?.name} 시그니처 가구와 직접 검증된 자재들을 한눈에
                 확인하세요.
               </p>
             </div>
