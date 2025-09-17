@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { Button } from "@/component/button";
 import { Keyword, Lineup, ProjectListFilterProps } from "@/type/project";
@@ -11,7 +13,7 @@ export const ProjectMobileFilter = ({
   setMobileFilterOpen,
 }: ProjectListFilterProps) => {
   const [checkedPyItems, setCheckedPyItems] = useState<string[]>([]);
-  const [checkedTypeItem, setCheckedTypeItem] = useState<string>("");
+  const [checkedTypeItem, setCheckedTypeItem] = useState<string>("ALL");
   const [checkedLineupItem, setCheckedLineupItem] = useState<Lineup>(
     Lineup.ALL
   );
@@ -25,19 +27,13 @@ export const ProjectMobileFilter = ({
     setCheckedLineupItem(lineupItems[0].key as Lineup);
   }, [typeFilter]);
 
-  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+  const handlePyFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
 
-    if (name === "pyung") {
-      if (checkedPyItems.includes(value)) {
-        setCheckedPyItems(checkedPyItems.filter((item) => item !== value));
-      } else {
-        setCheckedPyItems([...checkedPyItems, value]);
-      }
-    } else if (name === "type") {
-      setCheckedTypeItem(value);
-    } else if (name === "lineup") {
-      setCheckedLineupItem(value as Lineup);
+    if (checkedPyItems.includes(value)) {
+      setCheckedPyItems(checkedPyItems.filter((item) => item !== value));
+    } else {
+      setCheckedPyItems([...checkedPyItems, value]);
     }
   };
 
@@ -81,7 +77,7 @@ export const ProjectMobileFilter = ({
                 <X className="w-7 h-7 text-gray-900" />
               </button>
             </div>
-            <aside className="bg-white h-screen border-gray-300 px-6 overflow-y-auto flex flex-col">
+            <aside className="bg-white h-screen border-gray-300 px-6 flex flex-col">
               <div className="space-y-6 flex-1">
                 {/* 평형 필터 */}
                 <section>
@@ -101,7 +97,7 @@ export const ProjectMobileFilter = ({
                           type="checkbox"
                           value={item.key}
                           checked={checkedPyItems.includes(item.key)}
-                          onChange={(e) => handleFilterChange(e)}
+                          onChange={(e) => handlePyFilterChange(e)}
                           className="w-5 h-5 text-teal-600 border-gray-300 rounded focus:ring-teal-500 focus:ring-2"
                         />
                         <span className="text-base text-gray-700">
@@ -127,10 +123,11 @@ export const ProjectMobileFilter = ({
                           <input
                             id={type.key}
                             key={type.key}
-                            name="type"
+                            name={`type-${type.label}`}
                             type="radio"
                             value={type.key}
-                            onChange={(e) => handleFilterChange(e)}
+                            // onChange={(e) => handleFilterChange(e)}
+                            onChange={(e) => setCheckedTypeItem(e.target.value)}
                             checked={checkedTypeItem === type.key}
                             className="w-5 h-5 text-teal-600 border-gray-300 rounded focus:ring-teal-500 focus:ring-2"
                           />
@@ -159,11 +156,13 @@ export const ProjectMobileFilter = ({
                           <input
                             id={item.key}
                             key={item.key}
-                            name="lineup"
+                            name={`lineup-${item.label}`}
                             type="radio"
                             value={item.key}
                             checked={checkedLineupItem === item.key}
-                            onChange={(e) => handleFilterChange(e)}
+                            onChange={(e) =>
+                              setCheckedLineupItem(e.target.value as Lineup)
+                            }
                             className="w-5 h-5 border-gray-300 text-teal-500 focus:ring-teal-500"
                           />
                           <span className="text-base text-gray-700">
@@ -177,7 +176,7 @@ export const ProjectMobileFilter = ({
               </div>
 
               {/* 버튼 영역 */}
-              <div className="flex gap-2 justify-end items-end">
+              <div className="flex gap-2 justify-end items-end pt-10 pb-4">
                 <Button
                   onClick={handleClearBtnClick}
                   className="flex-1 px-4 py-2 text-base border border-gray-300 rounded-md hover:bg-gray-50"
