@@ -47,12 +47,10 @@ const ProjectPage = () => {
     }
 
     setTypeFilter([{ key: "ALL", label: "전체" }, ...newTypeFilter]);
-    setCondition((prev) => ({
-      ...prev,
+    setCondition({
       page: 1,
       category: newCategory,
-      type: "ALL", // 첫 번째 타입을 기본값으로 설정
-    }));
+    });
   }, [params]);
 
   useEffect(() => {

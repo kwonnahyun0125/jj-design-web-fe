@@ -55,7 +55,6 @@ export const ProjectFilter = ({
     setCondition((prev) => ({
       ...prev,
       page: 1,
-      search: "",
       pyung: [],
       keyword: (typeFilter[0]?.key || "") as Keyword,
       lineup: Lineup.FULL,
