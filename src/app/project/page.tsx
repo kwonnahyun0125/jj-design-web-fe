@@ -17,6 +17,7 @@ import { getProjectList } from "@/api/project/api";
 import { typeItems } from "@/api/project/data";
 import { ContentLoading } from "@/component/content-loading";
 import { ProjectMobileFilter } from "./component/mobile-filter";
+import { Breadcrumb } from "./component/breadcrumb";
 
 const ProjectPage = () => {
   const params = useSearchParams();
@@ -90,9 +91,8 @@ const ProjectPage = () => {
         }`}
       >
         {isLoading && <ContentLoading />}
-
         <div className="flex gap-8 min-h-screen">
-          {/* 좌측 필터 영역 (데스크탑) */}
+          {/* 좌측 필터 영역 */}
           <div className="w-80 flex-shrink-0 hidden lg:block">
             <div className="sticky top-20 h-[calc(100vh-5rem)] ">
               <ProjectFilter
@@ -110,6 +110,8 @@ const ProjectPage = () => {
               setCondition={setCondition}
               setMobileFilterOpen={setMobileFilterOpen}
             />
+            {/* 브레드 크럼 위치 */}
+            <Breadcrumb category={condition.category ?? Category.RESIDENCE} />
             {/* 모바일 필터 */}
             <ProjectMobileFilter
               typeFilter={typeFilter}
