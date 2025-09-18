@@ -173,13 +173,13 @@ export const SlideArea = ({ projectList }: { projectList: Project[] }) => {
                     current < slideImages.length - 1 && (
                       <>
                         {/* 모바일: 왼쪽 하단 오버레이 */}
-                        <div className="block sm:hidden absolute left-3 bottom-12 z-10 max-w-[85vw]">
+                        <div className="block sm:hidden absolute left-3 bottom-12 z-10 max-w-[70vw]">
                           <div className="bg-blue-50/80 rounded-xl px-4 py-3 text-left shadow-md">
                             <p className="text-xs font-medium mb-1 text-gray-800 truncate">
                               {currentImage.description}
                             </p>
-                            <div className="flex items-center gap-2">
-                              <h2 className="text-base font-bold text-gray-900 truncate">
+                            <div className="flex items-center justify-between gap-2">
+                              <h2 className="text-base font-bold text-gray-900 truncate max-w-[50vw]">
                                 {currentImage.title}
                               </h2>
                               <button
@@ -188,7 +188,7 @@ export const SlideArea = ({ projectList }: { projectList: Project[] }) => {
                                     `/project/detail?id=${currentImage.id}`
                                   );
                                 }}
-                                className="inline-flex items-center justify-center h-7 px-3 rounded-full bg-[#FCE7F3] hover:bg-[#111827] hover:text-white text-black text-xs font-semibold transition-colors"
+                                className="inline-flex items-center min-w-[60px] justify-center h-7 px-3 rounded-full bg-[#FCE7F3] hover:bg-[#111827] hover:text-white text-black text-xs font-semibold transition-colors"
                                 aria-label="더보기"
                               >
                                 더보기

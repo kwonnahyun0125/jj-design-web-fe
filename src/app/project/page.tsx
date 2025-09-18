@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { Pagination } from "@/component/pagination";
 import { Category, Lineup, Project, ProjectCondition } from "@/type/project";
 import { ProjectList } from "./component/list";
@@ -14,6 +14,7 @@ import { ProjectMobileFilter } from "./component/mobile-filter";
 
 const ProjectPage = () => {
   const params = useSearchParams();
+  const pathname = usePathname();
 
   const [projectList, setProjectList] = useState<Project[]>([]);
   const [totalItems, setTotalItems] = useState<number>(0);
@@ -71,8 +72,12 @@ const ProjectPage = () => {
     }
   }, [condition]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="w-full min-h-screen bg-gray-50">
       <div
         className={`relative max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 ${
           isLoading ? "opacity-50" : ""
@@ -82,7 +87,7 @@ const ProjectPage = () => {
 
         <div className="flex gap-8 min-h-screen">
           {/* 좌측 필터 영역 (데스크탑) */}
-          <div className="w-80 flex-shrink-0 hidden lg:block pt-8">
+          <div className="w-80 flex-shrink-0 hidden lg:block">
             <div className="sticky top-20 h-[calc(100vh-5rem)] ">
               <ProjectFilter
                 typeFilter={typeFilter}

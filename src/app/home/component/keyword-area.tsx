@@ -39,7 +39,6 @@ export const KeywordArea = () => {
       setCurrentIndex(0);
     };
     FetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedKeyword]);
 
   // 반응형: 슬라이드에 보여줄 카드 수 계산
@@ -62,7 +61,6 @@ export const KeywordArea = () => {
     window.addEventListener("resize", handleResize);
     handleResize();
     return () => window.removeEventListener("resize", handleResize);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keywordProjectList.length]);
 
   const prevSlide = () => {
@@ -104,7 +102,14 @@ export const KeywordArea = () => {
           <Button
             className="text-base sm:text-lg px-6 sm:px-8 py-2 sm:py-3 rounded font-semibold bg-[#FCE7F3] border border-gray-300 hover:bg-[#111827] hover:text-white"
             onClick={() => {
-              router.push("/project");
+              // 현재 보고 있는 키워드에 맞는 카테고리로 이동
+              const category =
+                selectedKeyword === "COMMERCIAL"
+                  ? "MERCANTILE"
+                  : selectedKeyword === "NEW"
+                  ? "ARCHITECTURE"
+                  : "RESIDENCE";
+              router.push(`/project?category=${category.toLocaleLowerCase()}`);
             }}
           >
             더 많은 시공사례 보기

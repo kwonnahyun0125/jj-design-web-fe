@@ -31,17 +31,16 @@ export const FurnitureCard = ({ furniture }: { furniture: Furniture }) => {
               {furniture.address || "정보 없음"}
             </p>
           </div>
-
           <div className="flex items-start gap-3">
             <p className="text-sm text-gray-500 min-w-[90px]">운영시간</p>
-            <p className="text-gray-700 flex-1 line-clamp-2">
+            <p className="text-gray-700 flex-1 line-clamp-4 md:line-clamp-2">
               평일 09:00~18:00 / 토 10:00~17:00 / 일 휴무
             </p>
           </div>
 
           <div className="flex items-start gap-3">
             <p className="text-sm text-gray-500 min-w-[90px]">이용안내</p>
-            <p className="text-gray-700 flex-1 line-clamp-2">
+            <p className="text-gray-700 flex-1 line-clamp-4 md:line-clamp-2">
               방문 전 상담 예약을 권장드리며, 도면이나 참고 이미지를 지참하시면
               맞춤 상담에 도움이 됩니다.
             </p>

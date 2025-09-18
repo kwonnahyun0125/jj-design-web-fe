@@ -1,13 +1,15 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { ConsultationArea } from "@/app/home/component/consultation-area";
 import { KeywordArea } from "@/app/home/component/keyword-area";
 import { SlideArea } from "@/app/home/component/slide-area";
-import { ProjectArea } from "./component/project-area";
 import { getProjectList } from "@/api/project/api";
-import { useEffect, useState } from "react";
+import { ProjectArea } from "./component/project-area";
 
 const HomePage = () => {
+  const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
   const [projectList, setProjectList] = useState([]);
 
@@ -15,6 +17,10 @@ const HomePage = () => {
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   // API 호출은 마운트 후에만
   useEffect(() => {
@@ -43,7 +49,7 @@ const HomePage = () => {
   }
 
   return (
-    <div className="w-full min-h-screen overflow-x-hidden overflow-y-auto bg-gray-50">
+    <div className="w-full min-h-screen bg-gray-50">
       {/* 슬라이드 영역 */}
       <div className="w-full">
         <SlideArea projectList={projectList} />

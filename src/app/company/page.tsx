@@ -1,10 +1,18 @@
 "use client";
 
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { useCompany } from "@/context/company-context";
 
 const CompanyPage = () => {
   const { companyData } = useCompany();
+
+  const pathname = usePathname();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">

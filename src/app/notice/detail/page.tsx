@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { getNoticeById } from "@/api/notice/api";
 import { calcDate, formatDate } from "@/utils/date";
@@ -11,6 +11,7 @@ import { ContentLoading } from "@/component/content-loading";
 
 const NoticeDetailPage = () => {
   const searchParams = useSearchParams();
+  const pathname = usePathname();
   const id = searchParams.get("id");
 
   const [notice, setNotice] = useState<Notice | null>(defaultNotice);
@@ -43,6 +44,10 @@ const NoticeDetailPage = () => {
 
     fetchData();
   }, [id]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <div className="min-h-screen bg-white">

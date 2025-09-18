@@ -2,6 +2,7 @@
 
 import { Button } from "@/component/button";
 import { useRouter } from "next/navigation";
+import { Fragment } from "react";
 
 export const ConsultationArea = () => {
   const router = useRouter();
@@ -11,11 +12,38 @@ export const ConsultationArea = () => {
       <div className="relative z-10 flex flex-col lg:flex-row items-center lg:items-start justify-center gap-8 lg:gap-16 max-w-6xl w-full mx-auto px-3 sm:px-6 py-8">
         {/* 텍스트 + 버튼(모바일) */}
         <div className="text-center lg:text-left text-white flex-1 max-w-2xl">
-          <p className="text-sm sm:text-base md:text-lg mb-2 font-light">
-            인테리어는 단순한 공간의 완성이 아니라, 삶의 가치를 담는 과정입니다.
+          {/* 모바일에서만 , 기준 줄바꿈 */}
+          <p className="text-sm sm:text-base md:text-lg mb-2 font-light whitespace-break-spaces">
+            {typeof window !== "undefined" && window.innerWidth < 1024
+              ? "인테리어는 단순한 공간의 완성이 아니라, 삶의 가치를 담는 과정입니다."
+                  .split(",")
+                  .map((part, idx, arr) =>
+                    idx < arr.length - 1 ? (
+                      <Fragment key={idx}>
+                        {part},
+                        <br />
+                      </Fragment>
+                    ) : (
+                      part
+                    )
+                  )
+              : "인테리어는 단순한 공간의 완성이 아니라, 삶의 가치를 담는 과정입니다."}
           </p>
-          <p className="text-sm sm:text-base md:text-lg mb-4 font-light">
-            JJ-DESIGN의 체계적인 시스템과 함께라면, 그 여정은 더욱 확실해집니다.
+          <p className="text-sm sm:text-base md:text-lg mb-4 font-light whitespace-break-spaces">
+            {typeof window !== "undefined" && window.innerWidth < 1024
+              ? "JJ-DESIGN의 체계적인 시스템과 함께라면, 그 여정은 더욱 확실해집니다."
+                  .split(",")
+                  .map((part, idx, arr) =>
+                    idx < arr.length - 1 ? (
+                      <Fragment key={idx}>
+                        {part},
+                        <br />
+                      </Fragment>
+                    ) : (
+                      part
+                    )
+                  )
+              : "JJ-DESIGN의 체계적인 시스템과 함께라면, 그 여정은 더욱 확실해집니다."}
           </p>
           <h2 className="text-base sm:text-xl md:text-2xl lg:text-3xl font-bold mb-8 leading-relaxed">
             인테리어 그 이상의 가치를, 모든 순간 함께합니다.

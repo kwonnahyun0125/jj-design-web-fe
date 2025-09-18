@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { Button } from "@/component/button";
 import { RightArrowIcon } from "@/component/Icon";
@@ -18,6 +18,7 @@ import { ContentLoading } from "@/component/content-loading";
 
 const ProjectDetailPage = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
 
@@ -36,6 +37,10 @@ const ProjectDetailPage = () => {
     key: 0,
     label: " 전체",
   });
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   useEffect(() => {
     if (!id) return;
@@ -62,7 +67,11 @@ const ProjectDetailPage = () => {
   }, [projectItems, selectedTag]);
 
   return (
-    <div className={`min-h-screen bg-gray-50 ${isLoading ? "opacity-50" : ""}`}>
+    <div
+      className={`w-full min-h-screen bg-gray-50 ${
+        isLoading ? "opacity-50" : ""
+      }`}
+    >
       {isLoading && <ContentLoading />}
       {projectItems && projectItems.id > 0 ? (
         <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-8 py-8">

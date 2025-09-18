@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { Pagination } from "@/component/pagination";
 import { FurnitureCard } from "./component/card";
 import { FurnitureHeader } from "./component/header";
@@ -18,6 +19,12 @@ const FurniturePage = () => {
   }>({ page: 1, pageSize: 10 });
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  const pathname = usePathname();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   useEffect(() => {
     try {
       const fetchData = async () => {
@@ -34,7 +41,7 @@ const FurniturePage = () => {
   const hasFurniture = furnitureList?.length > 0 && furnitureList[0]?.id > 0;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="w-full min-h-screen bg-gray-50">
       {/* 헤더 섹션 */}
       <FurnitureHeader />
 

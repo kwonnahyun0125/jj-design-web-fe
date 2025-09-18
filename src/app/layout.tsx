@@ -32,15 +32,15 @@ const RootLayout = ({
           }
         `}</style>
       </head>
-      <body style={{ fontFamily: "Pretendard, sans-serif" }}>
+      <body style={{ fontFamily: "Pretendard, sans-serif", color: "#111827" }}>
         <CompanyProvider>
-          <Toolbar />
           <ClientLayout>
             <Suspense fallback={<ContentLoading />}>
+              <Toolbar />
               {children ? children : <Error status="notfound" />}
+              <Footer />
             </Suspense>
           </ClientLayout>
-          <Footer />
         </CompanyProvider>
       </body>
     </html>

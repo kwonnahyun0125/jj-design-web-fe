@@ -1,7 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { menuItems } from "@/api/data";
 import { Menu, X } from "lucide-react";
 
@@ -12,7 +13,13 @@ export const MobileNavBar = ({
   selectedMenu: string;
   setSelectedMenu: (menu: string) => void;
 }) => {
+  const params = useSearchParams();
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const category = params.get("category");
+    if (category) setSelectedMenu(category);
+  }, [open, params, setSelectedMenu]);
 
   return (
     <div className="flex lg:hidden">
@@ -28,7 +35,7 @@ export const MobileNavBar = ({
       {open && (
         <div className="fixed inset-0 z-50 bg-black/40 flex">
           {/* 메뉴 패널: 화면에 가득 차게 */}
-          <nav className="bg-white w-full h-full shadow-lg flex flex-col p-6 animate-slide-in">
+          <nav className="bg-white w-full h-full shadow-lg flex flex-col p-6 animate-slide-in  overflow-y-auto">
             <div className="flex justify-between items-center mb-8">
               <span className="text-xl font-bold">메뉴</span>
               <button
