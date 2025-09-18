@@ -3,7 +3,13 @@
 import { useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { Pagination } from "@/component/pagination";
-import { Category, Lineup, Project, ProjectCondition } from "@/type/project";
+import {
+  Category,
+  Keyword,
+  Lineup,
+  Project,
+  ProjectCondition,
+} from "@/type/project";
 import { ProjectList } from "./component/list";
 import { ProjectFilter } from "./component/filter";
 import { ProjectHeader } from "./component/header";
@@ -34,6 +40,7 @@ const ProjectPage = () => {
 
   useEffect(() => {
     const category = params.get("category");
+    const keyword = params.get("keyword");
 
     let newCategory = Category.RESIDENCE;
     let newTypeFilter = typeItems[Category.RESIDENCE];
@@ -50,6 +57,7 @@ const ProjectPage = () => {
     setCondition({
       page: 1,
       category: newCategory,
+      keyword: keyword ? (keyword.toUpperCase() as Keyword) : undefined,
     });
   }, [params]);
 
@@ -89,6 +97,7 @@ const ProjectPage = () => {
             <div className="sticky top-20 h-[calc(100vh-5rem)] ">
               <ProjectFilter
                 typeFilter={typeFilter}
+                condition={condition}
                 setCondition={setCondition}
               />
             </div>

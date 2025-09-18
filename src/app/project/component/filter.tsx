@@ -5,6 +5,7 @@ import { lineupItems, pyItems } from "@/api/project/data";
 
 export const ProjectFilter = ({
   typeFilter,
+  condition,
   setCondition,
 }: ProjectListFilterProps) => {
   const [checkedPyItems, setCheckedPyItems] = useState<string[]>([]);
@@ -14,13 +15,10 @@ export const ProjectFilter = ({
   );
 
   useEffect(() => {
-    if (typeFilter.length > 0) {
-      setCheckedTypeItem(typeFilter[0].key);
-    }
     setCheckedPyItems([]);
-    setCheckedTypeItem(typeFilter[0]?.key || "");
+    setCheckedTypeItem(condition?.keyword || typeFilter[0]?.key || "");
     setCheckedLineupItem(lineupItems[0].key as Lineup);
-  }, [typeFilter]);
+  }, [condition, typeFilter]);
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

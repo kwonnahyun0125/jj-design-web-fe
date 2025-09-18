@@ -94,6 +94,7 @@ export type ViewButtonProps = {
 
 export type ProjectListFilterProps = {
   typeFilter: { key: string; label: string }[];
+  condition?: ProjectCondition;
   mobileFilterOpen?: boolean;
   setCondition: Dispatch<SetStateAction<ProjectCondition>>;
   setMobileFilterOpen?: Dispatch<SetStateAction<boolean>>;

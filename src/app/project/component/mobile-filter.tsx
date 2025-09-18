@@ -9,6 +9,7 @@ import { X } from "lucide-react";
 export const ProjectMobileFilter = ({
   typeFilter,
   mobileFilterOpen,
+  condition,
   setCondition,
   setMobileFilterOpen,
 }: ProjectListFilterProps) => {
@@ -19,13 +20,10 @@ export const ProjectMobileFilter = ({
   );
 
   useEffect(() => {
-    if (typeFilter.length > 0) {
-      setCheckedTypeItem(typeFilter[0].key);
-    }
     setCheckedPyItems([]);
-    setCheckedTypeItem(typeFilter[0]?.key || "");
+    setCheckedTypeItem(condition?.keyword || typeFilter[0]?.key || "");
     setCheckedLineupItem(lineupItems[0].key as Lineup);
-  }, [typeFilter]);
+  }, [condition, typeFilter]);
 
   const handlePyFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
