@@ -61,6 +61,7 @@ export const KeywordArea = () => {
 
   // maxIndex 동기화
   useEffect(() => {
+    // maxIndex는 (전체 카드 개수 - 1)까지 한 칸씩 이동
     setMaxIndex(Math.max(0, keywordProjectList.length - itemsPerSlide));
     // currentIndex가 maxIndex를 넘지 않도록 보정
     setCurrentIndex((prev) =>
@@ -69,17 +70,11 @@ export const KeywordArea = () => {
   }, [keywordProjectList.length, itemsPerSlide]);
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => {
-      const prevIndex = prev - 1;
-      return prevIndex < 0 ? maxIndex : prevIndex;
-    });
+    setCurrentIndex((prev) => (prev > 0 ? prev - 1 : 0));
   };
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => {
-      const nextIndex = prev + 1;
-      return nextIndex > maxIndex ? 0 : nextIndex;
-    });
+    setCurrentIndex((prev) => (prev < maxIndex ? prev + 1 : maxIndex));
   };
 
   return (
@@ -173,6 +168,11 @@ const KeywordSlider = ({
   const hasProjects =
     keywordProjectList.length > 0 && keywordProjectList[0].id > 0;
 
+  // 버튼 한 번에 카드 하나씩 이동
+  const startIdx = currentIndex;
+  const endIdx = startIdx + itemsPerSlide;
+  const visibleProjects = keywordProjectList.slice(startIdx, endIdx);
+
   return (
     <>
       {hasProjects ? (
@@ -180,20 +180,18 @@ const KeywordSlider = ({
           <div
             className="flex transition-transform duration-500 ease-in-out rounded-lg shadow pt-3 pb-5"
             style={{
-              transform: `translateX(-${
-                currentIndex * (100 / itemsPerSlide)
-              }%)`,
-              width: `${(keywordProjectList.length / itemsPerSlide) * 100}%`,
+              width: "100%",
+              transform: "none",
             }}
           >
-            {keywordProjectList.map((project, idx) => (
+            {visibleProjects.map((project, idx) => (
               <div
-                key={`project_${idx}`}
+                key={`project_${startIdx + idx}`}
                 className="flex-shrink-0 cursor-pointer"
-                style={{ width: `${100 / keywordProjectList.length}%` }}
+                style={{ width: `${100 / itemsPerSlide}%` }}
               >
                 <div className="px-2 sm:px-5">
-                  <KeywordCard project={project} idx={idx} />
+                  <KeywordCard project={project} idx={startIdx + idx} />
                 </div>
               </div>
             ))}
