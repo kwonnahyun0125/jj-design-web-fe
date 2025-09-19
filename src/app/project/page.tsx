@@ -3,7 +3,13 @@
 import { useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { Pagination } from "@/component/pagination";
-import { Category, Lineup, Project, ProjectCondition } from "@/type/project";
+import {
+  Category,
+  Keyword,
+  Lineup,
+  Project,
+  ProjectCondition,
+} from "@/type/project";
 import { ProjectList } from "./component/list";
 import { ProjectFilter } from "./component/filter";
 import { ProjectHeader } from "./component/header";
@@ -11,6 +17,7 @@ import { getProjectList } from "@/api/project/api";
 import { typeItems } from "@/api/project/data";
 import { ContentLoading } from "@/component/content-loading";
 import { ProjectMobileFilter } from "./component/mobile-filter";
+import { Breadcrumb } from "./component/breadcrumb";
 
 const ProjectPage = () => {
   const params = useSearchParams();
@@ -34,6 +41,7 @@ const ProjectPage = () => {
 
   useEffect(() => {
     const category = params.get("category");
+    const keyword = params.get("keyword");
 
     let newCategory = Category.RESIDENCE;
     let newTypeFilter = typeItems[Category.RESIDENCE];
@@ -47,12 +55,11 @@ const ProjectPage = () => {
     }
 
     setTypeFilter([{ key: "ALL", label: "전체" }, ...newTypeFilter]);
-    setCondition((prev) => ({
-      ...prev,
+    setCondition({
       page: 1,
       category: newCategory,
-      type: "ALL", // 첫 번째 타입을 기본값으로 설정
-    }));
+      keyword: keyword ? (keyword.toUpperCase() as Keyword) : undefined,
+    });
   }, [params]);
 
   useEffect(() => {
@@ -84,13 +91,13 @@ const ProjectPage = () => {
         }`}
       >
         {isLoading && <ContentLoading />}
-
         <div className="flex gap-8 min-h-screen">
-          {/* 좌측 필터 영역 (데스크탑) */}
+          {/* 좌측 필터 영역 */}
           <div className="w-80 flex-shrink-0 hidden lg:block">
             <div className="sticky top-20 h-[calc(100vh-5rem)] ">
               <ProjectFilter
                 typeFilter={typeFilter}
+                condition={condition}
                 setCondition={setCondition}
               />
             </div>
@@ -103,6 +110,8 @@ const ProjectPage = () => {
               setCondition={setCondition}
               setMobileFilterOpen={setMobileFilterOpen}
             />
+            {/* 브레드 크럼 위치 */}
+            <Breadcrumb category={condition.category ?? Category.RESIDENCE} />
             {/* 모바일 필터 */}
             <ProjectMobileFilter
               typeFilter={typeFilter}

@@ -47,9 +47,11 @@ export const NavBar = ({
           >
             <Button
               className={`peer text-gray-900 font-medium px-4 py-2 transition-colors text-base xl:text-lg flex items-center gap-1 cursor-pointer ${
-                selectedMenu === item.key
-                  ? "border-b-2 border-gray-900 "
-                  : "hover:border-b-2 hover:border-gray-900 "
+                // 현재 선택된 메뉴가 item sub 메뉴 중 하나일 때도 활성화 상태로 표시
+                selectedMenu === item.key ||
+                item.sub.some((sub) => sub.key === selectedMenu)
+                  ? "border-b-2 border-gray-900"
+                  : "hover:border-b-2 hover:border-gray-900"
               }`}
               onClick={() => {
                 setIsOpen(!isOpen);
@@ -72,8 +74,8 @@ export const NavBar = ({
             }}
             className={`text-gray-900 font-medium px-4 py-2 transition-colors text-base xl:text-lg ${
               selectedMenu === item.key
-                ? "border-b-2 border-gray-900 "
-                : "hover:border-b-2 hover:border-gray-900 "
+                ? "border-b-2 border-gray-900"
+                : "hover:border-b-2 hover:border-gray-900"
             }`}
           >
             {item.title}

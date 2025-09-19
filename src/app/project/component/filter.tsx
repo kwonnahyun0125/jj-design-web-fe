@@ -5,6 +5,7 @@ import { lineupItems, pyItems } from "@/api/project/data";
 
 export const ProjectFilter = ({
   typeFilter,
+  condition,
   setCondition,
 }: ProjectListFilterProps) => {
   const [checkedPyItems, setCheckedPyItems] = useState<string[]>([]);
@@ -14,13 +15,10 @@ export const ProjectFilter = ({
   );
 
   useEffect(() => {
-    if (typeFilter.length > 0) {
-      setCheckedTypeItem(typeFilter[0].key);
-    }
-    setCheckedPyItems([]);
-    setCheckedTypeItem(typeFilter[0]?.key || "");
-    setCheckedLineupItem(lineupItems[0].key as Lineup);
-  }, [typeFilter]);
+    setCheckedPyItems(condition?.pyung || []);
+    setCheckedTypeItem(condition?.keyword || typeFilter[0]?.key || "");
+    setCheckedLineupItem(condition?.lineup || (lineupItems[0].key as Lineup));
+  }, [condition, typeFilter]);
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -55,7 +53,6 @@ export const ProjectFilter = ({
     setCondition((prev) => ({
       ...prev,
       page: 1,
-      search: "",
       pyung: [],
       keyword: (typeFilter[0]?.key || "") as Keyword,
       lineup: Lineup.FULL,
@@ -63,7 +60,7 @@ export const ProjectFilter = ({
   };
 
   return (
-    <aside className="bg-white h-full border-r border-gray-300 py-10 px-6 overflow-y-auto flex flex-col">
+    <aside className="bg-white h-full border-r border-gray-300 py-10 ml-6 pr-6 overflow-y-auto flex flex-col">
       <div className="space-y-6 flex-1">
         {/* 평형 필터 */}
         <section>

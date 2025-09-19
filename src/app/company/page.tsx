@@ -51,7 +51,14 @@ const CompanyPage = () => {
                   className="text-lg text-gray-600 leading-relaxed mb-6"
                   style={{ whiteSpace: "break-spaces" }}
                 >
-                  {`저희 JJ Design은 창의적인 디자인과 혁신적인 솔루션을 제공하는\n 디자인 전문 기업입니다.\n\n 고객의 성공을 최우선으로 생각하며, 다양한 프로젝트 경험을 바탕으로 \n 최고의 결과를 만들어냅니다.`}
+                  저희 JJ Design은 창의적인 디자인과 혁신적인 솔루션을 제공하는
+                  <br />
+                  디자인 전문 기업입니다.
+                  <br />
+                  고객의 성공을 최우선으로 생각하며, 다양한 프로젝트 경험을
+                  바탕으로
+                  <br />
+                  최고의 결과를 만들어냅니다.
                 </p>
                 <div className="space-y-3 pt-3">
                   <div className="flex items-center">
@@ -119,32 +126,26 @@ const CompanyPage = () => {
               <h2 className="text-3xl font-bold text-gray-800">연락처</h2>
             </div>
             <div className="grid md:grid-cols-3 gap-8">
-              <div className="flex items-center p-6 bg-gray-50 rounded-xl min-h-[120px]">
-                <div className="w-10 h-10 bg-[#FCE7F3] border border-gray-300 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                  <span className="text-gray-600 text-lg">📍</span>
+              <div className="bg-gray-50  rounded-xl p-8 transform hover:scale-105 transition-transform min-h-[180px]">
+                <div className="w-12 h-12 bg-[#FCE7F3] border border-gray-300 rounded-full flex items-center justify-center mb-4">
+                  <span className="text-gray-600 text-2xl">📍</span>
                 </div>
-                <div>
-                  <p className="font-semibold text-gray-800">주소</p>
-                  <p className="text-gray-600 text-sm">{companyData.address}</p>
-                </div>
+                <h3 className="font-semibold text-gray-800 mb-2">주소</h3>
+                <p className="text-gray-600 text-sm">{companyData.address}</p>
               </div>
-              <div className="flex items-center p-6 bg-gray-50 rounded-xl min-h-[120px]">
-                <div className="w-10 h-10 bg-[#FCE7F3] border border-gray-300 rounded-full flex items-center justify-center mr-4">
-                  <span className="text-gray-600 text-lg">📞</span>
+              <div className="bg-gray-50 rounded-xl p-8 transform hover:scale-105 transition-transform min-h-[180px]">
+                <div className="w-12 h-12 bg-[#FCE7F3] border border-gray-300 rounded-full flex items-center justify-center mb-4">
+                  <span className="text-gray-600 text-2xl">📞</span>
                 </div>
-                <div>
-                  <p className="font-semibold text-gray-800">전화</p>
-                  <p className="text-gray-600 text-sm">{companyData.phone}</p>
-                </div>
+                <h3 className="font-semibold text-gray-800 mb-2">전화</h3>
+                <p className="text-gray-600 text-sm">{companyData.phone}</p>
               </div>
-              <div className="flex items-center p-6 bg-gray-50 rounded-xl min-h-[120px]">
-                <div className="w-10 h-10 bg-[#FCE7F3] border border-gray-300 rounded-full flex items-center justify-center mr-4">
-                  <span className="text-gray-600 text-lg">✉️</span>
+              <div className="bg-gray-50 rounded-xl p-8 transform hover:scale-105 transition-transform min-h-[180px]">
+                <div className="w-12 h-12 bg-[#FCE7F3] border border-gray-300 rounded-full flex items-center justify-center mb-4">
+                  <span className="text-gray-600 text-2xl">✉️</span>
                 </div>
-                <div>
-                  <p className="font-semibold text-gray-800">이메일</p>
-                  <p className="text-gray-600 text-sm">{companyData.email}</p>
-                </div>
+                <h3 className="font-semibold text-gray-800 mb-2">이메일</h3>
+                <p className="text-gray-600 text-sm">{companyData.email}</p>
               </div>
             </div>
           </div>

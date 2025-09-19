@@ -13,13 +13,7 @@ export enum Lineup {
 }
 
 export enum Keyword {
-  APART = "APART",
-  HOUSE = "HOUSE",
-  COMMERCIAL = "COMMERCIAL",
-  NEW = "NEW"
-}
-
-export enum Type {
+  ALL = "ALL",
   APART = "APART",
   HOUSE = "HOUSE",
   COMMERCIAL = "COMMERCIAL",
@@ -100,6 +94,7 @@ export type ViewButtonProps = {
 
 export type ProjectListFilterProps = {
   typeFilter: { key: string; label: string }[];
+  condition?: ProjectCondition;
   mobileFilterOpen?: boolean;
   setCondition: Dispatch<SetStateAction<ProjectCondition>>;
   setMobileFilterOpen?: Dispatch<SetStateAction<boolean>>;

@@ -41,11 +41,11 @@ export const Toolbar = () => {
                 selectedMenu={selectedMenu}
                 setSelectedMenu={setSelectedMenu}
               />
-              {/* 버튼들 */}
-              <div className="hidden sm:flex sm:items-end sm:space-x-4 group">
+              {/* 버튼들: 태블릿(sm) 이하에서는 숨김 */}
+              <div className="hidden lg:flex lg:items-end space-x-4">
                 {/* 인스타그램 버튼 */}
                 <Link
-                  className="text-gray-900 px-2 py-2 text-m font-medium hover:border-b-3 hover:border-gray-900 flex items-center justify-center"
+                  className="text-gray-900 px-4 py-2 text-m font-medium border-b-2 border-transparent hover:border-gray-900 transition-colors"
                   style={{ minWidth: "50px", cursor: "pointer" }}
                   href={instagramUrl}
                   target="_blank"
@@ -62,7 +62,7 @@ export const Toolbar = () => {
                 </Link>
                 {/* 블로그 버튼 */}
                 <Link
-                  className="text-gray-900 px-2 py-2 text-m font-medium hover:border-b-3 hover:border-gray-900 flex items-center justify-center"
+                  className="text-gray-900 px-2 py-2 text-m font-medium border-b-2 border-transparent hover:border-gray-900 transition-colors"
                   style={{ minWidth: "50px", cursor: "pointer" }}
                   href={blogUrl}
                   target="_blank"
@@ -81,7 +81,7 @@ export const Toolbar = () => {
                 <Link
                   href={"/consultation"}
                   onClick={() => setSelectedMenu("")}
-                  className="text-gray-900 px-5 py-2 text-lg font-large hover:border-b-3 hover:border-gray-900"
+                  className="text-gray-900 font-medium px-4 py-2 transition-colors text-base xl:text-lg hover:border-b-2 hover:border-gray-900 "
                   style={{ minWidth: "50px", cursor: "pointer" }}
                 >
                   상담신청

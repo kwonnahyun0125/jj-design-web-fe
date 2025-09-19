@@ -67,7 +67,7 @@ export const FormSiteInfo = ({
             value={address}
             placeholder="시/군/구 + 상세 주소"
             onChange={onChangeInput}
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-gray-800 focus:ring-0 transition-colors duration-200 bg-white"
+            className="w-full px-3 py-3 rounded-lg border border-gray-300 focus:border-gray-800 focus:ring-0 transition-colors duration-200 bg-white"
           />
         </div>
 
@@ -87,7 +87,7 @@ export const FormSiteInfo = ({
               value={size}
               onChange={onChangeInput}
               placeholder="예: 25평"
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-gray-800 focus:ring-0 transition-colors duration-200 bg-white"
+              className="w-full px-3 py-3 rounded-lg border border-gray-300 focus:border-gray-800 focus:ring-0 transition-colors duration-200 bg-white"
             />
           </div>
         </div>
@@ -103,7 +103,7 @@ export const FormSiteInfo = ({
               value={budget}
               onChange={onChangeInput}
               placeholder="예: 2천만 원"
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-gray-800 focus:ring-0 transition-colors duration-200 bg-white"
+              className="w-full px-3 py-3 rounded-lg border border-gray-300 focus:border-gray-800 focus:ring-0 transition-colors duration-200 bg-white"
             />
           </div>
 
@@ -116,7 +116,7 @@ export const FormSiteInfo = ({
               type="month"
               value={preferredDate}
               onChange={onChangeInput}
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-gray-800 focus:ring-0 transition-colors duration-200 bg-white"
+              className="w-full px-3 py-3 rounded-lg border border-gray-300 focus:border-gray-800 focus:ring-0 transition-colors duration-200 bg-white"
             />
           </div>
         </div>

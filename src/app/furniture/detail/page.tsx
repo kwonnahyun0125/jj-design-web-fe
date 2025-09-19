@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { getFurnitureById } from "@/api/furnuture/api";
 import { defaultFurniture } from "@/api/furnuture/data";
 import { ContentLoading } from "@/component/content-loading";
@@ -10,8 +10,10 @@ import { FurnitureLocation } from "./component/location";
 import { FurnitureSpace } from "./component/space";
 import { FurnitureIntro } from "./component/Introduction";
 import { FurnitureMatelrials } from "./component/matelrials";
+import { Button } from "@/component/button";
 
 const FurnitureDetailPage = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const id = searchParams.get("id");
@@ -56,6 +58,15 @@ const FurnitureDetailPage = () => {
 
       {/* 직영가구 위치 안내 */}
       <FurnitureLocation furniture={furniture} />
+      {/* 목록으로 돌아가기 버튼 */}
+      <div className="mt-8 text-center bg-gray-50 pb-12">
+        <Button
+          onClick={() => router.push("/furniture")}
+          className="inline-flex items-center px-4 py-2 bg-[#FCE7F3] border border-gray-300  text-black hover:bg-[#111827] hover:text-white rounded transition-colors"
+        >
+          목록으로 돌아가기
+        </Button>
+      </div>
     </div>
   );
 };
