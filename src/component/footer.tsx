@@ -4,9 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./button";
 import { useCompany } from "@/context/company-context";
+import { useRouter } from "next/navigation";
 
 export const Footer = () => {
   const { companyData } = useCompany();
+  const router = useRouter();
 
   const instagramUrl = companyData?.instagram;
   const blogUrl = companyData?.naver;
@@ -109,9 +111,12 @@ export const Footer = () => {
         </div>
         <div className="border-t border-gray-700 mt-6 pt-4 text-center text-xs md:text-base">
           &copy; 2023 {companyData.name}. All rights reserved. |{" "}
-          <Link href="/privacy" className="hover:underline">
+          <Button
+            onClick={() => router.push("/privacy")}
+            className="hover:underline"
+          >
             개인정보처리방침
-          </Link>
+          </Button>
         </div>
       </div>
     </footer>

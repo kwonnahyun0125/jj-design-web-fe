@@ -1,5 +1,8 @@
+"use client";
+
 import { Button } from "@/component/button";
 import { Modal } from "@/component/modal";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export const FormPrivacyInfo = ({
@@ -42,6 +45,8 @@ export const FormPrivacyInfo = ({
 };
 
 const FormPrivacyModal = () => {
+  const router = useRouter();
+
   return (
     <section className="bg-gray-50 p-6 rounded-lg border border-gray-200">
       <p className="text-gray-700 mb-6 leading-relaxed">
@@ -107,12 +112,12 @@ const FormPrivacyModal = () => {
       </div>
 
       <div className="mt-6 pt-4 border-t border-gray-300">
-        <a
-          href="/privacy"
+        <Button
+          onClick={() => router.push("/privacy")}
           className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm transition-colors"
         >
           👉 전체 개인정보 처리방침 보기
-        </a>
+        </Button>
       </div>
     </section>
   );

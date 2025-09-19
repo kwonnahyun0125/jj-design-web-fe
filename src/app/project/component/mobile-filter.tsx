@@ -14,15 +14,15 @@ export const ProjectMobileFilter = ({
   setMobileFilterOpen,
 }: ProjectListFilterProps) => {
   const [checkedPyItems, setCheckedPyItems] = useState<string[]>([]);
-  const [checkedTypeItem, setCheckedTypeItem] = useState<string>("ALL");
+  const [checkedTypeItem, setCheckedTypeItem] = useState<string>("");
   const [checkedLineupItem, setCheckedLineupItem] = useState<Lineup>(
     Lineup.ALL
   );
 
   useEffect(() => {
-    setCheckedPyItems([]);
+    setCheckedPyItems(condition?.pyung || []);
     setCheckedTypeItem(condition?.keyword || typeFilter[0]?.key || "");
-    setCheckedLineupItem(lineupItems[0].key as Lineup);
+    setCheckedLineupItem(condition?.lineup || (lineupItems[0].key as Lineup));
   }, [condition, typeFilter]);
 
   const handlePyFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
