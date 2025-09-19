@@ -116,6 +116,7 @@ const ProjectPage = () => {
             <ProjectMobileFilter
               typeFilter={typeFilter}
               mobileFilterOpen={mobileFilterOpen}
+              condition={condition}
               setCondition={setCondition}
               setMobileFilterOpen={setMobileFilterOpen}
             />
