@@ -26,7 +26,7 @@ const RootLayout = ({
         {/* 네이버 사이트 소유 확인 메타태그 */}
     <meta
       name="naver-site-verification"
-      content="773ee369e429946f028d1ec95f4646efcbfd08c"
+      content="773ee369e42994d6f028d1ec95f4646efcbfd08c"
     />
         <style>{`
           @font-face {
